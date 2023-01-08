@@ -106,6 +106,7 @@ class Enermy {
   #attackSpeed;
   #attackDamage;
   #enermyRadius;
+  #color;
 
   constructor() {
     this.#coordinate = randomEnermyCoord();
@@ -148,7 +149,7 @@ class Enermy {
   enermyMove() {
     this.enermyClear();
     const displacement = new Vector(this.#coordinate, playerCoord);
-  
+
     //move
     const move = displacement.getUnitVector();
     const oneMove = new Vector(

@@ -31,10 +31,11 @@ var playerMoveRight = false;
 var HP = 30;
 
 //monster list
+var enermys = [];
 var enermy_1 = new Enermy();
 var enermy_2 = new Enermy();
 
-var enermys = [];
+
 enermys.push(enermy_1);
 enermys.push(enermy_2);
 
@@ -121,18 +122,7 @@ function playerKeyupHandler(e) {
 }
 
 function playerMove() {
-  if (playerMoveUp) {
-    playerCoord.y -= 10;
-  }
-  if (playerMoveDown) {
-    playerCoord.y += 10;
-  }
-  if (playerMoveLeft) {
-    playerCoord.x -= 10;
-  }
-  if (playerMoveRight) {
-    playerCoord.x += 10;
-  }
+  enermyUpdate();
 }
 
 function playerUpdate() {
@@ -181,17 +171,15 @@ function HPBarUpdate() {
   context.closePath();
   context.stroke();
 
-  console.log(HP);
-  console.log(enermys[0].attackDamage);
   //update HP
-  enermys.forEach((enermy) => {
-    if (enermy.coordinate == playerCoord) {
-      HP -= enermy.attackDamage / FPS;
-      if (HP < 0) {
-        HP = 0;
-      }
-    }
-  });
+  // enermys.forEach((enermy) => {
+  //   if (enermy.coordinate == playerCoord) {
+  //     HP -= enermy.attackDamage / FPS;
+  //     if (HP < 0) {
+  //       HP = 0;
+  //     }
+  //   }
+  // });
 
   //draw HP bar
   context.lineTo(
@@ -223,6 +211,21 @@ function boardDraw() {
   context.fillRect(0, 0, board.width, board.height);
 }
 
-function enermyUpdate() {}
+function enermyUpdate() {
+  enermys.forEach((enermy) => {
+    if (playerMoveUp) {
+      enermy.coordinate.y += 10;
+    }
+    if (playerMoveDown) {
+      enermy.coordinate.y -= 10;
+    }
+    if (playerMoveLeft) {
+      enermy.coordinate.x += 10;
+    }
+    if (playerMoveRight) {
+      enermy.coordinate.x -= 10;
+    }
+  });
+}
 
 export { boardHeight, boardWidth, playerCoord, playerRadius, FPS };
