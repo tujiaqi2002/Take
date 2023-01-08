@@ -1,6 +1,7 @@
 canvas {
-  box-shadow: black 20px 10px 80px;
-  /* color: #da3131; */
+  box-shadow: rgb(0, 0, 0) 20px 10px 80px;
+  color: #000000;
+
 }
 
 
