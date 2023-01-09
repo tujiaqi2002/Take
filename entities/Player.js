@@ -66,4 +66,8 @@ export default class Player {
   set moveRight(bool) {
     this.#moveRight = bool;
   }
+
+  set HP(val) {
+    this.#HP = val;
+  }
 }

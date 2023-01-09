@@ -1,7 +1,122 @@
-import { BOARD_HEIGHT, BOARD_WIDTH } from './config.js';
+import {
+  BOARD,
+  BOARD_HEIGHT,
+  BOARD_WIDTH,
+  FPS,
+  context,
+  player,
+  Enemies,
+} from './config.js';
 import Coordinate from './Coordinate.js';
 
-export function randomEnermyCoord() {
+function boardDraw() {
+  context.fillStyle = '#000000';
+  context.fillRect(0, 0, BOARD.width, BOARD.height);
+}
+
+function playerUpdate() {
+  //draw Player
+  context.fillStyle = '#FFFFFF';
+  context.strokeStyle = '#FFFFFF';
+  context.beginPath();
+  context.arc(
+    player.coordinate.x,
+    player.coordinate.y,
+    player.radius,
+    0,
+    2 * Math.PI,
+    false
+  );
+  context.stroke();
+  context.fill();
+
+  HPBarUpdate();
+  playerMove();
+}
+
+function enemyUpdate() {
+  Enemies.forEach((enemy) => {
+    if (player.moveUp) {
+      enemy.coordinate.y += 10;
+    }
+    if (player.moveDown) {
+      enemy.coordinate.y -= 10;
+    }
+    if (player.moveLeft) {
+      enemy.coordinate.x += 10;
+    }
+    if (player.moveRight) {
+      enemy.coordinate.x -= 10;
+    }
+  });
+}
+
+function HPBarUpdate() {
+  //draw HP bar boarder
+  context.strokeStyle = '#FFFFFF';
+  context.beginPath();
+  context.moveTo(
+    player.coordinate.x - player.radius,
+    player.coordinate.y - player.radius - 10
+  );
+
+  context.lineTo(
+    player.coordinate.x + player.radius,
+    player.coordinate.y - player.radius - 10
+  );
+
+  context.lineTo(
+    player.coordinate.x + player.radius,
+    player.coordinate.y - player.radius - 20
+  );
+
+  context.lineTo(
+    player.coordinate.x - player.radius,
+    player.coordinate.y - player.radius - 20
+  );
+  context.closePath();
+  context.stroke();
+
+  //update HP
+  Enemies.forEach((enemy) => {
+    if (enemy.coordinate == player.coordinate) {
+      player.HP = player.HP - enemy.attackDamage / FPS;
+      if (player.HP < 0) {
+        player.HP = 0;
+      }
+    }
+  });
+
+  //draw HP bar
+  context.lineTo(
+    player.coordinate.x + player.radius,
+    player.coordinate.y - player.radius - 10
+  );
+
+  context.lineTo(
+    player.coordinate.x + player.radius,
+    player.coordinate.y - player.radius - 20
+  );
+
+  context.lineTo(
+    player.coordinate.x - player.radius,
+    player.coordinate.y - player.radius - 20
+  );
+
+  context.fillStyle = '#FFFFFF';
+  context.fillRect(
+    player.coordinate.x - player.radius,
+    player.coordinate.y - player.radius - 20,
+    player.HP,
+    10
+  );
+}
+
+function playerMove() {
+  enemyUpdate();
+}
+
+function randomEnemyCoord() {
   const randomValue = Math.random();
   switch (Math.floor(4 * randomValue)) {
     case 0:
@@ -14,3 +129,5 @@ export function randomEnermyCoord() {
       return new Coordinate(BOARD_WIDTH, Math.random() * BOARD_HEIGHT);
   }
 }
+
+export { boardDraw, playerUpdate, enemyUpdate, randomEnemyCoord };

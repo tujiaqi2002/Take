@@ -1,7 +1,7 @@
 import { FPS, player } from '../utils/config.js';
 import Vector from '../utils/Vector.js';
 import Coordinate from '../utils/Coordinate.js';
-import { randomEnermyCoord } from '../utils/utility.js';
+import { randomEnemyCoord } from '../utils/utility.js';
 
 const board = document.getElementById('game-board');
 var context;
@@ -11,12 +11,12 @@ export default class Enemy {
   #moveSpeed;
   #distanceToCharacter;
   #attackDamage;
-  #enermyRadius;
+  #enemyRadius;
   #moveDirection;
 
   constructor() {
-    this.#coordinate = randomEnermyCoord();
-    this.#enermyRadius = 10;
+    this.#coordinate = randomEnemyCoord();
+    this.#enemyRadius = 10;
     this.#moveSpeed = 30;
     this.#attackDamage = 5;
 
@@ -44,16 +44,16 @@ export default class Enemy {
     return this.#moveSpeed;
   }
 
-  get enermyRadius() {
-    return this.#enermyRadius;
+  get enemyRadius() {
+    return this.#enemyRadius;
   }
 
   get attackDamage() {
     return this.#attackDamage;
   }
 
-  enermyMove() {
-    this.enermyClear();
+  enemyMove() {
+    this.enemyClear();
     const displacement = new Vector(this.#coordinate, player.coordinate);
 
     //move
@@ -77,10 +77,10 @@ export default class Enemy {
       this.#coordinate = player.coordinate;
     }
 
-    this.enermyDraw();
+    this.enemyDraw();
   }
 
-  enermyDraw() {
+  enemyDraw() {
     context = board.getContext('2d');
     context.fillStyle = '#da3131';
     context.strokeStyle = '#FFFFFF';
@@ -88,7 +88,7 @@ export default class Enemy {
     context.arc(
       this.#coordinate.x,
       this.#coordinate.y,
-      this.#enermyRadius,
+      this.#enemyRadius,
       0,
       2 * Math.PI,
       false
@@ -97,7 +97,7 @@ export default class Enemy {
     context.fill();
   }
 
-  enermyClear() {
+  enemyClear() {
     context = board.getContext('2d');
     context.fillStyle = '#000000';
     context.strokeStyle = '#000000';
@@ -105,7 +105,7 @@ export default class Enemy {
     context.arc(
       this.#coordinate.x,
       this.#coordinate.y,
-      this.#enermyRadius + 1,
+      this.#enemyRadius + 1,
       0,
       2 * Math.PI,
       false
@@ -114,7 +114,7 @@ export default class Enemy {
     context.fill();
   }
 
-  enermySpawn() {
-    this.enermyDraw();
+  enemySpawn() {
+    this.enemyDraw();
   }
 }
