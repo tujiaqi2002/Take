@@ -1,38 +1,20 @@
 import { BOARD_HEIGHT, BOARD_WIDTH } from '../utils/config.js';
+import Character from './Character.js';
 import Coordinate from '../utils/Coordinate.js';
 
-export default class Player {
-  #coordinate;
-  #radius;
+export default class Player extends Character {
   #moveUp;
   #moveDown;
   #moveLeft;
   #moveRight;
-  #HP;
 
   constructor() {
-    this.#coordinate = new Coordinate(
-      BOARD_WIDTH / 2 - 1,
-      BOARD_HEIGHT / 2 - 1
-    );
-    this.#HP = 30;
-    this.#radius = 15;
+    super(30, new Coordinate(BOARD_WIDTH / 2 - 1, BOARD_HEIGHT / 2 - 1), 15);
+
     this.#moveUp = false;
     this.#moveDown = false;
     this.#moveLeft = false;
     this.#moveRight = false;
-  }
-
-  get coordinate() {
-    return this.#coordinate;
-  }
-
-  get radius() {
-    return this.#radius;
-  }
-
-  get HP() {
-    return this.#HP;
   }
 
   get moveUp() {
@@ -65,9 +47,5 @@ export default class Player {
 
   set moveRight(bool) {
     this.#moveRight = bool;
-  }
-
-  set HP(val) {
-    this.#HP = val;
   }
 }
