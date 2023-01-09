@@ -1,34 +1,8 @@
-import Enermy from './entities/Enermy.js';
-import Player from './entities/Player.js';
-import Coordinate from './utils/Coordinate.js';
-
-var board = document.getElementById('game-board');
-var boardHeight = 2000;
-var boardWidth = 2000;
-board.height = boardHeight;
-board.width = boardWidth;
-
-var context;
-
-var FPS = 144;
-
-//player setup
-const player = new Player();
-
-//monster list
-var enermys = [];
-var enermy_1 = new Enermy();
-var enermy_2 = new Enermy();
-
-enermys.push(enermy_1);
-enermys.push(enermy_2);
+import { BOARD, FPS, context, player, Enemies } from './utils/config.js';
 
 gameStart();
 
 function gameStart() {
-  context = board.getContext('2d');
-
-  enermy_1.enermySpawn();
   window.addEventListener('keydown', playerKeydownHandler, false);
   window.addEventListener('keyup', playerKeyupHandler, false);
   setInterval(update, 1000 / FPS);
@@ -42,7 +16,7 @@ function update() {
     alert('lose ');
   }
 
-  enermys.forEach((enermy) => {
+  Enemies.forEach((enermy) => {
     enermy.enermyMove();
   });
 }
@@ -154,7 +128,7 @@ function HPBarUpdate() {
   context.stroke();
 
   //update HP
-  // enermys.forEach((enermy) => {
+  // Enemies.forEach((enermy) => {
   //   if (enermy.coordinate == player.coordinate) {
   //     HP -= enermy.attackDamage / FPS;
   //     if (HP < 0) {
@@ -190,11 +164,11 @@ function HPBarUpdate() {
 
 function boardDraw() {
   context.fillStyle = '#000000';
-  context.fillRect(0, 0, board.width, board.height);
+  context.fillRect(0, 0, BOARD.width, BOARD.height);
 }
 
 function enermyUpdate() {
-  enermys.forEach((enermy) => {
+  Enemies.forEach((enermy) => {
     if (player.moveUp) {
       enermy.coordinate.y += 10;
     }
@@ -209,5 +183,3 @@ function enermyUpdate() {
     }
   });
 }
-
-export { boardHeight, boardWidth, FPS, player };

@@ -1,4 +1,4 @@
-import { boardHeight, boardWidth } from '../take.js';
+import { BOARD_HEIGHT, BOARD_WIDTH } from '../utils/config.js';
 import Coordinate from '../utils/Coordinate.js';
 
 export default class Player {
@@ -11,7 +11,10 @@ export default class Player {
   #HP;
 
   constructor() {
-    this.#coordinate = new Coordinate(boardWidth / 2 - 1, boardHeight / 2 - 1);
+    this.#coordinate = new Coordinate(
+      BOARD_WIDTH / 2 - 1,
+      BOARD_HEIGHT / 2 - 1
+    );
     this.#HP = 30;
     this.#radius = 15;
     this.#moveUp = false;

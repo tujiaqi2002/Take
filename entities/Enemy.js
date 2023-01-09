@@ -1,4 +1,4 @@
-import { FPS, player } from '../take.js';
+import { FPS, player } from '../utils/config.js';
 import Vector from '../utils/Vector.js';
 import Coordinate from '../utils/Coordinate.js';
 import { randomEnermyCoord } from '../utils/utility.js';
@@ -6,7 +6,7 @@ import { randomEnermyCoord } from '../utils/utility.js';
 const board = document.getElementById('game-board');
 var context;
 
-export default class Enermy {
+export default class Enemy {
   #coordinate;
   #moveSpeed;
   #distanceToCharacter;
