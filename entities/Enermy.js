@@ -1,101 +1,8 @@
-import {
-  boardHeight,
-  boardWidth,
-  playerCoord,
-  playerRadius,
-  FPS,
-} from "./take.js";
+import { boardHeight, boardWidth, playerCoord, FPS } from '../take.js';
+import Vector from '../utils/Vector.js';
+import Coordinate from '../utils/Coordinate.js';
 
-class Coordinate {
-  #x;
-  #y;
-
-  constructor(xCord, yCord) {
-    this.#x = xCord;
-    this.#y = yCord;
-  }
-
-  set x(xCord) {
-    this.#x = xCord;
-  }
-
-  set y(yCord) {
-    this.#y = yCord;
-  }
-
-  get x() {
-    return this.#x;
-  }
-
-  get y() {
-    return this.#y;
-  }
-}
-
-class Vector {
-  #direction;
-  #magnitude;
-  #deltaX;
-  #deltaY;
-  #startPoint;
-  #endPoint;
-
-  constructor(startPoint, endPoint) {
-    this.#startPoint = startPoint;
-    this.#endPoint = endPoint;
-    this.#deltaX = this.#endPoint.x - this.#startPoint.x;
-    this.#deltaY = this.#endPoint.y - this.#startPoint.y;
-    this.#direction = new Coordinate(this.#deltaX, this.#deltaY);
-    this.#magnitude = Math.sqrt(
-      Math.pow(this.#direction.x, 2) + Math.pow(this.#direction.y, 2)
-    );
-  }
-
-  get startPoint() {
-    return this.#startPoint;
-  }
-
-  get endPoint() {
-    return this.#endPoint;
-  }
-
-  get direction() {
-    return this.#direction;
-  }
-
-  get magnitude() {
-    return this.#magnitude;
-  }
-
-  get deltaX() {
-    return this.#deltaX;
-  }
-
-  get deltaY() {
-    return this.#deltaY;
-  }
-
-  getUnitVector() {
-    if (this.#magnitude != 0) {
-      return new Vector(
-        new Coordinate(this.#startPoint.x, this.#startPoint.y),
-
-        new Coordinate(
-          this.#startPoint.x + this.#deltaX / this.#magnitude,
-          this.#startPoint.y + this.#deltaY / this.#magnitude
-        )
-      );
-    } else
-      return new Vector(
-        new Coordinate(this.#startPoint.x, this.#startPoint.y),
-
-        new Coordinate(this.#startPoint.x, this.#startPoint.y)
-      );
-  }
-}
-
-var value;
-var board = document.getElementById("game-board");
+const board = document.getElementById('game-board');
 var context;
 
 class Enermy {
@@ -170,14 +77,14 @@ class Enermy {
     if (oneMove.magnitude >= displacement.magnitude) {
       this.#coordinate = playerCoord;
     }
-    console.log(displacement.magnitude);
+
     this.enermyDraw();
   }
 
   enermyDraw() {
-    context = board.getContext("2d");
-    context.fillStyle = "#da3131";
-    context.strokeStyle = "#FFFFFF";
+    context = board.getContext('2d');
+    context.fillStyle = '#da3131';
+    context.strokeStyle = '#FFFFFF';
     context.beginPath();
     context.arc(
       this.#coordinate.x,
@@ -192,9 +99,9 @@ class Enermy {
   }
 
   enermyClear() {
-    context = board.getContext("2d");
-    context.fillStyle = "#000000";
-    context.strokeStyle = "#000000";
+    context = board.getContext('2d');
+    context.fillStyle = '#000000';
+    context.strokeStyle = '#000000';
     context.beginPath();
     context.arc(
       this.#coordinate.x,
@@ -227,5 +134,4 @@ function randomEnermyCoord() {
   }
 }
 
-export { Enermy, Coordinate, Vector };
-export { randomEnermyCoord };
+export { Enermy, randomEnermyCoord };

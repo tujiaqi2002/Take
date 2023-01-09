@@ -1,8 +1,7 @@
-import { Enermy, Coordinate, Vector } from "./Enermy.js";
+import { Enermy } from './entities/Enermy.js';
+import Coordinate from './utils/Coordinate.js';
 
-import { randomEnermyCoord } from "./Enermy.js";
-
-var board = document.getElementById("game-board");
+var board = document.getElementById('game-board');
 var boardHeight = 2000;
 var boardWidth = 2000;
 board.height = boardHeight;
@@ -14,15 +13,8 @@ var FPS = 144;
 
 //player setup
 
-new (class Character {
-  constructor() {}
-})();
-
 var playerRadius = 15;
-var playerCoord = (playerCoord = new Coordinate(
-  boardWidth / 2 - 1,
-  boardHeight / 2 - 1
-));
+var playerCoord = new Coordinate(boardWidth / 2 - 1, boardHeight / 2 - 1);
 var playerMoveUp = false;
 var playerMoveDown = false;
 var playerMoveLeft = false;
@@ -35,18 +27,17 @@ var enermys = [];
 var enermy_1 = new Enermy();
 var enermy_2 = new Enermy();
 
-
 enermys.push(enermy_1);
 enermys.push(enermy_2);
 
 gameStart();
 
 function gameStart() {
-  context = board.getContext("2d");
+  context = board.getContext('2d');
 
   enermy_1.enermySpawn();
-  window.addEventListener("keydown", playerKeydownHandler, false);
-  window.addEventListener("keyup", playerKeyupHandler, false);
+  window.addEventListener('keydown', playerKeydownHandler, false);
+  window.addEventListener('keyup', playerKeyupHandler, false);
   setInterval(update, 1000 / FPS);
 }
 
@@ -55,7 +46,7 @@ function update() {
   playerUpdate();
   enermyUpdate();
   if (HP <= 0) {
-    alert("lose ");
+    alert('lose ');
   }
 
   enermys.forEach((enermy) => {
@@ -64,26 +55,25 @@ function update() {
 }
 
 function playerKeydownHandler(e) {
-  console.log(e.key);
   switch (e.key) {
-    case "w":
-    case "ArrowUp": {
+    case 'w':
+    case 'ArrowUp': {
       playerMoveUp = true;
       break;
     }
-    case "s":
-    case "ArrowDown": {
+    case 's':
+    case 'ArrowDown': {
       playerMoveDown = true;
 
       break;
     }
-    case "a":
-    case "ArrowLeft": {
+    case 'a':
+    case 'ArrowLeft': {
       playerMoveLeft = true;
       break;
     }
-    case "d":
-    case "ArrowRight": {
+    case 'd':
+    case 'ArrowRight': {
       playerMoveRight = true;
       break;
     }
@@ -93,26 +83,25 @@ function playerKeydownHandler(e) {
 }
 
 function playerKeyupHandler(e) {
-  console.log(e.key);
   switch (e.key) {
-    case "w":
-    case "ArrowUp": {
+    case 'w':
+    case 'ArrowUp': {
       playerMoveUp = false;
       break;
     }
-    case "s":
-    case "ArrowDown": {
+    case 's':
+    case 'ArrowDown': {
       playerMoveDown = false;
 
       break;
     }
-    case "a":
-    case "ArrowLeft": {
+    case 'a':
+    case 'ArrowLeft': {
       playerMoveLeft = false;
       break;
     }
-    case "d":
-    case "ArrowRight": {
+    case 'd':
+    case 'ArrowRight': {
       playerMoveRight = false;
       break;
     }
@@ -127,8 +116,8 @@ function playerMove() {
 
 function playerUpdate() {
   //draw Player
-  context.fillStyle = "#FFFFFF";
-  context.strokeStyle = "#FFFFFF";
+  context.fillStyle = '#FFFFFF';
+  context.strokeStyle = '#FFFFFF';
   context.beginPath();
   context.arc(
     playerCoord.x,
@@ -147,7 +136,7 @@ function playerUpdate() {
 
 function HPBarUpdate() {
   //draw HP bar boarder
-  context.strokeStyle = "#FFFFFF";
+  context.strokeStyle = '#FFFFFF';
   context.beginPath();
   context.moveTo(
     playerCoord.x - playerRadius,
@@ -197,7 +186,7 @@ function HPBarUpdate() {
     playerCoord.y - playerRadius - 20
   );
 
-  context.fillStyle = "#FFFFFF";
+  context.fillStyle = '#FFFFFF';
   context.fillRect(
     playerCoord.x - playerRadius,
     playerCoord.y - playerRadius - 20,
@@ -207,7 +196,7 @@ function HPBarUpdate() {
 }
 
 function boardDraw() {
-  context.fillStyle = "#000000";
+  context.fillStyle = '#000000';
   context.fillRect(0, 0, board.width, board.height);
 }
 
