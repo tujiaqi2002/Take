@@ -1,19 +1,18 @@
-import { boardHeight, boardWidth, playerCoord, FPS } from '../take.js';
+import { FPS, player } from '../take.js';
 import Vector from '../utils/Vector.js';
 import Coordinate from '../utils/Coordinate.js';
+import { randomEnermyCoord } from '../utils/utility.js';
 
 const board = document.getElementById('game-board');
 var context;
 
-class Enermy {
+export default class Enermy {
   #coordinate;
   #moveSpeed;
   #distanceToCharacter;
-  #moveDirection;
-  #attackSpeed;
   #attackDamage;
   #enermyRadius;
-  #color;
+  #moveDirection;
 
   constructor() {
     this.#coordinate = randomEnermyCoord();
@@ -22,7 +21,7 @@ class Enermy {
     this.#attackDamage = 5;
 
     // get the direction
-    const displacement = new Vector(this.#coordinate, playerCoord);
+    const displacement = new Vector(this.#coordinate, player.coordinate);
     this.#distanceToCharacter = displacement.magnitude;
 
     //set unit vetor
@@ -55,7 +54,7 @@ class Enermy {
 
   enermyMove() {
     this.enermyClear();
-    const displacement = new Vector(this.#coordinate, playerCoord);
+    const displacement = new Vector(this.#coordinate, player.coordinate);
 
     //move
     const move = displacement.getUnitVector();
@@ -75,7 +74,7 @@ class Enermy {
     this.#coordinate.y += oneMove.deltaY;
 
     if (oneMove.magnitude >= displacement.magnitude) {
-      this.#coordinate = playerCoord;
+      this.#coordinate = player.coordinate;
     }
 
     this.enermyDraw();
@@ -119,19 +118,3 @@ class Enermy {
     this.enermyDraw();
   }
 }
-
-function randomEnermyCoord() {
-  const randomValue = Math.random();
-  switch (Math.floor(4 * randomValue)) {
-    case 0:
-      return new Coordinate(Math.random() * boardWidth, 0);
-    case 1:
-      return new Coordinate(0, Math.random() * boardHeight);
-    case 2:
-      return new Coordinate(Math.random() * boardWidth, boardHeight);
-    case 3:
-      return new Coordinate(boardWidth, Math.random() * boardHeight);
-  }
-}
-
-export { Enermy, randomEnermyCoord };

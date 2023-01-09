@@ -1,4 +1,5 @@
-import { Enermy } from './entities/Enermy.js';
+import Enermy from './entities/Enermy.js';
+import Player from './entities/Player.js';
 import Coordinate from './utils/Coordinate.js';
 
 var board = document.getElementById('game-board');
@@ -12,15 +13,7 @@ var context;
 var FPS = 144;
 
 //player setup
-
-var playerRadius = 15;
-var playerCoord = new Coordinate(boardWidth / 2 - 1, boardHeight / 2 - 1);
-var playerMoveUp = false;
-var playerMoveDown = false;
-var playerMoveLeft = false;
-var playerMoveRight = false;
-
-var HP = 30;
+const player = new Player();
 
 //monster list
 var enermys = [];
@@ -45,7 +38,7 @@ function update() {
   boardDraw();
   playerUpdate();
   enermyUpdate();
-  if (HP <= 0) {
+  if (player.HP <= 0) {
     alert('lose ');
   }
 
@@ -58,23 +51,23 @@ function playerKeydownHandler(e) {
   switch (e.key) {
     case 'w':
     case 'ArrowUp': {
-      playerMoveUp = true;
+      player.moveUp = true;
       break;
     }
     case 's':
     case 'ArrowDown': {
-      playerMoveDown = true;
+      player.moveDown = true;
 
       break;
     }
     case 'a':
     case 'ArrowLeft': {
-      playerMoveLeft = true;
+      player.moveLeft = true;
       break;
     }
     case 'd':
     case 'ArrowRight': {
-      playerMoveRight = true;
+      player.moveRight = true;
       break;
     }
     default:
@@ -86,23 +79,23 @@ function playerKeyupHandler(e) {
   switch (e.key) {
     case 'w':
     case 'ArrowUp': {
-      playerMoveUp = false;
+      player.moveUp = false;
       break;
     }
     case 's':
     case 'ArrowDown': {
-      playerMoveDown = false;
+      player.moveDown = false;
 
       break;
     }
     case 'a':
     case 'ArrowLeft': {
-      playerMoveLeft = false;
+      player.moveLeft = false;
       break;
     }
     case 'd':
     case 'ArrowRight': {
-      playerMoveRight = false;
+      player.moveRight = false;
       break;
     }
     default:
@@ -120,9 +113,9 @@ function playerUpdate() {
   context.strokeStyle = '#FFFFFF';
   context.beginPath();
   context.arc(
-    playerCoord.x,
-    playerCoord.y,
-    playerRadius,
+    player.coordinate.x,
+    player.coordinate.y,
+    player.radius,
     0,
     2 * Math.PI,
     false
@@ -139,30 +132,30 @@ function HPBarUpdate() {
   context.strokeStyle = '#FFFFFF';
   context.beginPath();
   context.moveTo(
-    playerCoord.x - playerRadius,
-    playerCoord.y - playerRadius - 10
+    player.coordinate.x - player.radius,
+    player.coordinate.y - player.radius - 10
   );
 
   context.lineTo(
-    playerCoord.x + playerRadius,
-    playerCoord.y - playerRadius - 10
+    player.coordinate.x + player.radius,
+    player.coordinate.y - player.radius - 10
   );
 
   context.lineTo(
-    playerCoord.x + playerRadius,
-    playerCoord.y - playerRadius - 20
+    player.coordinate.x + player.radius,
+    player.coordinate.y - player.radius - 20
   );
 
   context.lineTo(
-    playerCoord.x - playerRadius,
-    playerCoord.y - playerRadius - 20
+    player.coordinate.x - player.radius,
+    player.coordinate.y - player.radius - 20
   );
   context.closePath();
   context.stroke();
 
   //update HP
   // enermys.forEach((enermy) => {
-  //   if (enermy.coordinate == playerCoord) {
+  //   if (enermy.coordinate == player.coordinate) {
   //     HP -= enermy.attackDamage / FPS;
   //     if (HP < 0) {
   //       HP = 0;
@@ -172,25 +165,25 @@ function HPBarUpdate() {
 
   //draw HP bar
   context.lineTo(
-    playerCoord.x + playerRadius,
-    playerCoord.y - playerRadius - 10
+    player.coordinate.x + player.radius,
+    player.coordinate.y - player.radius - 10
   );
 
   context.lineTo(
-    playerCoord.x + playerRadius,
-    playerCoord.y - playerRadius - 20
+    player.coordinate.x + player.radius,
+    player.coordinate.y - player.radius - 20
   );
 
   context.lineTo(
-    playerCoord.x - playerRadius,
-    playerCoord.y - playerRadius - 20
+    player.coordinate.x - player.radius,
+    player.coordinate.y - player.radius - 20
   );
 
   context.fillStyle = '#FFFFFF';
   context.fillRect(
-    playerCoord.x - playerRadius,
-    playerCoord.y - playerRadius - 20,
-    HP,
+    player.coordinate.x - player.radius,
+    player.coordinate.y - player.radius - 20,
+    player.HP,
     10
   );
 }
@@ -202,19 +195,19 @@ function boardDraw() {
 
 function enermyUpdate() {
   enermys.forEach((enermy) => {
-    if (playerMoveUp) {
+    if (player.moveUp) {
       enermy.coordinate.y += 10;
     }
-    if (playerMoveDown) {
+    if (player.moveDown) {
       enermy.coordinate.y -= 10;
     }
-    if (playerMoveLeft) {
+    if (player.moveLeft) {
       enermy.coordinate.x += 10;
     }
-    if (playerMoveRight) {
+    if (player.moveRight) {
       enermy.coordinate.x -= 10;
     }
   });
 }
 
-export { boardHeight, boardWidth, playerCoord, playerRadius, FPS };
+export { boardHeight, boardWidth, FPS, player };
