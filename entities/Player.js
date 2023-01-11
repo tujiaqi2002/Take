@@ -9,8 +9,11 @@ export default class Player extends Character {
   #moveRight;
   #moveSpeed;
 
+  #maxHealth;
+  #healthRegen;
+
   constructor() {
-    super(30, new Coordinate(BOARD_WIDTH / 2 - 1, BOARD_HEIGHT / 2 - 1), 15);
+    super(100, new Coordinate(BOARD_WIDTH / 2 - 1, BOARD_HEIGHT / 2 - 1), 15);
 
     this.#moveUp = false;
     this.#moveDown = false;
@@ -18,6 +21,8 @@ export default class Player extends Character {
     this.#moveRight = false;
 
     this.#moveSpeed = 300;
+    this.#healthRegen = 1;
+    this.#maxHealth = 100;
   }
 
   //player move direction booleans
@@ -55,5 +60,13 @@ export default class Player extends Character {
 
   get moveSpeed() {
     return this.#moveSpeed;
+  }
+
+  get healthRegen() {
+    return this.#healthRegen;
+  }
+
+  get maxHealth(){
+    return this.#maxHealth
   }
 }

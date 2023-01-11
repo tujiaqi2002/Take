@@ -14,7 +14,7 @@ export default class Enemy extends Character {
     super(30, randomEnemyCoord(), 10);
 
     this.#moveSpeed = 100;
-    this.#attackDamage = 5;
+    this.#attackDamage = 10;
 
     // get the direction
     const displacement = new Vector(this.coordinate, player.coordinate);
@@ -34,7 +34,8 @@ export default class Enemy extends Character {
 
   set moveSpeed(moveSpeed) {
     this.#moveSpeed = moveSpeed;
-  }d
+  }
+  d;
 
   enemyMove() {
     this.enemyClear();
@@ -42,7 +43,7 @@ export default class Enemy extends Character {
 
     //move = unitVector to player
     const move = displacement.getUnitVector();
- 
+
     const oneMove = new Vector(
       this.coordinate,
       new Coordinate(
@@ -50,8 +51,6 @@ export default class Enemy extends Character {
         this.coordinate.y + move.deltaY * this.#moveSpeed * secondsPassed
       )
     );
-
-    console.log(move.deltaX * this.#moveSpeed * secondsPassed)
 
     this.coordinate.x += oneMove.deltaX;
     this.coordinate.y += oneMove.deltaY;

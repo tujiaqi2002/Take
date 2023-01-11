@@ -63,15 +63,21 @@ function HPBarUpdate() {
   context.stroke();
 
   //update HP
+  if (player.HP + player.healthRegen * secondsPassed > player.maxHealth) {
+    player.HP = player.maxHealth;
+  } else {
+    player.HP += player.healthRegen * secondsPassed;
+  }
+
   Enemies.forEach((enemy) => {
     if (enemy.coordinate == player.coordinate) {
-      player.HP = player.HP - enemy.attackDamage;
+      player.HP = player.HP - enemy.attackDamage * secondsPassed;
       if (player.HP < 0) {
         player.HP = 0;
       }
     }
   });
-
+  console.log(player.HP);
   //draw HP bar
   context.lineTo(
     player.coordinate.x + player.radius,
@@ -92,7 +98,7 @@ function HPBarUpdate() {
   context.fillRect(
     player.coordinate.x - player.radius,
     player.coordinate.y - player.radius - 20,
-    player.HP,
+    ((2 * player.radius) / 100) * player.HP,
     10
   );
 }
@@ -100,15 +106,12 @@ function HPBarUpdate() {
 function playerMove() {
   Enemies.forEach((enemy) => {
     if (player.moveUp) {
-      console.log(player.moveSpeed * secondsPassed);
       enemy.coordinate.y += player.moveSpeed * secondsPassed;
     }
     if (player.moveDown) {
-      console.log(player.moveSpeed * secondsPassed);
       enemy.coordinate.y -= player.moveSpeed * secondsPassed;
     }
     if (player.moveLeft) {
-      console.log(player.moveSpeed * secondsPassed);
       enemy.coordinate.x += player.moveSpeed * secondsPassed;
     }
     if (player.moveRight) {
