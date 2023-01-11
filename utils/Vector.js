@@ -1,4 +1,4 @@
-import Coordinate from './Coordinate.js';
+import Coordinate from "./Coordinate.js";
 
 export default class Vector {
   #direction;
@@ -41,6 +41,14 @@ export default class Vector {
 
   get deltaY() {
     return this.#deltaY;
+  }
+
+  set deltaX(deltaX) {
+    this.#deltaX = deltaX;
+  }
+
+  set deltaY(deltaY) {
+    this.#deltaY = deltaY;
   }
 
   getUnitVector() {

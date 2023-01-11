@@ -19,7 +19,7 @@ export function modifyFPS(_FPS) {
 
 let secondsPassed = 0;
 export function modifySecondsPassed(_secondsPassed) {
-    secondsPassed = _secondsPassed;
+  secondsPassed = _secondsPassed;
 }
 
 // Entity Initialization
@@ -30,5 +30,20 @@ const enemy_1 = new Enemy();
 const enemy_2 = new Enemy();
 Enemies.push(enemy_1);
 Enemies.push(enemy_2);
+console.log(Enemies);
+let allCharacters = Enemies.map((enemy) => enemy);
+allCharacters.push(player);
 
-export { BOARD, BOARD_HEIGHT, BOARD_WIDTH, context, FPS, secondsPassed, player, Enemies };
+console.log(allCharacters);
+
+export {
+  BOARD,
+  BOARD_HEIGHT,
+  BOARD_WIDTH,
+  context,
+  FPS,
+  secondsPassed,
+  player,
+  Enemies,
+  allCharacters,
+};

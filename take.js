@@ -7,11 +7,16 @@ import {
   secondsPassed,
   modifySecondsPassed,
 } from "./utils/config.js";
-import { boardDraw, playerUpdate, enemyUpdate } from "./utils/utility.js";
+import { boardDraw } from "./utils/utility.js";
 import {
   playerKeydownHandler,
   playerKeyupHandler,
 } from "./utils/eventHandler.js";
+
+import {
+  detectCollisions,
+  detectEdgeCollisions,
+} from "./utils/Collision-system.js";
 
 window.addEventListener("DOMContentLoaded", gameStart);
 
@@ -26,12 +31,18 @@ let oldTimeStamp = 0;
 function gameLoop(timeStamp) {
   modifySecondsPassed((timeStamp - oldTimeStamp) / 1000);
   oldTimeStamp = timeStamp;
-
   modifyFPS(Math.round(1 / secondsPassed));
 
+  detectCollisions();
   boardDraw();
-  playerUpdate();
-  enemyUpdate();
+
+  // detectEdgeCollisions();
+  // playerUpdate();
+
+  player.playerUpdate();
+  player.playerDraw();
+  // enemyUpdate();
+
   FPSDraw();
 
   if (player.HP <= 0) {
