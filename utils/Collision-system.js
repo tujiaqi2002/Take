@@ -58,9 +58,7 @@ function detectCollisions() {
         }
         console.log(speed);
         let impulse = (200 * speed) / (obj1.mass + obj2.mass);
-        console.log(impulse);
-        console.log(obj1.velocity.deltaX);
-        console.log(impulse * obj2.mass * vCollisionNorm.x);
+       
         obj1.velocity.deltaX = 0;
         obj1.velocity.deltaY -= impulse * obj2.mass * vCollisionNorm.y;
         obj2.velocity.deltaX += impulse * obj1.mass * vCollisionNorm.x;

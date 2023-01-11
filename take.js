@@ -7,7 +7,7 @@ import {
   secondsPassed,
   modifySecondsPassed,
 } from "./utils/config.js";
-import { boardDraw } from "./utils/utility.js";
+import { boardDraw, draw, update } from "./utils/utility.js";
 import {
   playerKeydownHandler,
   playerKeyupHandler,
@@ -34,31 +34,17 @@ function gameLoop(timeStamp) {
   modifyFPS(Math.round(1 / secondsPassed));
 
   detectCollisions();
-  boardDraw();
-
+  update();
   // detectEdgeCollisions();
-  // playerUpdate();
-
-  player.playerUpdate();
-  player.playerDraw();
-  // enemyUpdate();
-
-  FPSDraw();
+  draw();
 
   if (player.HP <= 0) {
     // alert('Defeat');
   }
 
   Enemies.forEach((enemy) => {
-    enemy.enemyMove();
+    enemy.enemyDraw();
   });
 
   window.requestAnimationFrame(gameLoop);
-}
-
-function FPSDraw() {
-  // Draw FPS to the screen
-  context.font = "25px Arial";
-  context.fillStyle = "white";
-  context.fillText("FPS: " + FPS, 10, 30);
 }

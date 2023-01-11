@@ -47,7 +47,6 @@ export default class Enemy extends Character {
   }
 
   enemyMove() {
-    this.enemyClear();
     this.velocity = new Vector(this.coordinate, player.coordinate);
     //move = unitVector to player
     const move = this.velocity.getUnitVector();
@@ -67,7 +66,6 @@ export default class Enemy extends Character {
     //   this.coordinate = player.coordinate;
     // }
 
-    this.enemyDraw();
   }
 
   enemyDraw() {
@@ -86,24 +84,8 @@ export default class Enemy extends Character {
     context.fill();
   }
 
-  enemyClear() {
-    context.fillStyle = "#000000";
-    context.strokeStyle = "#000000";
-    context.beginPath();
-    context.arc(
-      this.coordinate.x,
-      this.coordinate.y,
-      this.radius + 1,
-      0,
-      2 * Math.PI,
-      false
-    );
-    context.stroke();
-    context.fill();
-  }
-
-  enemySpawn() {
-    this.enemyDraw();
+  enemyUpdate(){
+    this.enemyMove();
   }
 }
 
