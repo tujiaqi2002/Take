@@ -120,9 +120,33 @@ export default class Player extends Character {
     context.lineWidth = 1;
   }
 
+  EXPBarDraw() {
+    //draw background
+
+    //draw  EXP bar
+    context.fillStyle = "#537a73";
+    context.fillRect(9, 9, ((BOARD_WIDTH - 14) * this.#EXP) / this.#maxEXP, 50);
+
+    //draw EXP barboarder
+    context.strokeStyle = "#f7f5d7";
+    context.lineWidth = 8;
+    context.beginPath();
+    context.roundRect(7, 7, BOARD_WIDTH - 14, 50, [5]);
+    context.stroke();
+
+    //draw Level
+    context.fillStyle = "white";
+    context.font = "bolder 30px Courier";
+
+    context.fillText("Level:" + this.#level, BOARD_WIDTH - 150, 40);
+
+    context.lineWidth = 1;
+  }
+
   HPBarDraw() {
     //draw HP bar boarder
     context.strokeStyle = "#FFFFFF";
+
     context.beginPath();
     context.roundRect(
       this.coordinate.x - this.radius,
