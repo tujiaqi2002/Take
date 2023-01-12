@@ -1,8 +1,9 @@
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../utils/config.js";
-import Character from "./Character.js";
-import Coordinate from "../utils/Coordinate.js";
-import { secondsPassed } from "../utils/config.js";
-import { context, Enemies } from "../utils/config.js";
+import { BOARD_HEIGHT, BOARD_WIDTH } from '../utils/config.js';
+import Character from './Character.js';
+import Coordinate from '../utils/Coordinate.js';
+import { secondsPassed } from '../utils/config.js';
+import { context, Enemies } from '../utils/config.js';
+import AOE from './AOE.js';
 
 export default class Player extends Character {
   #moveUp;
@@ -14,6 +15,8 @@ export default class Player extends Character {
   #level;
   #maxHealth;
   #healthRegen;
+
+  #weapons = [];
 
   constructor() {
     super(100, new Coordinate(BOARD_WIDTH / 2 - 1, BOARD_HEIGHT / 2 - 1), 15);
@@ -74,14 +77,19 @@ export default class Player extends Character {
     return this.#maxHealth;
   }
 
+  addWeapon(weapon) {
+    this.#weapons.push(weapon);
+  }
+
   playerUpdate() {
     this.HPBarUpdate();
     this.playerMove();
+    this.#weapons.forEach((weapon) => weapon.update());
   }
 
   HPBarDraw() {
     //draw HP bar boarder
-    context.strokeStyle = "#FFFFFF";
+    context.strokeStyle = '#FFFFFF';
     context.beginPath();
     context.moveTo(
       this.coordinate.x - this.radius,
@@ -121,7 +129,7 @@ export default class Player extends Character {
       this.coordinate.y - this.radius - 20
     );
 
-    context.fillStyle = "#FFFFFF";
+    context.fillStyle = '#FFFFFF';
     context.fillRect(
       this.coordinate.x - this.radius,
       this.coordinate.y - this.radius - 20,
@@ -167,9 +175,9 @@ export default class Player extends Character {
 
   playerDraw() {
     //draw player
-    context.fillStyle = this.isColliding ? "#0099b0" : "#FFFFFF";
+    context.fillStyle = this.isColliding ? '#0099b0' : '#FFFFFF';
 
-    context.strokeStyle = "#FFFFFF";
+    context.strokeStyle = '#FFFFFF';
     context.beginPath();
     context.arc(
       this.coordinate.x,
@@ -183,5 +191,6 @@ export default class Player extends Character {
     context.fill();
 
     this.HPBarDraw();
+    this.#weapons.forEach((weapon) => weapon.draw());
   }
 }
