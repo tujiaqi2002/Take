@@ -1,13 +1,4 @@
-import {
-  BOARD,
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
-  context,
-  player,
-  Enemies,
-  secondsPassed,
-  FPS,
-} from "./config.js";
+import { BOARD, context, player, Enemies, FPS } from "./config.js";
 import Coordinate from "./Coordinate.js";
 
 function boardDraw() {
@@ -15,17 +6,20 @@ function boardDraw() {
   context.fillRect(0, 0, BOARD.width, BOARD.height);
 }
 
-function draw() {
-  boardDraw();
-  FPSDraw();
-  player.playerDraw();
-}
-
 function update() {
   Enemies.forEach((enemy) => {
     enemy.enemyUpdate();
   });
   player.playerUpdate();
+}
+
+function draw() {
+  boardDraw();
+  FPSDraw();
+  player.playerDraw();
+  Enemies.forEach((enemy) => {
+    enemy.enemyDraw();
+  });
 }
 
 function FPSDraw() {

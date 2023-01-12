@@ -13,10 +13,7 @@ import {
   playerKeyupHandler,
 } from "./utils/eventHandler.js";
 
-import {
-  detectCollisions,
-  detectEdgeCollisions,
-} from "./utils/Collision-system.js";
+import { detectCollisions } from "./utils/Collision-system.js";
 
 window.addEventListener("DOMContentLoaded", gameStart);
 
@@ -33,18 +30,13 @@ function gameLoop(timeStamp) {
   oldTimeStamp = timeStamp;
   modifyFPS(Math.round(1 / secondsPassed));
 
-  detectCollisions();
   update();
+  detectCollisions();
   // detectEdgeCollisions();
   draw();
 
   if (player.HP <= 0) {
     // alert('Defeat');
   }
-
-  Enemies.forEach((enemy) => {
-    enemy.enemyDraw();
-  });
-
   window.requestAnimationFrame(gameLoop);
 }
