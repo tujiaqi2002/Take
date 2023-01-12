@@ -17,10 +17,11 @@ function update() {
 function draw() {
   boardDraw();
   FPSDraw();
-  player.playerDraw();
+  
   Enemies.forEach((enemy) => {
     enemy.enemyDraw();
   });
+  player.playerDraw();
 }
 
 function FPSDraw() {
