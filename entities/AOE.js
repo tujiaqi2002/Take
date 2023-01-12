@@ -2,9 +2,11 @@ import { context, player } from '../utils/config.js';
 
 export default class AOE {
   #coordinate;
+  #damage;
 
   constructor() {
     this.#coordinate = player.coordinate;
+    this.#damage = 10;
   }
 
   draw() {
