@@ -106,4 +106,3 @@ function randomEnemyCoord() {
   }
 }
 
-function enemyUpdate() {}

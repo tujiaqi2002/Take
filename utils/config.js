@@ -1,5 +1,6 @@
 import Player from "../entities/Player.js";
 import Enemy from "../entities/Enemy.js";
+import Weapon from "../entities/Weapon.js";
 
 // Canva (Board) Configuration
 const BOARD = document.getElementById("game-board");
@@ -41,6 +42,12 @@ allCharacters.push(player);
 
 console.log(allCharacters);
 
+let Bullets = [];
+const bullet_1 = new Weapon();
+Bullets.push(bullet_1);
+console.log(Bullets);
+
+
 export {
   BOARD,
   BOARD_HEIGHT,
@@ -50,5 +57,6 @@ export {
   secondsPassed,
   player,
   Enemies,
+  Bullets,
   allCharacters,
 };

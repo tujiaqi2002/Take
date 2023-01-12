@@ -57,6 +57,7 @@ function detectCollisions() {
           break;
         }
 
+
         let impulse = (2 * speed) / (obj1.mass + obj2.mass);
         obj1.vx -= impulse * obj2.mass * vCollisionNorm.x;
         obj1.vy -= impulse * obj2.mass * vCollisionNorm.y;
