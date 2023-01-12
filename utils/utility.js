@@ -1,4 +1,4 @@
-import { BOARD, context, player, Enemies, FPS } from "./config.js";
+import { BOARD, context, player, Enemies, FPS, Bullets } from "./config.js";
 import Coordinate from "./Coordinate.js";
 
 function boardDraw() {
@@ -20,6 +20,10 @@ function draw() {
   Enemies.forEach((enemy) => {
     enemy.enemyDraw();
   });
+  Bullets.forEach((bullet) => {
+    bullet.bulletDraw();
+  });
+  
 }
 
 function FPSDraw() {

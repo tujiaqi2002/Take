@@ -56,16 +56,16 @@ function detectCollisions() {
         if (speed < 0) {
           break;
         }
-        console.log(player.velocity);
+        //console.log(player.velocity);
 
         let impulse = (200 * speed) / (obj1.mass + obj2.mass);
-        console.log(obj1.velocity.deltaX);
+        //console.log(obj1.velocity.deltaX);
         obj1.velocity.deltaX -= impulse * obj2.mass * vCollisionNorm.x;
         obj1.velocity.deltaY -= impulse * obj2.mass * vCollisionNorm.y;
         obj2.velocity.deltaX += impulse * obj1.mass * vCollisionNorm.x;
         obj2.velocity.deltaY += impulse * obj1.mass * vCollisionNorm.y;
 
-        console.log(obj1.velocity.deltaX);
+        //console.log(obj1.velocity.deltaX);
       }
     }
   }
