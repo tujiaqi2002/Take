@@ -2,7 +2,7 @@ import { BOARD, context, player, Enemies, FPS, Bullets } from "./config.js";
 import Coordinate from "./Coordinate.js";
 import { detectCollisions } from "./Collision-system.js";
 function boardDraw() {
-  context.fillStyle = "#000000";
+  context.fillStyle = "#080404";
   context.fillRect(0, 0, BOARD.width, BOARD.height);
 }
 
@@ -16,8 +16,8 @@ function update() {
 
 function draw() {
   boardDraw();
-  FPSDraw();
-  
+  // FPSDraw();
+
   Enemies.forEach((enemy) => {
     enemy.enemyDraw();
   });
