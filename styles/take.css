@@ -1,8 +1,6 @@
 canvas {
-  box-shadow: rgb(0, 0, 0) 20px 10px 80px;
-  color: #000000;
-
+  box-shadow: black 20px 10px 80px;
+  width: 100%;
 }
-
 
 /*# sourceMappingURL=take.css.map */

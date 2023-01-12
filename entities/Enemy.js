@@ -1,11 +1,13 @@
-import { FPS, context, player } from '../utils/config.js';
-import Character from './Character.js';
-import Vector from '../utils/Vector.js';
-import Coordinate from '../utils/Coordinate.js';
-import { randomEnemyCoord } from '../utils/utility.js';
+import { context, player, secondsPassed } from "../utils/config.js";
+import Character from "./Character.js";
+import Vector from "../utils/Vector.js";
+import Coordinate from "../utils/Coordinate.js";
+import { BOARD_HEIGHT, BOARD_WIDTH } from "../utils/config.js";
+import { detectCollisions } from "../utils/Collision-system.js";
 
 export default class Enemy extends Character {
   #moveSpeed;
+  #velocity;
   #distanceToCharacter;
   #attackDamage;
   #moveDirection;
@@ -13,8 +15,9 @@ export default class Enemy extends Character {
   constructor() {
     super(30, randomEnemyCoord(), 10);
 
-    this.#moveSpeed = 30;
-    this.#attackDamage = 5;
+    this.#moveSpeed = 100;
+    this.#attackDamage = 10;
+    this.#velocity = new Vector(this.coordinate, player.coordinate);
 
     // get the direction
     const displacement = new Vector(this.coordinate, player.coordinate);
@@ -32,41 +35,45 @@ export default class Enemy extends Character {
     return this.#attackDamage;
   }
 
+  get velocity() {
+    return this.#velocity;
+  }
+
   set moveSpeed(moveSpeed) {
     this.#moveSpeed = moveSpeed;
   }
 
-  enemyMove() {
-    this.enemyClear();
-    const displacement = new Vector(this.coordinate, player.coordinate);
+  set velocity(velocity) {
+    this.#velocity = velocity;
+  }
 
-    //move
-    const move = displacement.getUnitVector();
-    const oneMove = new Vector(
+  enemyMove() {
+    this.velocity = new Vector(this.coordinate, player.coordinate);
+    //move = unitVector to player
+    const move = this.velocity.getUnitVector();
+
+    this.velocity = new Vector(
       this.coordinate,
       new Coordinate(
-        this.coordinate.x +
-          ((move.deltaX * this.#distanceToCharacter) / (FPS * 100)) *
-            this.#moveSpeed,
-        this.coordinate.y +
-          ((move.deltaY * this.#distanceToCharacter) / (FPS * 100)) *
-            this.#moveSpeed
+        this.coordinate.x + move.deltaX * this.#moveSpeed * secondsPassed,
+        this.coordinate.y + move.deltaY * this.#moveSpeed * secondsPassed
       )
     );
+    this.coordinate.x += this.velocity.deltaX;
+    this.coordinate.y += this.velocity.deltaY;
 
-    this.coordinate.x += oneMove.deltaX;
-    this.coordinate.y += oneMove.deltaY;
-
-    if (oneMove.magnitude >= displacement.magnitude) {
-      this.coordinate = player.coordinate;
+    // if (oneMove.magnitude >= displacement.magnitude) {
+    //   this.coordinate = player.coordinate;
+    // }
+    
+    if(this.isColliding){
+      
     }
-
-    this.enemyDraw();
   }
 
   enemyDraw() {
-    context.fillStyle = '#da3131';
-    context.strokeStyle = '#FFFFFF';
+    context.fillStyle = this.isColliding ? "#0099b0" : "#da3131";
+    context.strokeStyle = "#FFFFFF";
     context.beginPath();
     context.arc(
       this.coordinate.x,
@@ -80,23 +87,23 @@ export default class Enemy extends Character {
     context.fill();
   }
 
-  enemyClear() {
-    context.fillStyle = '#000000';
-    context.strokeStyle = '#000000';
-    context.beginPath();
-    context.arc(
-      this.coordinate.x,
-      this.coordinate.y,
-      this.radius + 1,
-      0,
-      2 * Math.PI,
-      false
-    );
-    context.stroke();
-    context.fill();
-  }
-
-  enemySpawn() {
-    this.enemyDraw();
+  enemyUpdate() {
+    this.enemyMove();
   }
 }
+
+function randomEnemyCoord() {
+  const randomValue = Math.random();
+  switch (Math.floor(4 * randomValue)) {
+    case 0:
+      return new Coordinate(Math.random() * BOARD_WIDTH, 0);
+    case 1:
+      return new Coordinate(0, Math.random() * BOARD_HEIGHT);
+    case 2:
+      return new Coordinate(Math.random() * BOARD_WIDTH, BOARD_HEIGHT);
+    case 3:
+      return new Coordinate(BOARD_WIDTH, Math.random() * BOARD_HEIGHT);
+  }
+}
+
+function enemyUpdate() {}

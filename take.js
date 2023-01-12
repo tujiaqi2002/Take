@@ -1,27 +1,44 @@
-import { FPS, player, Enemies } from './utils/config.js';
-import { boardDraw, playerUpdate, enemyUpdate } from './utils/utility.js';
+import {
+  player,
+  Enemies,
+  context,
+  FPS,
+  modifyFPS,
+  secondsPassed,
+  modifySecondsPassed,
+} from "./utils/config.js";
+import { draw, update } from "./utils/utility.js";
 import {
   playerKeydownHandler,
   playerKeyupHandler,
-} from './utils/eventHandler.js';
+} from "./utils/eventHandler.js";
 
-window.addEventListener('DOMContentLoaded', gameStart);
+import { detectCollisions } from "./utils/Collision-system.js";
+import Enemy from "./entities/Enemy.js";
+
+window.addEventListener("DOMContentLoaded", gameStart);
 
 function gameStart() {
-  window.addEventListener('keydown', playerKeydownHandler, false);
-  window.addEventListener('keyup', playerKeyupHandler, false);
-  setInterval(update, 1000 / FPS);
+  window.addEventListener("keydown", playerKeydownHandler, false);
+  window.addEventListener("keyup", playerKeyupHandler, false);
+  window.requestAnimationFrame(gameLoop);
 }
 
-function update() {
-  boardDraw();
-  playerUpdate();
-  enemyUpdate();
-  if (player.HP <= 0) {
-    alert('Defeat');
-  }
+let oldTimeStamp = 0;
 
-  Enemies.forEach((enemy) => {
-    enemy.enemyMove();
-  });
+function gameLoop(timeStamp) {
+  modifySecondsPassed((timeStamp - oldTimeStamp) / 1000);
+  oldTimeStamp = timeStamp;
+  modifyFPS(Math.round(1 / secondsPassed));
+
+  update();
+
+  // detectEdgeCollisions();
+
+  draw();
+
+  if (player.HP <= 0) {
+    // alert('Defeat');
+  }
+  window.requestAnimationFrame(gameLoop);
 }
