@@ -3,7 +3,6 @@ import Character from './Character.js';
 import Coordinate from '../utils/Coordinate.js';
 import { secondsPassed } from '../utils/config.js';
 import { context, Enemies } from '../utils/config.js';
-import AOE from './AOE.js';
 
 export default class Player extends Character {
   #moveUp;

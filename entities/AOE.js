@@ -19,7 +19,6 @@ export default class AOE {
       2 * Math.PI,
       false
     );
-    context.stroke();
     context.fill();
   }
 

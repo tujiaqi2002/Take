@@ -1,5 +1,4 @@
 import { BOARD, context, player, Enemies, FPS, Bullets } from './config.js';
-import Coordinate from './Coordinate.js';
 import { detectCollisions } from './Collision-system.js';
 
 function boardDraw() {
