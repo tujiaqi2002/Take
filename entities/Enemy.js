@@ -1,9 +1,8 @@
-import { context, player, secondsPassed } from "../utils/config.js";
-import Character from "./Character.js";
-import Vector from "../utils/Vector.js";
-import Coordinate from "../utils/Coordinate.js";
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../utils/config.js";
-import { detectCollisions } from "../utils/Collision-system.js";
+import { context, player, secondsPassed } from '../utils/config.js';
+import Character from './Character.js';
+import Vector from '../utils/Vector.js';
+import Coordinate from '../utils/Coordinate.js';
+import { BOARD_HEIGHT, BOARD_WIDTH } from '../utils/config.js';
 
 export default class Enemy extends Character {
   #moveSpeed;
@@ -65,15 +64,14 @@ export default class Enemy extends Character {
     // if (oneMove.magnitude >= displacement.magnitude) {
     //   this.coordinate = player.coordinate;
     // }
-    
-    if(this.isColliding){
-      
+
+    if (this.isColliding) {
     }
   }
 
   enemyDraw() {
-    context.fillStyle = this.isColliding ? "#0099b0" : "#da3131";
-    context.strokeStyle = "#FFFFFF";
+    context.fillStyle = this.isColliding ? '#0099b0' : '#da3131';
+    context.strokeStyle = '#FFFFFF';
     context.beginPath();
     context.arc(
       this.coordinate.x,
@@ -105,4 +103,3 @@ function randomEnemyCoord() {
       return new Coordinate(BOARD_WIDTH, Math.random() * BOARD_HEIGHT);
   }
 }
-
