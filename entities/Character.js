@@ -47,6 +47,9 @@ export default class Character {
     return this.#restitution;
   }
 
+  set radius(radius) {
+    this.#radius = radius;
+  }
   set HP(HP) {
     this.#HP = HP;
   }

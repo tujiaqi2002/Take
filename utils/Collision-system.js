@@ -1,4 +1,6 @@
 import { allCharacters, BOARD_HEIGHT, BOARD_WIDTH, player } from "./config.js";
+import Coordinate from "./Coordinate.js";
+import Vector from "./Vector.js";
 
 function detectCollisions() {
   let obj1;
@@ -29,43 +31,37 @@ function detectCollisions() {
         obj1.isColliding = true;
         obj2.isColliding = true;
 
-        let vCollision = {
-          x: obj2.coordinate.x - obj1.coordinate.x,
-          y: obj2.coordinate.y - obj1.coordinate.y,
-        };
-        let distance = Math.sqrt(
-          (obj2.coordinate.x - obj1.coordinate.x) *
-            (obj2.coordinate.x - obj1.coordinate.x) +
-            (obj2.coordinate.y - obj1.coordinate.y) *
-              (obj2.coordinate.y - obj1.coordinate.y)
+        //calculate overlap
+        let vectorOfObjs = new Vector(obj1.coordinate, obj2.coordinate);
+        let distanceOfObjs = vectorOfObjs.magnitude;
+        let overlap = (obj1.radius + obj2.radius - distanceOfObjs) / 2;
+        obj1.coordinate.x -= overlap * vectorOfObjs.getUnitVector().deltaX;
+        obj1.coordinate.y -= overlap * vectorOfObjs.getUnitVector().deltaY;
+
+        let vCollision = new Vector(obj1.coordinate, obj2.coordinate);
+
+        let vCollisionNorm = vCollision.getUnitVector();
+
+        let vRelativeVelocity = new Vector(
+          new Coordinate(obj2.velocity.deltaX, obj2.velocity.deltaY),
+          new Coordinate(obj1.velocity.deltaX, obj1.velocity.deltaY)
         );
-        let vCollisionNorm = {
-          x: vCollision.x / 15,
-          y: vCollision.y / 15,
-        };
-        let vRelativeVelocity = {
-          x: obj1.velocity.deltaX - obj2.velocity.deltaX,
-          y: obj1.velocity.deltaY - obj2.velocity.deltaY,
-        };
+
         let speed =
-          vRelativeVelocity.x * vCollisionNorm.x +
-          vRelativeVelocity.y * vCollisionNorm.y;
+          vRelativeVelocity.deltaX * vCollisionNorm.deltaX +
+          vRelativeVelocity.deltaY * vCollisionNorm.deltaY;
         // Apply restitution to the speed
 
         speed *= Math.min(obj1.restitution, obj2.restitution);
         if (speed < 0) {
           break;
         }
-        console.log(player.velocity);
 
-        let impulse = (200 * speed) / (obj1.mass + obj2.mass);
-        console.log(obj1.velocity.deltaX);
-        obj1.velocity.deltaX -= impulse * obj2.mass * vCollisionNorm.x;
-        obj1.velocity.deltaY -= impulse * obj2.mass * vCollisionNorm.y;
-        obj2.velocity.deltaX += impulse * obj1.mass * vCollisionNorm.x;
-        obj2.velocity.deltaY += impulse * obj1.mass * vCollisionNorm.y;
-
-        console.log(obj1.velocity.deltaX);
+        let impulse = (2 * speed) / (obj1.mass + obj2.mass);
+        obj1.vx -= impulse * obj2.mass * vCollisionNorm.x;
+        obj1.vy -= impulse * obj2.mass * vCollisionNorm.y;
+        obj2.vx += impulse * obj1.mass * vCollisionNorm.x;
+        obj2.vy += impulse * obj1.mass * vCollisionNorm.y;
       }
     }
   }
@@ -104,4 +100,4 @@ function circleIntersect(x1, y1, r1, x2, y2, r2) {
 //   }
 // }
 
-export { detectCollisions, circleIntersect,  };
+export { detectCollisions, circleIntersect };

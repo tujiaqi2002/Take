@@ -28,8 +28,13 @@ const player = new Player();
 let Enemies = [];
 const enemy_1 = new Enemy();
 const enemy_2 = new Enemy();
+const enemy_3 = new Enemy();
+
+enemy_3.radius = 30;
+enemy_3.moveSpeed = 200;
 Enemies.push(enemy_1);
 Enemies.push(enemy_2);
+Enemies.push(enemy_3);
 console.log(Enemies);
 let allCharacters = Enemies.map((enemy) => enemy);
 allCharacters.push(player);
