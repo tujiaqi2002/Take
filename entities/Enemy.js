@@ -3,6 +3,7 @@ import Character from "./Character.js";
 import Vector from "../utils/Vector.js";
 import Coordinate from "../utils/Coordinate.js";
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../utils/config.js";
+import { detectCollisions } from "../utils/Collision-system.js";
 
 export default class Enemy extends Character {
   #moveSpeed;
@@ -58,18 +59,20 @@ export default class Enemy extends Character {
         this.coordinate.y + move.deltaY * this.#moveSpeed * secondsPassed
       )
     );
-
     this.coordinate.x += this.velocity.deltaX;
     this.coordinate.y += this.velocity.deltaY;
 
     // if (oneMove.magnitude >= displacement.magnitude) {
     //   this.coordinate = player.coordinate;
     // }
-
+    
+    if(this.isColliding){
+      
+    }
   }
 
   enemyDraw() {
-    context.fillStyle = "#da3131";
+    context.fillStyle = this.isColliding ? "#0099b0" : "#da3131";
     context.strokeStyle = "#FFFFFF";
     context.beginPath();
     context.arc(
@@ -84,7 +87,7 @@ export default class Enemy extends Character {
     context.fill();
   }
 
-  enemyUpdate(){
+  enemyUpdate() {
     this.enemyMove();
   }
 }

@@ -11,6 +11,7 @@ export default class Player extends Character {
   #moveRight;
   #moveSpeed;
 
+  #level;
   #maxHealth;
   #healthRegen;
 
@@ -22,6 +23,7 @@ export default class Player extends Character {
     this.#moveLeft = false;
     this.#moveRight = false;
 
+    this.#level = 1;
     this.#moveSpeed = 300;
     this.#healthRegen = 1;
     this.#maxHealth = 100;
@@ -164,7 +166,7 @@ export default class Player extends Character {
   }
 
   playerDraw() {
-    //draw this
+    //draw player
     context.fillStyle = this.isColliding ? "#0099b0" : "#FFFFFF";
 
     context.strokeStyle = "#FFFFFF";
@@ -179,5 +181,7 @@ export default class Player extends Character {
     );
     context.stroke();
     context.fill();
+
+    this.HPBarDraw();
   }
 }
