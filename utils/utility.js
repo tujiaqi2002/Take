@@ -1,8 +1,8 @@
-import { BOARD, context, player, Enemies, FPS, Bullets } from './config.js';
-import { detectCollisions } from './Collision-system.js';
+import { BOARD, context, player, Enemies, FPS, Bullets } from "./config.js";
+import { detectCollisions } from "./Collision-system.js";
 
 function boardDraw() {
-  context.fillStyle = '#000000';
+  context.fillStyle = "#080404";
   context.fillRect(0, 0, BOARD.width, BOARD.height);
 }
 
@@ -16,7 +16,7 @@ function update() {
 
 function draw() {
   boardDraw();
-  FPSDraw();
+  // FPSDraw();
 
   Enemies.forEach((enemy) => {
     enemy.enemyDraw();
@@ -30,9 +30,9 @@ function draw() {
 
 function FPSDraw() {
   // Draw FPS to the screen
-  context.font = '25px Arial';
-  context.fillStyle = 'white';
-  context.fillText('FPS: ' + FPS, 10, 30);
+  context.font = "25px Arial";
+  context.fillStyle = "white";
+  context.fillText("FPS: " + FPS, 10, 30);
 }
 
 export { boardDraw, draw, update };
