@@ -3,18 +3,20 @@ import {
   secondsPassed,
   modifySecondsPassed,
   EXPGems,
-} from './utils/config.js';
-import { draw, update } from './utils/utility.js';
+  totalFrame,
+  modifyTotalFrame,
+} from "./utils/config.js";
+import { draw, update } from "./utils/utility.js";
 import {
   playerKeydownHandler,
   playerKeyupHandler,
-} from './utils/eventHandler.js';
+} from "./utils/eventHandler.js";
 
-window.addEventListener('DOMContentLoaded', gameStart);
+window.addEventListener("DOMContentLoaded", gameStart);
 
 function gameStart() {
-  window.addEventListener('keydown', playerKeydownHandler, false);
-  window.addEventListener('keyup', playerKeyupHandler, false);
+  window.addEventListener("keydown", playerKeydownHandler, false);
+  window.addEventListener("keyup", playerKeyupHandler, false);
   window.requestAnimationFrame(gameLoop);
 }
 
@@ -24,6 +26,7 @@ function gameLoop(timeStamp) {
   modifySecondsPassed((timeStamp - oldTimeStamp) / 1000);
   oldTimeStamp = timeStamp;
   modifyFPS(Math.round(1 / secondsPassed));
+  modifyTotalFrame(totalFrame + 1);
 
   update();
   draw();

@@ -1,8 +1,15 @@
-import { BOARD_HEIGHT, BOARD_WIDTH, EXPGems } from "../utils/config.js";
+import {
+  BOARD_HEIGHT,
+  BOARD_WIDTH,
+  EXPGems,
+  FPS,
+  totalFrame,
+} from "../utils/config.js";
 import Character from "./Character.js";
 import Coordinate from "../utils/Coordinate.js";
 import { secondsPassed } from "../utils/config.js";
 import { context, Enemies } from "../utils/config.js";
+import { draw } from "../utils/utility.js";
 
 export default class Player extends Character {
   #moveUp;
@@ -24,7 +31,8 @@ export default class Player extends Character {
   #weapons = [];
 
   constructor() {
-    super(100, new Coordinate(BOARD_WIDTH / 2 - 1, BOARD_HEIGHT / 2 - 1), 15);
+    //HP coord radius
+    super(100, new Coordinate(BOARD_WIDTH / 2 - 1, BOARD_HEIGHT / 2 - 1), 25);
 
     this.#moveUp = false;
     this.#moveDown = false;
@@ -129,7 +137,6 @@ export default class Player extends Character {
     //draw Level
     context.fillStyle = "white";
     context.font = "bolder 30px Courier";
-    console.log(Math.ceil(Math.log(this.#level) / Math.log(10)));
     context.fillText(
       "Level:" + this.#level,
       BOARD_WIDTH -
@@ -254,18 +261,25 @@ export default class Player extends Character {
     //draw player
     context.fillStyle = this.isColliding ? "#0099b0" : "#f7f5d7";
 
-    context.strokeStyle = "#FFFFFF";
-    context.beginPath();
-    context.arc(
-      this.coordinate.x,
-      this.coordinate.y,
-      this.radius,
-      0,
-      2 * Math.PI,
-      false
+    let characterImg = new Image();
+
+    let staticFPS = 30;
+    if (FPS < 150 && FPS > 130) {
+      staticFPS = 144;
+    }
+
+    characterImg.src =
+      "assets/Warrior-V1.3/Warrior/Individual Sprite/idle/Warrior_Idle_" +
+      (Math.floor((totalFrame % staticFPS) / (144 / 6)) + 1) +
+      ".png";
+    console.log(characterImg.src);
+    context.drawImage(
+      characterImg,
+      this.coordinate.x - (69 * 2) / 2 + 10,
+      this.coordinate.y - (44 * 2) / 2 - 10,
+      69 * 2,
+      44 * 2
     );
-    context.stroke();
-    context.fill();
 
     this.HPBarDraw();
     this.#weapons.forEach((weapon) => weapon.draw());

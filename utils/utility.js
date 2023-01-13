@@ -35,7 +35,6 @@ function update() {
         player.radius - EXPGem.radius
       )
     ) {
-      console.log("get");
       EXPGems.splice(index, 1);
       //update player EXP bar
       player.EXP += EXPGem.EXPAmount;
@@ -47,7 +46,6 @@ function update() {
     if (enemy.HP <= 0) {
       Enemies.splice(index, 1);
       allCharacters.splice(index + 1, 1);
-      console.log(allCharacters);
       index--;
       enemy.enemyDie();
     }

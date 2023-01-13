@@ -19,6 +19,12 @@ export function modifyFPS(_FPS) {
   FPS = _FPS;
 }
 
+//total Frame
+let totalFrame = 0;
+export function modifyTotalFrame(_totalFrame) {
+  totalFrame = _totalFrame;
+}
+
 let secondsPassed = 0;
 export function modifySecondsPassed(_secondsPassed) {
   secondsPassed = _secondsPassed;
@@ -83,4 +89,5 @@ export {
   Bullets,
   allCharacters,
   EXPGems,
+  totalFrame,
 };
