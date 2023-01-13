@@ -1,6 +1,7 @@
 import { player, secondsPassed } from '../utils/config.js';
 import Coordinate from '../utils/Coordinate.js';
 import Bullet from './Bullet.js';
+import Weapon from './Weapon.js';
 
 let LEFT = false;
 let RIGHT = true;
@@ -8,7 +9,8 @@ let DOWN = false;
 let UP = false;
 let totalSecondsPassed = 0;
 
-export default class Weapon {
+export default class Ezq extends Weapon{
+  
   #bulletType;
   #bulletNum;
   #attackSpeed;
@@ -30,7 +32,7 @@ export default class Weapon {
 
   constructor() {
     //super(100, player.coordinate, 15);
-    this.coordinate = player.coordinate;
+    super(10, 1, player.coordinate);
     this.#fireDirection = new Coordinate(
       player.coordinate.x,
       player.coordinate.y
@@ -40,9 +42,7 @@ export default class Weapon {
     this.#bulletNum = 1;
     this.#attackSpeed = 1;
     this.#bulletSpeed = 20;
-    this.damage = 1;
     this.#penetrate = 0;
-    this.#coldDown = 1.0;
     this.angle = 0;
 
     this.bullets = [];
@@ -113,10 +113,16 @@ export default class Weapon {
     );
     this.bullets.push(newBullet);
   }
-  bulletDraw() {
+  
+  update() {
     this.bulletMove();
     this.bullets.forEach((bullet) => {
       bullet.update();
+    });
+  }
+
+  draw(){
+    this.bullets.forEach((bullet) => {
       bullet.draw();
     });
   }
