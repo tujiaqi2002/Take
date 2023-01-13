@@ -6,13 +6,15 @@ export default class Bullet {
   #angle;
   #speed;
   #distance;
-  
-  constructor(x, y, angle, speed) {
+  #radius;
+
+  constructor(x, y, radius, angle, speed) {
     this.#x = x;
     this.#y = y;
     this.#angle = angle;
     this.#speed = speed;
     this.#distance = 0;
+    this.#radius = radius;
   }
 
   get distance(){
@@ -23,7 +25,7 @@ export default class Bullet {
     context.fillStyle = "lightgray";
     context.strokeStyle = "#FFFFFF";
     context.beginPath();
-    context.arc(this.#x, this.#y, 10, 0, 2 * Math.PI, false);
+    context.arc(this.#x, this.#y, this.#radius, 0, 2 * Math.PI, false);
     context.stroke();
     context.fill();
   }
