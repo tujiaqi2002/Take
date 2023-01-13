@@ -1,6 +1,6 @@
 import Player from '../entities/Player.js';
 import Enemy from '../entities/Enemy.js';
-import Weapon from '../entities/Weapon.js';
+import Weapon from '../entities/temp.js';
 import AOE from '../entities/AOE.js';
 
 // Canva (Board) Configuration

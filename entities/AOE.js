@@ -1,12 +1,9 @@
 import { context, player } from '../utils/config.js';
+import Weapon from './Weapon.js';
 
-export default class AOE {
-  #coordinate;
-  #damage;
-
+export default class AOE extends Weapon {
   constructor() {
-    this.#coordinate = player.coordinate;
-    this.#damage = 10;
+    super(10, 1, player.coordinate);
   }
 
   draw() {
@@ -14,8 +11,8 @@ export default class AOE {
     context.strokeStyle = '#FFFFFF';
     context.beginPath();
     context.arc(
-      this.#coordinate.x,
-      this.#coordinate.y,
+      this.coordinate.x,
+      this.coordinate.y,
       100,
       0,
       2 * Math.PI,
@@ -25,6 +22,6 @@ export default class AOE {
   }
 
   update() {
-    this.#coordinate = player.coordinate;
+    this.coordinate = player.coordinate;
   }
 }
