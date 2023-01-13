@@ -1,4 +1,4 @@
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../utils/config.js";
+import { BOARD_HEIGHT, BOARD_WIDTH, EXPGems } from "../utils/config.js";
 import Character from "./Character.js";
 import Coordinate from "../utils/Coordinate.js";
 import { secondsPassed } from "../utils/config.js";
@@ -11,12 +11,18 @@ export default class Player extends Character {
   #moveRight;
   #moveSpeed;
 
+  //level system attribute
   #level;
   #EXP;
   #maxEXP;
 
+  #maxEXPIncrease;
+  #magnetRadius;
+
   #maxHealth;
   #healthRegen;
+
+  #weapons = [];
 
   constructor() {
     super(100, new Coordinate(BOARD_WIDTH / 2 - 1, BOARD_HEIGHT / 2 - 1), 15);
@@ -28,8 +34,11 @@ export default class Player extends Character {
 
     //level system
     this.#level = 1;
-    this.#EXP = 3.7;
-    this.#maxEXP = 5;
+
+    this.#EXP = 0;
+    this.#maxEXP = 10;
+    this.#magnetRadius = 60;
+    this.#maxEXPIncrease = 20;
 
     this.#moveSpeed = 300;
     this.#healthRegen = 1;
@@ -69,8 +78,13 @@ export default class Player extends Character {
     this.#moveRight = bool;
   }
 
+  //player property gettters and setters
   get moveSpeed() {
     return this.#moveSpeed;
+  }
+
+  get magnetRadius() {
+    return this.#magnetRadius;
   }
 
   get healthRegen() {
@@ -85,9 +99,68 @@ export default class Player extends Character {
     return this.#EXP;
   }
 
+  set EXP(EXP) {
+    this.#EXP = EXP;
+  }
+
+  addWeapon(weapon) {
+    this.#weapons.push(weapon);
+  }
+
   playerUpdate() {
     this.HPBarUpdate();
     this.playerMove();
+    this.EXPBarUpdate();
+    this.#weapons.forEach((weapon) => weapon.update());
+  }
+
+  EXPBarDraw() {
+    //draw background
+
+    //draw  EXP bar
+    context.fillStyle = "#537a73";
+    context.fillRect(9, 9, ((BOARD_WIDTH - 14) * this.#EXP) / this.#maxEXP, 50);
+
+    //draw EXP barboarder
+    context.strokeStyle = "#f7f5d7";
+    context.lineWidth = 8;
+    context.beginPath();
+    context.roundRect(7, 7, BOARD_WIDTH - 14, 50, [5]);
+    context.stroke();
+
+    //draw Level
+    context.fillStyle = "white";
+    context.font = "bolder 30px Courier";
+    console.log(Math.ceil(Math.log(this.#level) / Math.log(10)));
+    context.fillText(
+      "Level:" + this.#level,
+      BOARD_WIDTH -
+        120 -
+        20 * Math.ceil(Math.log(this.#level + 0.5) / Math.log(10)),
+      40
+    );
+
+    context.lineWidth = 1;
+  }
+
+  EXPBarUpdate() {
+    if (this.#EXP >= this.#maxEXP) {
+      this.#EXP -= this.#maxEXP;
+      this.#level += 1;
+      this.#maxEXP += this.#maxEXPIncrease;
+    }
+
+    switch (this.#level) {
+      case 10:
+        this.#maxEXPIncrease = 30;
+        break;
+      case 20:
+        this.#maxEXPIncrease = 40;
+        break;
+      case 40:
+        this.#maxEXPIncrease = 50;
+        break;
+    }
   }
 
   EXPBarDraw() {
@@ -185,6 +258,21 @@ export default class Player extends Character {
         enemy.coordinate.x -= this.moveSpeed * secondsPassed;
       }
     });
+
+    EXPGems.forEach((EXPGem) => {
+      if (this.moveUp) {
+        EXPGem.coordinate.y += this.moveSpeed * secondsPassed;
+      }
+      if (this.moveDown) {
+        EXPGem.coordinate.y -= this.moveSpeed * secondsPassed;
+      }
+      if (this.moveLeft) {
+        EXPGem.coordinate.x += this.moveSpeed * secondsPassed;
+      }
+      if (this.moveRight) {
+        EXPGem.coordinate.x -= this.moveSpeed * secondsPassed;
+      }
+    });
   }
 
   playerDraw() {
@@ -205,6 +293,7 @@ export default class Player extends Character {
     context.fill();
 
     this.HPBarDraw();
+    this.#weapons.forEach((weapon) => weapon.draw());
     this.EXPBarDraw();
   }
 }

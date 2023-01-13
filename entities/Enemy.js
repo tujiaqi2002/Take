@@ -1,16 +1,22 @@
-import { context, player, secondsPassed } from "../utils/config.js";
+import {
+  context,
+  Enemies,
+  EXPGems,
+  player,
+  secondsPassed,
+} from "../utils/config.js";
 import Character from "./Character.js";
 import Vector from "../utils/Vector.js";
 import Coordinate from "../utils/Coordinate.js";
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../utils/config.js";
-import { detectCollisions } from "../utils/Collision-system.js";
-
+import EXPGem from "../utils/Level-system.js";
 export default class Enemy extends Character {
   #moveSpeed;
   #velocity;
   #distanceToCharacter;
   #attackDamage;
   #moveDirection;
+  #EXPDrop;
 
   constructor() {
     super(30, randomEnemyCoord(), 10);
@@ -18,6 +24,7 @@ export default class Enemy extends Character {
     this.#moveSpeed = 100;
     this.#attackDamage = 10;
     this.#velocity = new Vector(this.coordinate, player.coordinate);
+    this.#EXPDrop = 2;
 
     // get the direction
     const displacement = new Vector(this.coordinate, player.coordinate);
@@ -37,6 +44,10 @@ export default class Enemy extends Character {
 
   get velocity() {
     return this.#velocity;
+  }
+
+  get EXPDrop() {
+    return this.#EXPDrop;
   }
 
   set moveSpeed(moveSpeed) {
@@ -65,9 +76,8 @@ export default class Enemy extends Character {
     // if (oneMove.magnitude >= displacement.magnitude) {
     //   this.coordinate = player.coordinate;
     // }
-    
-    if(this.isColliding){
-      
+
+    if (this.isColliding) {
     }
   }
 
@@ -88,7 +98,14 @@ export default class Enemy extends Character {
   }
 
   enemyUpdate() {
+    //check for if enemy dies
     this.enemyMove();
+  }
+
+  enemyDie() {
+    //drop EXP gem
+    const EXPGemDrop = new EXPGem(new Coordinate(this.coordinate.x,this.coordinate.y));
+    EXPGems.push(EXPGemDrop);
   }
 }
 
@@ -105,4 +122,3 @@ function randomEnemyCoord() {
       return new Coordinate(BOARD_WIDTH, Math.random() * BOARD_HEIGHT);
   }
 }
-

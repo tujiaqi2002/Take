@@ -1,4 +1,4 @@
-import { allCharacters, BOARD_HEIGHT, BOARD_WIDTH, player } from "./config.js";
+import { allCharacters } from "./config.js";
 import Coordinate from "./Coordinate.js";
 import Vector from "./Vector.js";
 
@@ -56,7 +56,6 @@ function detectCollisions() {
         if (speed < 0) {
           break;
         }
-
 
         let impulse = (2 * speed) / (obj1.mass + obj2.mass);
         obj1.velocity.x -= impulse * obj2.mass * vCollisionNorm.x;

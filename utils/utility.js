@@ -1,6 +1,18 @@
-import { BOARD, context, player, Enemies, FPS, Bullets } from "./config.js";
-import Coordinate from "./Coordinate.js";
-import { detectCollisions } from "./Collision-system.js";
+import {
+  BOARD,
+  context,
+  player,
+  Enemies,
+  FPS,
+  Bullets,
+  setEnemies,
+  EXPGems,
+  allCharacters,
+} from "./config.js";
+import { detectCollisions, circleIntersect } from "./Collision-system.js";
+import EXPGem from "./Level-system.js";
+import Enemy from "../entities/Enemy.js";
+
 function boardDraw() {
   context.fillStyle = "#080404";
   context.fillRect(0, 0, BOARD.width, BOARD.height);
@@ -8,9 +20,44 @@ function boardDraw() {
 
 function update() {
   detectCollisions();
-  Enemies.forEach((enemy) => {
+
+  //update EXP gems
+  EXPGems.forEach((EXPGem, index) => {
+    EXPGem.EXPGemTake();
+    EXPGem.EXPGemUpdate();
+    if (
+      circleIntersect(
+        EXPGem.coordinate.x,
+        EXPGem.coordinate.y,
+        EXPGem.radius,
+        player.coordinate.x,
+        player.coordinate.y,
+        player.radius - EXPGem.radius
+      )
+    ) {
+      console.log("get");
+      EXPGems.splice(index, 1);
+      //update player EXP bar
+      player.EXP += EXPGem.EXPAmount;
+    }
+  });
+  //update all enemies
+  Enemies.forEach((enemy, index) => {
+    //check for enemy die
+    if (enemy.HP <= 0) {
+      Enemies.splice(index, 1);
+      allCharacters.splice(index + 1, 1);
+      console.log(allCharacters);
+      index--;
+      enemy.enemyDie();
+    }
     enemy.enemyUpdate();
   });
+  if (Enemies.length < 50) {
+    let newEnemy = new Enemy();
+    Enemies.push(newEnemy);
+    allCharacters.push(newEnemy);
+  }
   player.playerUpdate();
 }
 
@@ -24,10 +71,12 @@ function draw() {
   Bullets.forEach((bullet) => {
     bullet.bulletDraw();
   });
-  
+
+  EXPGems.forEach((EXPGem) => {
+    EXPGem.EXPGemDraw();
+  });
 
   player.playerDraw();
-
 }
 
 function FPSDraw() {
