@@ -16,4 +16,12 @@ export default class Weapon {
   set coordinate(coordinate) {
     this.#coordinate = coordinate;
   }
+
+  get cooldown() {
+    return this.#cooldown;
+  }
+  
+  set cooldown(cooldown) {
+    this.#cooldown = cooldown;
+  }
 }

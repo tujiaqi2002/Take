@@ -9,12 +9,10 @@ let DOWN = false;
 let UP = false;
 let totalSecondsPassed = 0;
 
-export default class Ezq extends Weapon{
-  
+export default class Ezq extends Weapon{  
   #bulletType;
   #bulletNum;
   #attackSpeed;
-  #coldDown;
   #bulletSpeed;
   #damage;
   #penetrate;
@@ -29,6 +27,8 @@ export default class Ezq extends Weapon{
   #bullets;
   #angle;
   #second;
+  #boundTime;
+  #intervalTime;
 
   constructor() {
     //super(100, player.coordinate, 15);
@@ -39,11 +39,13 @@ export default class Ezq extends Weapon{
     );
 
     this.#bulletType = 0;
-    this.#bulletNum = 1;
+    this.#bulletNum = 20;
     this.#attackSpeed = 1;
-    this.#bulletSpeed = 20;
+    this.#bulletSpeed = 10;
     this.#penetrate = 0;
-    this.angle = 0;
+    this.#angle = 0;
+    this.#boundTime = 0;//0.7 * this.#attackSpeed * this.cooldown;
+    this.#intervalTime = 0.1;
 
     this.bullets = [];
     console.log(this.bullets);
@@ -83,41 +85,78 @@ export default class Ezq extends Weapon{
     }
     if ((newCoord.x == 0) & (newCoord.y == 0)) {
       if (LEFT) {
-        this.angle = Math.PI;
+        this.#angle = Math.PI;
       }
       if (RIGHT) {
-        this.angle = 0;
+        this.#angle = 0;
       }
       if (UP) {
-        this.angle = (270 * Math.PI) / 180;
+        this.#angle = (270 * Math.PI) / 180;
       }
       if (DOWN) {
-        this.angle = (90 * Math.PI) / 180;
+        this.#angle = (90 * Math.PI) / 180;
       }
     } else {
-      this.angle = Math.atan2(newCoord.y, newCoord.x);
+      this.#angle = Math.atan2(newCoord.y, newCoord.x);
     }
     totalSecondsPassed += secondsPassed;
-    if (totalSecondsPassed >= 1) {
-      this.shoot();
-      totalSecondsPassed -= 1;
-    }
+    let shootingTime = this.#attackSpeed * this.cooldown / this.#bulletNum * 0.3;
+    if (totalSecondsPassed >= 0){ //0.7 * this.#attackSpeed * this.cooldown) {
+      totalSecondsPassed += secondsPassed;
+      if (totalSecondsPassed >= this.#attackSpeed * this.cooldown) {
+        totalSecondsPassed = 0; 
+        this.#boundTime = 0;//0.7 * this.#attackSpeed * this.cooldown;
+      }  
+
+      for (let i = 1; i <= this.#bulletNum; i++){
+        //console.log(this.#boundTime);
+        if (this.#boundTime >= this.#intervalTime * this.#bulletNum){
+
+        }
+        else if (totalSecondsPassed >= this.#boundTime){         
+          this.shoot();
+          this.#boundTime += this.#intervalTime;// i*shootingTime ;
+        }     
+      }
+    }    
   }
 
   shoot() {
+    let offset = 20;
+    let randomX = Math.floor((Math.random()-0.5)*100/2);
+    let randomY = Math.floor((Math.random()-0.5)*100/2);
+    let randomSpeedIndex = Math.random()*0.1+0.95;
+    if (LEFT){
+      randomX = Math.abs(randomX)-offset;
+    }
+    if (RIGHT){
+      randomX = Math.abs(randomX)*-1+offset;
+    }
+    if (UP){
+      randomY = Math.abs(randomY)-offset;
+    }
+    if (DOWN){
+      randomY = Math.abs(randomY)*-1+offset ;
+    }
+    
     var newBullet = new Bullet(
-      this.coordinate.x,
-      this.coordinate.y,
-      this.angle,
-      this.bulletSpeed
+      this.coordinate.x + randomX,
+      this.coordinate.y + randomY,
+      this.#angle,
+      this.#bulletSpeed * randomSpeedIndex
     );
+    //console.log(this.#bulletSpeed);
     this.bullets.push(newBullet);
   }
-  
+
   update() {
     this.bulletMove();
     this.bullets.forEach((bullet) => {
       bullet.update();
+      if (bullet.distance > 1500){
+        const index = this.bullets.indexOf(bullet);
+        this.bullets.splice(index, 1);
+      }
     });
   }
 
