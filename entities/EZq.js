@@ -7,6 +7,11 @@ let LEFT = false;
 let RIGHT = true;
 let DOWN = false;
 let UP = false;
+// let UP_RIGHT = false;
+// let UP_LEFT = false;
+// let DOWN_RIGHT = false;
+// let DOWN_LEFT = false;
+
 let totalSecondsPassed = 0;
 
 export default class Ezq extends Weapon{  
@@ -14,35 +19,25 @@ export default class Ezq extends Weapon{
   #bulletNum;
   #attackSpeed;
   #bulletSpeed;
-  #damage;
-  #penetrate;
-  #fired;
-  #distanceToEnemy;
-
-  #moveSpeed;
-  #velocity;
-  #moveDirection;
 
   #fireDirection;
-  #bullets;
   #angle;
-  #second;
   #boundTime;
   #intervalTime;
+  #radius;
 
   constructor() {
-    //super(100, player.coordinate, 15);
     super(10, 1, player.coordinate);
     this.#fireDirection = new Coordinate(
       player.coordinate.x,
       player.coordinate.y
     );
+    this.#radius = 7;
 
     this.#bulletType = 0;
-    this.#bulletNum = 20;
+    this.#bulletNum = 5;
     this.#attackSpeed = 1;
     this.#bulletSpeed = 10;
-    this.#penetrate = 0;
     this.#angle = 0;
     this.#boundTime = 0;//0.7 * this.#attackSpeed * this.cooldown;
     this.#intervalTime = 0.1;
@@ -62,6 +57,13 @@ export default class Ezq extends Weapon{
       UP = false;
       newCoord.y = 10;
     }
+    if (player.moveUp) {
+      LEFT = false;
+      RIGHT = false;
+      DOWN = false;
+      UP = true;
+      newCoord.y = -10;
+    }
     if (player.moveLeft) {
       LEFT = true;
       RIGHT = false;
@@ -76,46 +78,32 @@ export default class Ezq extends Weapon{
       UP = false;
       newCoord.x = 10;
     }
-    if (player.moveUp) {
-      LEFT = false;
-      RIGHT = false;
-      DOWN = false;
-      UP = true;
-      newCoord.y = -10;
-    }
+    
     if ((newCoord.x == 0) & (newCoord.y == 0)) {
-      if (LEFT) {
-        this.#angle = Math.PI;
-      }
-      if (RIGHT) {
-        this.#angle = 0;
-      }
-      if (UP) {
-        this.#angle = (270 * Math.PI) / 180;
-      }
-      if (DOWN) {
-        this.#angle = (90 * Math.PI) / 180;
-      }
-    } else {
+    } 
+    else {
       this.#angle = Math.atan2(newCoord.y, newCoord.x);
+      console.log(this.#angle)
     }
-    totalSecondsPassed += secondsPassed;
-    let shootingTime = this.#attackSpeed * this.cooldown / this.#bulletNum * 0.3;
-    if (totalSecondsPassed >= 0){ //0.7 * this.#attackSpeed * this.cooldown) {
+    if (this.#intervalTime * this.#bulletNum / this.cooldown > this.#attackSpeed){
+      this.#intervalTime = this.#attackSpeed * this.cooldown / this.#bulletNum;
+
+    }
+    //let shootingTime = this.#attackSpeed * this.cooldown / this.#bulletNum * 0.3;
+    if (totalSecondsPassed >= 0){ 
       totalSecondsPassed += secondsPassed;
       if (totalSecondsPassed >= this.#attackSpeed * this.cooldown) {
         totalSecondsPassed = 0; 
-        this.#boundTime = 0;//0.7 * this.#attackSpeed * this.cooldown;
+        this.#boundTime = 0;
       }  
 
       for (let i = 1; i <= this.#bulletNum; i++){
         //console.log(this.#boundTime);
-        if (this.#boundTime >= this.#intervalTime * this.#bulletNum){
-
+        if (this.#boundTime >= this.#intervalTime * this.#bulletNum ){
         }
         else if (totalSecondsPassed >= this.#boundTime){         
           this.shoot();
-          this.#boundTime += this.#intervalTime;// i*shootingTime ;
+          this.#boundTime += this.#intervalTime;
         }     
       }
     }    
@@ -142,6 +130,7 @@ export default class Ezq extends Weapon{
     var newBullet = new Bullet(
       this.coordinate.x + randomX,
       this.coordinate.y + randomY,
+      this.#radius,
       this.#angle,
       this.#bulletSpeed * randomSpeedIndex
     );
