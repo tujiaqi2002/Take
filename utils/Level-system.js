@@ -1,7 +1,7 @@
-import { detectCollisions } from "./Collision-system.js";
-import { context, EXPGems, player } from "./config.js";
-import { circleIntersect } from "./Collision-system.js";
-import Vector from "./Vector.js";
+import { detectCollisions } from './Collision-system.js';
+import { context, EXPGems, player } from './config.js';
+import { circleIntersect } from './Collision-system.js';
+import Vector from './Vector.js';
 export default class EXPGem {
   #EXPAmount;
   #coordinate;
@@ -41,8 +41,8 @@ export default class EXPGem {
   }
 
   EXPGemDraw() {
-    context.fillStyle = "#eeff00";
-    context.strokeStyle = "#FFFFFF";
+    context.fillStyle = '#eeff00';
+    context.strokeStyle = '#FFFFFF';
     context.beginPath();
     context.arc(
       this.#coordinate.x,
@@ -57,7 +57,7 @@ export default class EXPGem {
   }
 
   EXPGemUpdate() {
-    this.#coordinate.x += this.#velocity.getUnitVector().deltaX * 5;
-    this.#coordinate.y += this.#velocity.getUnitVector().deltaY * 5;
+    this.#coordinate.x += this.#velocity.getUnitVector().deltaX * 8;
+    this.#coordinate.y += this.#velocity.getUnitVector().deltaY * 8;
   }
 }
