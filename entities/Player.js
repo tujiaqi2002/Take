@@ -129,8 +129,14 @@ export default class Player extends Character {
     //draw Level
     context.fillStyle = "white";
     context.font = "bolder 30px Courier";
-
-    context.fillText("Level:" + this.#level, BOARD_WIDTH - 150, 40);
+    console.log(Math.ceil(Math.log(this.#level) / Math.log(10)));
+    context.fillText(
+      "Level:" + this.#level,
+      BOARD_WIDTH -
+        120 -
+        20 * Math.ceil(Math.log(this.#level + 0.5) / Math.log(10)),
+      40
+    );
 
     context.lineWidth = 1;
   }
@@ -140,7 +146,6 @@ export default class Player extends Character {
       this.#EXP -= this.#maxEXP;
       this.#level += 1;
       this.#maxEXP += this.#maxEXPIncrease;
-      console.log(1);
     }
 
     switch (this.#level) {

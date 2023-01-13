@@ -57,7 +57,7 @@ export default class EXPGem {
   }
 
   EXPGemUpdate() {
-    this.#coordinate.x += this.#velocity.getUnitVector().deltaX * 10;
-    this.#coordinate.y += this.#velocity.getUnitVector().deltaY * 10;
+    this.#coordinate.x += this.#velocity.getUnitVector().deltaX * 5;
+    this.#coordinate.y += this.#velocity.getUnitVector().deltaY * 5;
   }
 }

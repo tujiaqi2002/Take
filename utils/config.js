@@ -29,7 +29,7 @@ const player = new Player();
 player.addWeapon(new AOE());
 
 let EXPGems = [];
-
+let allCharacters = [];
 let Enemies = [];
 const enemy_1 = new Enemy();
 const enemy_2 = new Enemy();
@@ -55,11 +55,12 @@ Enemies.push(enemy_8);
 Enemies.push(enemy_9);
 Enemies.push(enemy_10);
 
-
 console.log(Enemies);
-let allCharacters = Enemies.map((enemy) => enemy);
-allCharacters.push(player);
 
+allCharacters.push(player);
+Enemies.forEach((enemy) => {
+  allCharacters.push(enemy);
+});
 console.log(allCharacters);
 
 let Bullets = [];

@@ -11,6 +11,7 @@ import {
 } from "./config.js";
 import { detectCollisions, circleIntersect } from "./Collision-system.js";
 import EXPGem from "./Level-system.js";
+import Enemy from "../entities/Enemy.js";
 
 function boardDraw() {
   context.fillStyle = "#080404";
@@ -37,7 +38,7 @@ function update() {
       console.log("get");
       EXPGems.splice(index, 1);
       //update player EXP bar
-      player.EXP += EXPGem.EXPAmount
+      player.EXP += EXPGem.EXPAmount;
     }
   });
   //update all enemies
@@ -45,12 +46,18 @@ function update() {
     //check for enemy die
     if (enemy.HP <= 0) {
       Enemies.splice(index, 1);
-      allCharacters.splice(index, 1);
+      allCharacters.splice(index + 1, 1);
+      console.log(allCharacters);
       index--;
       enemy.enemyDie();
     }
     enemy.enemyUpdate();
   });
+  if (Enemies.length < 50) {
+    let newEnemy = new Enemy();
+    Enemies.push(newEnemy);
+    allCharacters.push(newEnemy);
+  }
   player.playerUpdate();
 }
 
