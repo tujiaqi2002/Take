@@ -1,7 +1,8 @@
 import Player from '../entities/Player.js';
 import Enemy from '../entities/Enemy.js';
-import Weapon from '../entities/temp.js';
+import Weapon from '../entities/EZq.js';
 import AOE from '../entities/AOE.js';
+import Ezq from '../entities/EZq.js';
 
 // Canva (Board) Configuration
 const BOARD = document.getElementById('game-board');
@@ -27,6 +28,7 @@ export function modifySecondsPassed(_secondsPassed) {
 // Entity Initialization
 const player = new Player();
 player.addWeapon(new AOE());
+player.addWeapon(new Ezq());
 
 let Enemies = [];
 const enemy_1 = new Enemy();
