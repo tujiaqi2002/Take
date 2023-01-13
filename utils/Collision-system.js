@@ -1,6 +1,6 @@
-import { allCharacters } from './config.js';
-import Coordinate from './Coordinate.js';
-import Vector from './Vector.js';
+import { allCharacters } from "./config.js";
+import Coordinate from "./Coordinate.js";
+import Vector from "./Vector.js";
 
 function detectCollisions() {
   let obj1;

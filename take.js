@@ -2,6 +2,7 @@ import {
   modifyFPS,
   secondsPassed,
   modifySecondsPassed,
+  EXPGems,
 } from './utils/config.js';
 import { draw, update } from './utils/utility.js';
 import {
