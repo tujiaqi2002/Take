@@ -267,10 +267,13 @@ export default class Player extends Character {
     if (FPS < 150 && FPS > 130) {
       staticFPS = 144;
     }
+    if (FPS < 70 && FPS > 50) {
+      staticFPS = 60;
+    }
 
     characterImg.src =
       "assets/Warrior-V1.3/Warrior/Individual Sprite/idle/Warrior_Idle_" +
-      (Math.floor((totalFrame % staticFPS) / (144 / 6)) + 1) +
+      (Math.floor((totalFrame % staticFPS) / (staticFPS / 6)) + 1) +
       ".png";
     console.log(characterImg.src);
     context.drawImage(
