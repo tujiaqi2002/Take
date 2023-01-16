@@ -83,9 +83,16 @@ function rewardPhaseUpdate() {
   // console.log(1);
 }
 
-function rewardPhaseDraw() {
-  let numberOfReward = Math.floor(Math.random() + player.luck / 100) + 3;
+export let indexOfHighlightBox = 0;
+export let arrowMoveUp = false;
+export let arrowMoveDown = false;
 
+export function indexOfHighlightBoxModify(_indexOfHighlightBox) {
+  indexOfHighlightBox = _indexOfHighlightBox;
+}
+
+export let numberOfReward = Math.floor(Math.random() + player.luck / 100) + 3;
+function rewardPhaseDraw() {
   let rewardBoxLeftGap = 10;
   let rewardBoxTopGap = 10;
   let rewardBoxWidth = 1000;
@@ -117,6 +124,11 @@ function rewardPhaseDraw() {
 
   //draw boxes
   for (let i = 0; i < numberOfReward; i++) {
+    if (i == indexOfHighlightBox) {
+      context.strokeStyle = "red";
+    } else {
+      context.strokeStyle = "gold";
+    }
     context.lineWidth = 6;
     context.beginPath();
     context.roundRect(
@@ -135,96 +147,94 @@ function rewardPhaseDraw() {
   }
 
   //draw arrow indicator
-  let arrowIndicator = 0;
+  // context.strokeStyle = "red";
+  // context.beginPath();
+  // context.moveTo(
+  //   (BOARD_WIDTH - rewardBoxWidth) / 2 - 140,
+  //   (BOARD_HEIGHT -
+  //     numberOfReward * rewardBoxHeight -
+  //     (numberOfReward - 1) * rewardBoxGap) /
+  //     2 +
+  //     arrowIndicator * rewardBoxHeight +
+  //     arrowIndicator * rewardBoxGap +
+  //     rewardBoxHeight / 2 -
+  //     20
+  // );
+  // context.lineTo(
+  //   (BOARD_WIDTH - rewardBoxWidth) / 2 - 60,
+  //   (BOARD_HEIGHT -
+  //     numberOfReward * rewardBoxHeight -
+  //     (numberOfReward - 1) * rewardBoxGap) /
+  //     2 +
+  //     arrowIndicator * rewardBoxHeight +
+  //     arrowIndicator * rewardBoxGap +
+  //     rewardBoxHeight / 2 -
+  //     20
+  // );
 
-  context.strokeStyle = "red";
-  context.beginPath();
-  context.moveTo(
-    (BOARD_WIDTH - rewardBoxWidth) / 2 - 140,
-    (BOARD_HEIGHT -
-      numberOfReward * rewardBoxHeight -
-      (numberOfReward - 1) * rewardBoxGap) /
-      2 +
-      arrowIndicator * rewardBoxHeight +
-      arrowIndicator * rewardBoxGap +
-      rewardBoxHeight / 2 -
-      20
-  );
-  context.lineTo(
-    (BOARD_WIDTH - rewardBoxWidth) / 2 - 60,
-    (BOARD_HEIGHT -
-      numberOfReward * rewardBoxHeight -
-      (numberOfReward - 1) * rewardBoxGap) /
-      2 +
-      arrowIndicator * rewardBoxHeight +
-      arrowIndicator * rewardBoxGap +
-      rewardBoxHeight / 2 -
-      20
-  );
+  // context.lineTo(
+  //   (BOARD_WIDTH - rewardBoxWidth) / 2 - 60,
+  //   (BOARD_HEIGHT -
+  //     numberOfReward * rewardBoxHeight -
+  //     (numberOfReward - 1) * rewardBoxGap) /
+  //     2 +
+  //     arrowIndicator * rewardBoxHeight +
+  //     arrowIndicator * rewardBoxGap +
+  //     rewardBoxHeight / 2 -
+  //     40
+  // );
 
-  context.lineTo(
-    (BOARD_WIDTH - rewardBoxWidth) / 2 - 60,
-    (BOARD_HEIGHT -
-      numberOfReward * rewardBoxHeight -
-      (numberOfReward - 1) * rewardBoxGap) /
-      2 +
-      arrowIndicator * rewardBoxHeight +
-      arrowIndicator * rewardBoxGap +
-      rewardBoxHeight / 2 -
-      40
-  );
+  // context.lineTo(
+  //   (BOARD_WIDTH - rewardBoxWidth) / 2 - 25,
+  //   (BOARD_HEIGHT -
+  //     numberOfReward * rewardBoxHeight -
+  //     (numberOfReward - 1) * rewardBoxGap) /
+  //     2 +
+  //     arrowIndicator * rewardBoxHeight +
+  //     arrowIndicator * rewardBoxGap +
+  //     rewardBoxHeight / 2
+  // );
 
-  context.lineTo(
-    (BOARD_WIDTH - rewardBoxWidth) / 2 - 25,
-    (BOARD_HEIGHT -
-      numberOfReward * rewardBoxHeight -
-      (numberOfReward - 1) * rewardBoxGap) /
-      2 +
-      arrowIndicator * rewardBoxHeight +
-      arrowIndicator * rewardBoxGap +
-      rewardBoxHeight / 2
-  );
+  // context.lineTo(
+  //   (BOARD_WIDTH - rewardBoxWidth) / 2 - 60,
+  //   (BOARD_HEIGHT -
+  //     numberOfReward * rewardBoxHeight -
+  //     (numberOfReward - 1) * rewardBoxGap) /
+  //     2 +
+  //     arrowIndicator * rewardBoxHeight +
+  //     arrowIndicator * rewardBoxGap +
+  //     rewardBoxHeight / 2 +
+  //     40
+  // );
+  // context.lineTo(
+  //   (BOARD_WIDTH - rewardBoxWidth) / 2 - 60,
+  //   (BOARD_HEIGHT -
+  //     numberOfReward * rewardBoxHeight -
+  //     (numberOfReward - 1) * rewardBoxGap) /
+  //     2 +
+  //     arrowIndicator * rewardBoxHeight +
+  //     arrowIndicator * rewardBoxGap +
+  //     rewardBoxHeight / 2 +
+  //     20
+  // );
 
-  context.lineTo(
-    (BOARD_WIDTH - rewardBoxWidth) / 2 - 60,
-    (BOARD_HEIGHT -
-      numberOfReward * rewardBoxHeight -
-      (numberOfReward - 1) * rewardBoxGap) /
-      2 +
-      arrowIndicator * rewardBoxHeight +
-      arrowIndicator * rewardBoxGap +
-      rewardBoxHeight / 2 +
-      40
-  );
-  context.lineTo(
-    (BOARD_WIDTH - rewardBoxWidth) / 2 - 60,
-    (BOARD_HEIGHT -
-      numberOfReward * rewardBoxHeight -
-      (numberOfReward - 1) * rewardBoxGap) /
-      2 +
-      arrowIndicator * rewardBoxHeight +
-      arrowIndicator * rewardBoxGap +
-      rewardBoxHeight / 2 +
-      20
-  );
+  // context.lineTo(
+  //   (BOARD_WIDTH - rewardBoxWidth) / 2 - 140,
+  //   (BOARD_HEIGHT -
+  //     numberOfReward * rewardBoxHeight -
+  //     (numberOfReward - 1) * rewardBoxGap) /
+  //     2 +
+  //     arrowIndicator * rewardBoxHeight +
+  //     arrowIndicator * rewardBoxGap +
+  //     rewardBoxHeight / 2 +
+  //     20
+  // );
 
-  context.lineTo(
-    (BOARD_WIDTH - rewardBoxWidth) / 2 - 140,
-    (BOARD_HEIGHT -
-      numberOfReward * rewardBoxHeight -
-      (numberOfReward - 1) * rewardBoxGap) /
-      2 +
-      arrowIndicator * rewardBoxHeight +
-      arrowIndicator * rewardBoxGap +
-      rewardBoxHeight / 2 +
-      20
-  );
+  // context.closePath();
 
-  context.closePath();
-
-  context.stroke();
-  context.fillStyle = "red";
-  context.fill();
+  // context.stroke();
+  // context.fillStyle = "red";
+  // context.fill();
   context.lineWidth = 1;
 }
 

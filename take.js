@@ -23,10 +23,10 @@ function gameStart() {
   window.addEventListener("keyup", playerKeyupHandler, false);
   window.requestAnimationFrame(gameLoop);
 }
-let rewardPhaseDone = false;
-let inRewardPhase = true;
-let inGamePhase = false;
-let oldTimeStamp = 0;
+export let rewardPhaseDone = false;
+export let inRewardPhase = false;
+export let inGamePhase = true;
+export let oldTimeStamp = 0;
 
 function gameLoop(timeStamp) {
   modifySecondsPassed((timeStamp - oldTimeStamp) / 1000);
