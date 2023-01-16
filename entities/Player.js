@@ -15,12 +15,13 @@ export default class Player extends Character {
   #level;
   #EXP;
   #maxEXP;
-
   #maxEXPIncrease;
   #magnetRadius;
+  #levelUp;
 
   #maxHealth;
   #healthRegen;
+  #luck;
 
   #weapons = [];
 
@@ -39,10 +40,12 @@ export default class Player extends Character {
     this.#maxEXP = 10;
     this.#magnetRadius = 60;
     this.#maxEXPIncrease = 20;
+    this.#levelUp = false;
 
     this.#moveSpeed = 300;
     this.#healthRegen = 1;
     this.#maxHealth = 100;
+    this.#luck = 0;
   }
 
   //player move direction booleans
@@ -99,6 +102,18 @@ export default class Player extends Character {
     return this.#EXP;
   }
 
+  get levelUp() {
+    return this.#levelUp;
+  }
+
+  get luck() {
+    return this.#luck;
+  }
+
+  set levelUp(levelUp) {
+    this.#levelUp = levelUp;
+  }
+
   set EXP(EXP) {
     this.#EXP = EXP;
   }
@@ -131,7 +146,6 @@ export default class Player extends Character {
     //draw Level
     context.fillStyle = "white";
     context.font = "bolder 30px Courier";
-    console.log(Math.ceil(Math.log(this.#level) / Math.log(10)));
     context.fillText(
       "Level:" + this.#level,
       BOARD_WIDTH -
@@ -148,6 +162,7 @@ export default class Player extends Character {
       this.#EXP -= this.#maxEXP;
       this.#level += 1;
       this.#maxEXP += this.#maxEXPIncrease;
+      this.#levelUp = true;
     }
 
     switch (this.#level) {

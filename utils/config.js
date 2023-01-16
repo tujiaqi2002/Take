@@ -55,18 +55,15 @@ Enemies.push(enemy_8);
 Enemies.push(enemy_9);
 Enemies.push(enemy_10);
 
-console.log(Enemies);
 
 allCharacters.push(player);
 Enemies.forEach((enemy) => {
   allCharacters.push(enemy);
 });
-console.log(allCharacters);
 
 let Bullets = [];
 const bullet_1 = new Weapon();
 Bullets.push(bullet_1);
-console.log(Bullets);
 
 export function setEnemies(newEnemies) {
   Enemies = newEnemies;
