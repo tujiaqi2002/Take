@@ -68,9 +68,9 @@ function draw() {
   Enemies.forEach((enemy) => {
     enemy.enemyDraw();
   });
-  Bullets.forEach((bullet) => {
-    bullet.bulletDraw();
-  });
+  // Bullets.forEach((bullet) => {
+  //   bullet.bulletDraw();
+  // });
 
   EXPGems.forEach((EXPGem) => {
     EXPGem.EXPGemDraw();

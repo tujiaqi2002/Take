@@ -1,19 +1,10 @@
-import { circleIntersect } from "../utils/Collision-system.js";
 import { context, Enemies, player, secondsPassed } from "../utils/config.js";
+import { circleIntersect } from "../utils/Collision-system.js";
+import Weapon from './Weapon.js';
 
-export default class AOE {
-  #coordinate;
-  #damage;
-  #radius;
-
+export default class AOE extends Weapon {
   constructor() {
-    this.#coordinate = player.coordinate;
-    this.#damage = 1000;
-    this.#radius = 200;
-  }
-
-  get radius() {
-    return this.#radius;
+    super(10, 1, player.coordinate);
   }
 
   draw() {
