@@ -1,8 +1,8 @@
-import Player from '../entities/Player.js';
-import Enemy from '../entities/Enemy.js';
-import Weapon from '../entities/EZq.js';
-import AOE from '../entities/AOE.js';
-import Ezq from '../entities/EZq.js';
+import Player from "../entities/Player.js";
+import Enemy from "../entities/Enemy.js";
+import Weapon from "../entities/EZq.js";
+import AOE from "../entities/AOE.js";
+import Ezq from "../entities/EZq.js";
 
 // Canva (Board) Configuration
 const BOARD = document.getElementById("game-board");
@@ -28,7 +28,6 @@ export function modifySecondsPassed(_secondsPassed) {
 // Entity Initialization
 const player = new Player();
 player.addWeapon(new AOE());
-player.addWeapon(new Ezq());
 
 let EXPGems = [];
 let allCharacters = [];
@@ -57,18 +56,14 @@ Enemies.push(enemy_8);
 Enemies.push(enemy_9);
 Enemies.push(enemy_10);
 
-console.log(Enemies);
-
 allCharacters.push(player);
 Enemies.forEach((enemy) => {
   allCharacters.push(enemy);
 });
-console.log(allCharacters);
 
 let Bullets = [];
 const bullet_1 = new Weapon();
 Bullets.push(bullet_1);
-console.log(Bullets);
 
 export function setEnemies(newEnemies) {
   Enemies = newEnemies;

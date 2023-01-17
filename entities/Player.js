@@ -40,6 +40,7 @@ export default class Player extends Character {
     this.#magnetRadius = 60;
     this.#maxEXPIncrease = 20;
 
+    this.mass = 1000;
     this.#moveSpeed = 300;
     this.#healthRegen = 1;
     this.#maxHealth = 100;

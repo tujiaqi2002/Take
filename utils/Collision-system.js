@@ -1,4 +1,4 @@
-import { allCharacters } from "./config.js";
+import { allCharacters, player } from "./config.js";
 import Coordinate from "./Coordinate.js";
 import Vector from "./Vector.js";
 
@@ -34,10 +34,23 @@ function detectCollisions() {
         //calculate overlap
         let vectorOfObjs = new Vector(obj1.coordinate, obj2.coordinate);
         let distanceOfObjs = vectorOfObjs.magnitude;
-        let overlap = (obj1.radius + obj2.radius - distanceOfObjs) / 2;
-        obj1.coordinate.x -= overlap * vectorOfObjs.getUnitVector().deltaX;
-        obj1.coordinate.y -= overlap * vectorOfObjs.getUnitVector().deltaY;
-
+        let overlap = obj1.radius + obj2.radius - distanceOfObjs;
+        if (obj1 == player) {
+          obj2.coordinate.x += overlap * vectorOfObjs.getUnitVector().deltaX;
+          obj2.coordinate.y += overlap * vectorOfObjs.getUnitVector().deltaY;
+        } else if ((obj2 = player)) {
+          obj1.coordinate.x -= overlap * vectorOfObjs.getUnitVector().deltaX;
+          obj1.coordinate.y -= overlap * vectorOfObjs.getUnitVector().deltaY;
+        } else {
+          obj1.coordinate.x -=
+            (overlap * vectorOfObjs.getUnitVector().deltaX) / 2;
+          obj1.coordinate.y -=
+            (overlap * vectorOfObjs.getUnitVector().deltaY) / 2;
+          obj2.coordinate.x +=
+            (overlap * vectorOfObjs.getUnitVector().deltaX) / 2;
+          obj2.coordinate.y +=
+            (overlap * vectorOfObjs.getUnitVector().deltaY) / 2;
+        }
         let vCollision = new Vector(obj1.coordinate, obj2.coordinate);
 
         let vCollisionNorm = vCollision.getUnitVector();

@@ -12,9 +12,9 @@ export default class AOE extends Weapon {
     context.strokeStyle = "#FFFFFF";
     context.beginPath();
     context.arc(
-      this.#coordinate.x,
-      this.#coordinate.y,
-      this.#radius,
+      this.coordinate.x,
+      this.coordinate.y,
+      this.radius,
       0,
       2 * Math.PI,
       false
@@ -23,20 +23,20 @@ export default class AOE extends Weapon {
   }
 
   update() {
-    this.#coordinate = player.coordinate;
+    this.coordinate = player.coordinate;
     Enemies.forEach((enemy, index) => {
       if (
         //if enemy is inside the area
         circleIntersect(
-          this.#coordinate.x,
-          this.#coordinate.y,
-          this.#radius,
+          this.coordinate.x,
+          this.coordinate.y,
+          this.radius,
           enemy.coordinate.x,
           enemy.coordinate.y,
           enemy.radius
         )
       ) {
-        enemy.HP -= this.#damage * secondsPassed;
+        enemy.HP -= this.damage * secondsPassed;
       }
     });
   }

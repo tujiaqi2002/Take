@@ -35,7 +35,6 @@ function update() {
         player.radius - EXPGem.radius
       )
     ) {
-      console.log("get");
       EXPGems.splice(index, 1);
       //update player EXP bar
       player.EXP += EXPGem.EXPAmount;
@@ -47,13 +46,12 @@ function update() {
     if (enemy.HP <= 0) {
       Enemies.splice(index, 1);
       allCharacters.splice(index + 1, 1);
-      console.log(allCharacters);
       index--;
       enemy.enemyDie();
     }
     enemy.enemyUpdate();
   });
-  if (Enemies.length < 50) {
+  if (Enemies.length < 5) {
     let newEnemy = new Enemy();
     Enemies.push(newEnemy);
     allCharacters.push(newEnemy);
@@ -68,9 +66,6 @@ function draw() {
   Enemies.forEach((enemy) => {
     enemy.enemyDraw();
   });
-  // Bullets.forEach((bullet) => {
-  //   bullet.bulletDraw();
-  // });
 
   EXPGems.forEach((EXPGem) => {
     EXPGem.EXPGemDraw();

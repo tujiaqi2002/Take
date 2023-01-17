@@ -65,4 +65,8 @@ export default class Character {
   set coordinate(cord) {
     this.#coordinate = cord;
   }
+
+  set mass(mass) {
+    this.#mass = mass;
+  }
 }
