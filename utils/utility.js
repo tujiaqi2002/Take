@@ -48,7 +48,7 @@ function update() {
     }
     enemy.enemyUpdate();
   });
-  if (Enemies.length < 50) {
+  if (Enemies.length < 5) {
     let newEnemy = new Enemy();
     Enemies.push(newEnemy);
     allCharacters.push(newEnemy);

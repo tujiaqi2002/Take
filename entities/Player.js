@@ -46,6 +46,7 @@ export default class Player extends Character {
     this.#maxEXPIncrease = 20;
     this.#levelUp = false;
 
+    this.mass = 1000;
     this.#moveSpeed = 300;
     this.#healthRegen = 1;
     this.#maxHealth = 100;

@@ -8,14 +8,14 @@ import {
 import {
   playerKeydownHandler,
   playerKeyupHandler,
-} from './utils/eventHandler.js';
+} from "./utils/eventHandler.js";
 
 window.addEventListener('DOMContentLoaded', gameStart);
 const config = new Config();
 
 function gameStart() {
-  window.addEventListener('keydown', playerKeydownHandler, false);
-  window.addEventListener('keyup', playerKeyupHandler, false);
+  window.addEventListener("keydown", playerKeydownHandler, false);
+  window.addEventListener("keyup", playerKeyupHandler, false);
   window.requestAnimationFrame(gameLoop);
 }
 

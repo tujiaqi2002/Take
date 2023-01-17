@@ -2,19 +2,9 @@ import { config } from '../take.js';
 import { circleIntersect } from '../utils/Collision-system.js';
 import { Enemies, player } from '../utils/config.js';
 
-export default class AOE {
-  #coordinate;
-  #damage;
-  #radius;
-
+export default class AOE extends Weapon {
   constructor() {
-    this.#coordinate = player.coordinate;
-    this.#damage = 1000;
-    this.#radius = 200;
-  }
-
-  get radius() {
-    return this.#radius;
+    super(10, 1, player.coordinate);
   }
 
   draw() {
@@ -33,14 +23,14 @@ export default class AOE {
   }
 
   update() {
-    this.#coordinate = player.coordinate;
+    this.coordinate = player.coordinate;
     Enemies.forEach((enemy, index) => {
       if (
         //if enemy is inside the area
         circleIntersect(
-          this.#coordinate.x,
-          this.#coordinate.y,
-          this.#radius,
+          this.coordinate.x,
+          this.coordinate.y,
+          this.radius,
           enemy.coordinate.x,
           enemy.coordinate.y,
           enemy.radius
