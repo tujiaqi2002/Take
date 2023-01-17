@@ -1,4 +1,4 @@
-import { inGamePhase, inRewardPhase } from '../take.js';
+import { config } from '../take.js';
 import { player } from '../utils/config.js';
 import {
   indexOfHighlightBox,
@@ -7,7 +7,7 @@ import {
 } from './utility.js';
 
 function playerKeydownHandler(e) {
-  if (inGamePhase) {
+  if (config.inGamePhase) {
     switch (e.key) {
       case 'w':
       case 'ArrowUp': {
@@ -34,7 +34,7 @@ function playerKeydownHandler(e) {
         return;
     }
   }
-  if (inRewardPhase) {
+  if (config.inRewardPhase) {
     switch (e.key) {
       case 'w':
       case 'ArrowUp': {
@@ -57,7 +57,7 @@ function playerKeydownHandler(e) {
 }
 
 function playerKeyupHandler(e) {
-  if (inGamePhase) {
+  if (config.inGamePhase) {
     switch (e.key) {
       case 'w':
       case 'ArrowUp': {
@@ -83,8 +83,6 @@ function playerKeyupHandler(e) {
       default:
         return;
     }
-  }
-  if (inRewardPhase) {
   }
 }
 

@@ -18,20 +18,16 @@ function gameStart() {
   window.addEventListener('keyup', playerKeyupHandler, false);
   window.requestAnimationFrame(gameLoop);
 }
-export let rewardPhaseDone = false;
-export let inRewardPhase = false;
-export let inGamePhase = true;
-export let oldTimeStamp = 0;
 
 function gameLoop(timeStamp) {
-  config.secondsPassed = (timeStamp - oldTimeStamp) / 1000;
-  oldTimeStamp = timeStamp;
+  config.secondsPassed = (timeStamp - config.oldTimeStamp) / 1000;
+  config.oldTimeStamp = timeStamp;
   config.FPS = Math.round(1 / config.secondsPassed);
 
   update();
   if (player.levelUp) {
-    inRewardPhase = true;
-    inGamePhase = false;
+    config.inRewardPhase = true;
+    config.inGamePhase = false;
   }
   draw();
   phaseSwap();
@@ -40,18 +36,18 @@ function gameLoop(timeStamp) {
 function rewardPhaseLoop() {
   rewardPhaseUpdate();
   rewardPhaseDraw();
-  if (rewardPhaseDone) {
+  if (config.rewardPhaseDone) {
     window.requestAnimationFrame(gameLoop);
   }
   window.requestAnimationFrame(rewardPhaseLoop);
 }
 
 function phaseSwap() {
-  if (inGamePhase) {
+  if (config.inGamePhase) {
     window.requestAnimationFrame(gameLoop);
   }
 
-  if (inRewardPhase) {
+  if (config.inRewardPhase) {
     window.requestAnimationFrame(rewardPhaseLoop);
   }
 }

@@ -1,5 +1,5 @@
-import { player, secondsPassed } from '../utils/config.js';
-import Coordinate from '../utils/Coordinate.js';
+import { player, secondsPassed } from '../../utils/config.js';
+import Coordinate from '../../utils/Coordinate.js';
 import Bullet from './Bullet.js';
 
 let LEFT = false;

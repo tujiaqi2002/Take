@@ -1,4 +1,4 @@
-import { context } from "../utils/config.js";
+import { context } from "../../utils/config.js";
 
 export default class Bullet {
   constructor(x, y, angle) {

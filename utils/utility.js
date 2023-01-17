@@ -8,7 +8,7 @@ import {
   allCharacters,
 } from './config.js';
 import { detectCollisions, circleIntersect } from './Collision-system.js';
-import Enemy from '../entities/Enemy.js';
+import Enemy from '../entities/characters/Enemy.js';
 
 function boardDraw() {
   config.context.fillStyle = '#080404';

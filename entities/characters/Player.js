@@ -1,12 +1,12 @@
-import { config } from '../take.js';
+import { config } from '../../take.js';
 import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
   Enemies,
   EXPGems,
-} from '../utils/config.js';
+} from '../../utils/config.js';
 import Character from './Character.js';
-import Coordinate from '../utils/Coordinate.js';
+import Coordinate from '../../utils/Coordinate.js';
 
 export default class Player extends Character {
   #moveUp;
