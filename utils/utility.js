@@ -1,21 +1,18 @@
+import { config } from '../take.js';
 import {
-  BOARD,
-  context,
+  BOARD_WIDTH,
+  BOARD_HEIGHT,
   player,
   Enemies,
-  FPS,
-  Bullets,
   EXPGems,
   allCharacters,
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
 } from './config.js';
 import { detectCollisions, circleIntersect } from './Collision-system.js';
 import Enemy from '../entities/Enemy.js';
 
 function boardDraw() {
-  context.fillStyle = '#080404';
-  context.fillRect(0, 0, BOARD.width, BOARD.height);
+  config.context.fillStyle = '#080404';
+  config.context.fillRect(0, 0, config.BOARD.width, config.BOARD.height);
 }
 
 function update() {
@@ -61,13 +58,9 @@ function update() {
 
 function draw() {
   boardDraw();
-  // FPSDraw();
 
   Enemies.forEach((enemy) => {
     enemy.enemyDraw();
-  });
-  Bullets.forEach((bullet) => {
-    bullet.bulletDraw();
   });
 
   EXPGems.forEach((EXPGem) => {
@@ -96,10 +89,10 @@ function rewardPhaseDraw() {
   let rewardBoxGap = 15;
 
   //draw boarder
-  context.strokeStyle = 'gold';
-  context.lineWidth = 8;
-  context.beginPath();
-  context.roundRect(
+  config.context.strokeStyle = 'gold';
+  config.context.lineWidth = 8;
+  config.context.beginPath();
+  config.context.roundRect(
     (BOARD_WIDTH - 2 * rewardBoxLeftGap - rewardBoxWidth) / 2,
     (BOARD_HEIGHT -
       numberOfReward * rewardBoxHeight -
@@ -112,20 +105,20 @@ function rewardPhaseDraw() {
       2 * rewardBoxTopGap,
     [20]
   );
-  context.stroke();
-  context.fillStyle = 'Gray';
-  context.fill();
+  config.context.stroke();
+  config.context.fillStyle = 'Gray';
+  config.context.fill();
 
   //draw boxes
   for (let i = 0; i < numberOfReward; i++) {
     if (i == indexOfHighlightBox) {
-      context.strokeStyle = 'red';
+      config.context.strokeStyle = 'red';
     } else {
-      context.strokeStyle = 'gold';
+      config.context.strokeStyle = 'gold';
     }
-    context.lineWidth = 6;
-    context.beginPath();
-    context.roundRect(
+    config.context.lineWidth = 6;
+    config.context.beginPath();
+    config.context.roundRect(
       (BOARD_WIDTH - rewardBoxWidth) / 2,
       (BOARD_HEIGHT -
         numberOfReward * rewardBoxHeight -
@@ -137,10 +130,10 @@ function rewardPhaseDraw() {
       rewardBoxHeight,
       [10]
     );
-    context.stroke();
+    config.context.stroke();
   }
 
-  context.lineWidth = 1;
+  config.context.lineWidth = 1;
 }
 
 function FPSDraw() {

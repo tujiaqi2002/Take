@@ -1,15 +1,10 @@
-import {
-  context,
-  Enemies,
-  EXPGems,
-  player,
-  secondsPassed,
-} from "../utils/config.js";
-import Character from "./Character.js";
-import Vector from "../utils/Vector.js";
-import Coordinate from "../utils/Coordinate.js";
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../utils/config.js";
-import EXPGem from "../utils/Level-system.js";
+import { config } from '../take.js';
+import { BOARD_WIDTH, BOARD_HEIGHT, EXPGems, player } from '../utils/config.js';
+import Character from './Character.js';
+import Vector from '../utils/Vector.js';
+import Coordinate from '../utils/Coordinate.js';
+import EXPGem from '../utils/Level-system.js';
+
 export default class Enemy extends Character {
   #moveSpeed;
   #velocity;
@@ -60,32 +55,27 @@ export default class Enemy extends Character {
 
   enemyMove() {
     this.velocity = new Vector(this.coordinate, player.coordinate);
-    //move = unitVector to player
+
+    // move = unitVector to player
     const move = this.velocity.getUnitVector();
 
     this.velocity = new Vector(
       this.coordinate,
       new Coordinate(
-        this.coordinate.x + move.deltaX * this.#moveSpeed * secondsPassed,
-        this.coordinate.y + move.deltaY * this.#moveSpeed * secondsPassed
+        this.coordinate.x +
+          move.deltaX * this.#moveSpeed * config.secondsPassed,
+        this.coordinate.y + move.deltaY * this.#moveSpeed * config.secondsPassed
       )
     );
     this.coordinate.x += this.velocity.deltaX;
     this.coordinate.y += this.velocity.deltaY;
-
-    // if (oneMove.magnitude >= displacement.magnitude) {
-    //   this.coordinate = player.coordinate;
-    // }
-
-    if (this.isColliding) {
-    }
   }
 
   enemyDraw() {
-    context.fillStyle = this.isColliding ? "#0099b0" : "#da3131";
-    context.strokeStyle = "#FFFFFF";
-    context.beginPath();
-    context.arc(
+    config.context.fillStyle = this.isColliding ? '#0099b0' : '#da3131';
+    config.context.strokeStyle = '#FFFFFF';
+    config.context.beginPath();
+    config.context.arc(
       this.coordinate.x,
       this.coordinate.y,
       this.radius,
@@ -93,8 +83,8 @@ export default class Enemy extends Character {
       2 * Math.PI,
       false
     );
-    context.stroke();
-    context.fill();
+    config.context.stroke();
+    config.context.fill();
   }
 
   enemyUpdate() {
@@ -104,7 +94,9 @@ export default class Enemy extends Character {
 
   enemyDie() {
     //drop EXP gem
-    const EXPGemDrop = new EXPGem(new Coordinate(this.coordinate.x,this.coordinate.y));
+    const EXPGemDrop = new EXPGem(
+      new Coordinate(this.coordinate.x, this.coordinate.y)
+    );
     EXPGems.push(EXPGemDrop);
   }
 }

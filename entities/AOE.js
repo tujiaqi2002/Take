@@ -1,5 +1,6 @@
-import { circleIntersect } from "../utils/Collision-system.js";
-import { context, Enemies, player, secondsPassed } from "../utils/config.js";
+import { config } from '../take.js';
+import { circleIntersect } from '../utils/Collision-system.js';
+import { Enemies, player } from '../utils/config.js';
 
 export default class AOE {
   #coordinate;
@@ -17,10 +18,10 @@ export default class AOE {
   }
 
   draw() {
-    context.fillStyle = "rgba(255, 255, 255, 0.5)";
-    context.strokeStyle = "#FFFFFF";
-    context.beginPath();
-    context.arc(
+    config.context.fillStyle = 'rgba(255, 255, 255, 0.5)';
+    config.context.strokeStyle = '#FFFFFF';
+    config.context.beginPath();
+    config.context.arc(
       this.#coordinate.x,
       this.#coordinate.y,
       this.#radius,
@@ -28,7 +29,7 @@ export default class AOE {
       2 * Math.PI,
       false
     );
-    context.fill();
+    config.context.fill();
   }
 
   update() {
@@ -45,7 +46,7 @@ export default class AOE {
           enemy.radius
         )
       ) {
-        enemy.HP -= this.#damage * secondsPassed;
+        enemy.HP -= this.#damage * config.secondsPassed;
       }
     });
   }
