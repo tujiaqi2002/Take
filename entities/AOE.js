@@ -1,6 +1,6 @@
-import { config } from '../../take.js';
-import { circleIntersect } from '../../utils/Collision-system.js';
-import { Enemies, player } from '../../utils/config.js';
+import { config } from '../take.js';
+import { circleIntersect } from '../utils/Collision-system.js';
+import { Enemies, player } from '../utils/config.js';
 
 export default class AOE {
   #coordinate;

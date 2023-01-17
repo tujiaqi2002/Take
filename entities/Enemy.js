@@ -1,14 +1,9 @@
-import { config } from '../../take.js';
-import {
-  BOARD_WIDTH,
-  BOARD_HEIGHT,
-  EXPGems,
-  player,
-} from '../../utils/config.js';
+import { config } from '../take.js';
+import { BOARD_WIDTH, BOARD_HEIGHT, EXPGems, player } from '../utils/config.js';
 import Character from './Character.js';
-import Vector from '../../utils/Vector.js';
-import Coordinate from '../../utils/Coordinate.js';
-import EXPGem from '../../utils/Level-system.js';
+import Vector from '../utils/Vector.js';
+import Coordinate from '../utils/Coordinate.js';
+import EXPGem from '../utils/Level-system.js';
 
 export default class Enemy extends Character {
   #moveSpeed;

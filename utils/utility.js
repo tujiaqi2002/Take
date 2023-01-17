@@ -8,7 +8,7 @@ import {
   allCharacters,
 } from './config.js';
 import { detectCollisions, circleIntersect } from './Collision-system.js';
-import Enemy from '../entities/characters/Enemy.js';
+import Enemy from '../entities/Enemy.js';
 
 function boardDraw() {
   config.context.fillStyle = '#080404';
@@ -68,6 +68,7 @@ function draw() {
   });
 
   player.playerDraw();
+  FPSDraw();
 }
 
 function rewardPhaseUpdate() {}
@@ -138,9 +139,9 @@ function rewardPhaseDraw() {
 
 function FPSDraw() {
   // Draw FPS to the screen
-  context.font = '25px Arial';
-  context.fillStyle = 'white';
-  context.fillText('FPS: ' + FPS, 10, 30);
+  config.context.font = '25px Arial';
+  config.context.fillStyle = 'white';
+  config.context.fillText('FPS: ' + config.FPS, 10, 30);
 }
 
 export { boardDraw, draw, update, rewardPhaseUpdate, rewardPhaseDraw };

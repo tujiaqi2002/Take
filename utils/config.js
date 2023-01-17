@@ -1,5 +1,4 @@
-import Player from '../entities/characters/Player.js';
-import Enemy from '../entities/characters/Enemy.js';
+import Player from '../entities/Player.js';
 import AOE from '../entities/AOE.js';
 
 const BOARD_HEIGHT = 2000;
