@@ -3,7 +3,6 @@ import { circleIntersect } from "../utils/Collision-system.js";
 import Weapon from './Weapon.js';
 
 export default class AOE extends Weapon {
-  super(10, 1, player.coordinate);
   constructor() {
     super(10, 1, player.coordinate);
   }
