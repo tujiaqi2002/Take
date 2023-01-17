@@ -2,7 +2,6 @@ import {
   modifyFPS,
   secondsPassed,
   modifySecondsPassed,
-  EXPGems,
   player,
 } from "./utils/config.js";
 import {

@@ -5,18 +5,16 @@ import {
   Enemies,
   FPS,
   Bullets,
-  setEnemies,
   EXPGems,
   allCharacters,
   BOARD_HEIGHT,
   BOARD_WIDTH,
-} from "./config.js";
-import { detectCollisions, circleIntersect } from "./Collision-system.js";
-import EXPGem from "./Level-system.js";
-import Enemy from "../entities/Enemy.js";
+} from './config.js';
+import { detectCollisions, circleIntersect } from './Collision-system.js';
+import Enemy from '../entities/Enemy.js';
 
 function boardDraw() {
-  context.fillStyle = "#080404";
+  context.fillStyle = '#080404';
   context.fillRect(0, 0, BOARD.width, BOARD.height);
 }
 
@@ -79,9 +77,7 @@ function draw() {
   player.playerDraw();
 }
 
-function rewardPhaseUpdate() {
-  // console.log(1);
-}
+function rewardPhaseUpdate() {}
 
 export let indexOfHighlightBox = 0;
 export let arrowMoveUp = false;
@@ -99,10 +95,8 @@ function rewardPhaseDraw() {
   let rewardBoxHeight = 300;
   let rewardBoxGap = 15;
 
-  console.log(numberOfReward);
-
   //draw boarder
-  context.strokeStyle = "gold";
+  context.strokeStyle = 'gold';
   context.lineWidth = 8;
   context.beginPath();
   context.roundRect(
@@ -119,15 +113,15 @@ function rewardPhaseDraw() {
     [20]
   );
   context.stroke();
-  context.fillStyle = "Gray";
+  context.fillStyle = 'Gray';
   context.fill();
 
   //draw boxes
   for (let i = 0; i < numberOfReward; i++) {
     if (i == indexOfHighlightBox) {
-      context.strokeStyle = "red";
+      context.strokeStyle = 'red';
     } else {
-      context.strokeStyle = "gold";
+      context.strokeStyle = 'gold';
     }
     context.lineWidth = 6;
     context.beginPath();
@@ -146,103 +140,14 @@ function rewardPhaseDraw() {
     context.stroke();
   }
 
-  //draw arrow indicator
-  // context.strokeStyle = "red";
-  // context.beginPath();
-  // context.moveTo(
-  //   (BOARD_WIDTH - rewardBoxWidth) / 2 - 140,
-  //   (BOARD_HEIGHT -
-  //     numberOfReward * rewardBoxHeight -
-  //     (numberOfReward - 1) * rewardBoxGap) /
-  //     2 +
-  //     arrowIndicator * rewardBoxHeight +
-  //     arrowIndicator * rewardBoxGap +
-  //     rewardBoxHeight / 2 -
-  //     20
-  // );
-  // context.lineTo(
-  //   (BOARD_WIDTH - rewardBoxWidth) / 2 - 60,
-  //   (BOARD_HEIGHT -
-  //     numberOfReward * rewardBoxHeight -
-  //     (numberOfReward - 1) * rewardBoxGap) /
-  //     2 +
-  //     arrowIndicator * rewardBoxHeight +
-  //     arrowIndicator * rewardBoxGap +
-  //     rewardBoxHeight / 2 -
-  //     20
-  // );
-
-  // context.lineTo(
-  //   (BOARD_WIDTH - rewardBoxWidth) / 2 - 60,
-  //   (BOARD_HEIGHT -
-  //     numberOfReward * rewardBoxHeight -
-  //     (numberOfReward - 1) * rewardBoxGap) /
-  //     2 +
-  //     arrowIndicator * rewardBoxHeight +
-  //     arrowIndicator * rewardBoxGap +
-  //     rewardBoxHeight / 2 -
-  //     40
-  // );
-
-  // context.lineTo(
-  //   (BOARD_WIDTH - rewardBoxWidth) / 2 - 25,
-  //   (BOARD_HEIGHT -
-  //     numberOfReward * rewardBoxHeight -
-  //     (numberOfReward - 1) * rewardBoxGap) /
-  //     2 +
-  //     arrowIndicator * rewardBoxHeight +
-  //     arrowIndicator * rewardBoxGap +
-  //     rewardBoxHeight / 2
-  // );
-
-  // context.lineTo(
-  //   (BOARD_WIDTH - rewardBoxWidth) / 2 - 60,
-  //   (BOARD_HEIGHT -
-  //     numberOfReward * rewardBoxHeight -
-  //     (numberOfReward - 1) * rewardBoxGap) /
-  //     2 +
-  //     arrowIndicator * rewardBoxHeight +
-  //     arrowIndicator * rewardBoxGap +
-  //     rewardBoxHeight / 2 +
-  //     40
-  // );
-  // context.lineTo(
-  //   (BOARD_WIDTH - rewardBoxWidth) / 2 - 60,
-  //   (BOARD_HEIGHT -
-  //     numberOfReward * rewardBoxHeight -
-  //     (numberOfReward - 1) * rewardBoxGap) /
-  //     2 +
-  //     arrowIndicator * rewardBoxHeight +
-  //     arrowIndicator * rewardBoxGap +
-  //     rewardBoxHeight / 2 +
-  //     20
-  // );
-
-  // context.lineTo(
-  //   (BOARD_WIDTH - rewardBoxWidth) / 2 - 140,
-  //   (BOARD_HEIGHT -
-  //     numberOfReward * rewardBoxHeight -
-  //     (numberOfReward - 1) * rewardBoxGap) /
-  //     2 +
-  //     arrowIndicator * rewardBoxHeight +
-  //     arrowIndicator * rewardBoxGap +
-  //     rewardBoxHeight / 2 +
-  //     20
-  // );
-
-  // context.closePath();
-
-  // context.stroke();
-  // context.fillStyle = "red";
-  // context.fill();
   context.lineWidth = 1;
 }
 
 function FPSDraw() {
   // Draw FPS to the screen
-  context.font = "25px Arial";
-  context.fillStyle = "white";
-  context.fillText("FPS: " + FPS, 10, 30);
+  context.font = '25px Arial';
+  context.fillStyle = 'white';
+  context.fillText('FPS: ' + FPS, 10, 30);
 }
 
 export { boardDraw, draw, update, rewardPhaseUpdate, rewardPhaseDraw };

@@ -46,7 +46,6 @@ export default class Weapon {
     this.angle = 0;
 
     this.bullets = [];
-    console.log(this.bullets);
   }
 
   bulletMove() {
