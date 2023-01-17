@@ -1,5 +1,5 @@
-import { detectCollisions } from './Collision-system.js';
-import { context, EXPGems, player } from './config.js';
+import { config } from '../take.js';
+import { player } from './config.js';
 import { circleIntersect } from './Collision-system.js';
 import Vector from './Vector.js';
 export default class EXPGem {
@@ -7,12 +7,14 @@ export default class EXPGem {
   #coordinate;
   #radius;
   #velocity;
+  #flySpeed;
 
   constructor(coordinate) {
     this.#coordinate = coordinate;
     this.#EXPAmount = 2;
     this.#radius = 2;
     this.#velocity = new Vector(this.#coordinate, this.#coordinate);
+    this.#flySpeed = player.moveSpeed * 2;
   }
 
   get coordinate() {
@@ -41,10 +43,10 @@ export default class EXPGem {
   }
 
   EXPGemDraw() {
-    context.fillStyle = '#eeff00';
-    context.strokeStyle = '#FFFFFF';
-    context.beginPath();
-    context.arc(
+    config.context.fillStyle = '#eeff00';
+    config.context.strokeStyle = '#FFFFFF';
+    config.context.beginPath();
+    config.context.arc(
       this.#coordinate.x,
       this.#coordinate.y,
       this.#radius,
@@ -52,12 +54,18 @@ export default class EXPGem {
       2 * Math.PI,
       false
     );
-    context.stroke();
-    context.fill();
+    config.context.stroke();
+    config.context.fill();
   }
 
   EXPGemUpdate() {
-    this.#coordinate.x += this.#velocity.getUnitVector().deltaX * 8;
-    this.#coordinate.y += this.#velocity.getUnitVector().deltaY * 8;
+    this.#coordinate.x +=
+      this.#velocity.getUnitVector().deltaX *
+      config.secondsPassed *
+      this.#flySpeed;
+    this.#coordinate.y +=
+      this.#velocity.getUnitVector().deltaY *
+      config.secondsPassed *
+      this.#flySpeed;
   }
 }

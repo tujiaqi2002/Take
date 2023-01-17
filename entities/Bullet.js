@@ -1,4 +1,4 @@
-import { context } from "../utils/config.js";
+import { context } from '../utils/config.js';
 
 export default class Bullet {
   #x;
@@ -22,8 +22,8 @@ export default class Bullet {
   }
 
   draw() {
-    context.fillStyle = "lightgray";
-    context.strokeStyle = "#FFFFFF";
+    context.fillStyle = 'lightgray';
+    context.strokeStyle = '#FFFFFF';
     context.beginPath();
     context.arc(this.#x, this.#y, this.#radius, 0, 2 * Math.PI, false);
     context.stroke();

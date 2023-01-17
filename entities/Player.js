@@ -1,8 +1,12 @@
-import { BOARD_HEIGHT, BOARD_WIDTH, EXPGems } from "../utils/config.js";
-import Character from "./Character.js";
-import Coordinate from "../utils/Coordinate.js";
-import { secondsPassed } from "../utils/config.js";
-import { context, Enemies } from "../utils/config.js";
+import { config } from '../take.js';
+import {
+  BOARD_HEIGHT,
+  BOARD_WIDTH,
+  Enemies,
+  EXPGems,
+} from '../utils/config.js';
+import Character from './Character.js';
+import Coordinate from '../utils/Coordinate.js';
 
 export default class Player extends Character {
   #moveUp;
@@ -15,12 +19,13 @@ export default class Player extends Character {
   #level;
   #EXP;
   #maxEXP;
-
   #maxEXPIncrease;
   #magnetRadius;
+  #levelUp;
 
   #maxHealth;
   #healthRegen;
+  #luck;
 
   #weapons = [];
 
@@ -39,11 +44,13 @@ export default class Player extends Character {
     this.#maxEXP = 10;
     this.#magnetRadius = 60;
     this.#maxEXPIncrease = 20;
+    this.#levelUp = false;
 
     this.mass = 1000;
     this.#moveSpeed = 300;
     this.#healthRegen = 1;
     this.#maxHealth = 100;
+    this.#luck = 0;
   }
 
   //player move direction booleans
@@ -100,6 +107,18 @@ export default class Player extends Character {
     return this.#EXP;
   }
 
+  get levelUp() {
+    return this.#levelUp;
+  }
+
+  get luck() {
+    return this.#luck;
+  }
+
+  set levelUp(levelUp) {
+    this.#levelUp = levelUp;
+  }
+
   set EXP(EXP) {
     this.#EXP = EXP;
   }
@@ -119,29 +138,33 @@ export default class Player extends Character {
     //draw background
 
     //draw  EXP bar
-    context.fillStyle = "#537a73";
-    context.fillRect(9, 9, ((BOARD_WIDTH - 14) * this.#EXP) / this.#maxEXP, 50);
+    config.context.fillStyle = '#537a73';
+    config.context.fillRect(
+      9,
+      9,
+      ((BOARD_WIDTH - 14) * this.#EXP) / this.#maxEXP,
+      50
+    );
 
     //draw EXP barboarder
-    context.strokeStyle = "#f7f5d7";
-    context.lineWidth = 8;
-    context.beginPath();
-    context.roundRect(7, 7, BOARD_WIDTH - 14, 50, [5]);
-    context.stroke();
+    config.context.strokeStyle = '#f7f5d7';
+    config.context.lineWidth = 8;
+    config.context.beginPath();
+    config.context.roundRect(7, 7, BOARD_WIDTH - 14, 50, [5]);
+    config.context.stroke();
 
     //draw Level
-    context.fillStyle = "white";
-    context.font = "bolder 30px Courier";
-    console.log(Math.ceil(Math.log(this.#level) / Math.log(10)));
-    context.fillText(
-      "Level:" + this.#level,
+    config.context.fillStyle = 'white';
+    config.context.font = 'bolder 30px Courier';
+    config.context.fillText(
+      'Level:' + this.#level,
       BOARD_WIDTH -
         120 -
         20 * Math.ceil(Math.log(this.#level + 0.5) / Math.log(10)),
       40
     );
 
-    context.lineWidth = 1;
+    config.context.lineWidth = 1;
   }
 
   EXPBarUpdate() {
@@ -149,6 +172,7 @@ export default class Player extends Character {
       this.#EXP -= this.#maxEXP;
       this.#level += 1;
       this.#maxEXP += this.#maxEXPIncrease;
+      this.#levelUp = true;
     }
 
     switch (this.#level) {
@@ -168,57 +192,62 @@ export default class Player extends Character {
     //draw background
 
     //draw  EXP bar
-    context.fillStyle = "#537a73";
-    context.fillRect(9, 9, ((BOARD_WIDTH - 14) * this.#EXP) / this.#maxEXP, 50);
+    config.context.fillStyle = '#537a73';
+    config.context.fillRect(
+      9,
+      9,
+      ((BOARD_WIDTH - 14) * this.#EXP) / this.#maxEXP,
+      50
+    );
 
     //draw EXP barboarder
-    context.strokeStyle = "#f7f5d7";
-    context.lineWidth = 8;
-    context.beginPath();
-    context.roundRect(7, 7, BOARD_WIDTH - 14, 50, [5]);
-    context.stroke();
+    config.context.strokeStyle = '#f7f5d7';
+    config.context.lineWidth = 8;
+    config.context.beginPath();
+    config.context.roundRect(7, 7, BOARD_WIDTH - 14, 50, [5]);
+    config.context.stroke();
 
     //draw Level
-    context.fillStyle = "white";
-    context.font = "bolder 30px Courier";
+    config.context.fillStyle = 'white';
+    config.context.font = 'bolder 30px Courier';
 
-    context.fillText("Level:" + this.#level, BOARD_WIDTH - 150, 40);
+    config.context.fillText('Level:' + this.#level, BOARD_WIDTH - 150, 40);
 
-    context.lineWidth = 1;
+    config.context.lineWidth = 1;
   }
 
   HPBarDraw() {
     //draw HP bar boarder
-    context.strokeStyle = "#FFFFFF";
+    config.context.strokeStyle = '#FFFFFF';
 
-    context.beginPath();
-    context.roundRect(
+    config.context.beginPath();
+    config.context.roundRect(
       this.coordinate.x - this.radius,
       this.coordinate.y - this.radius - 20,
       2 * this.radius,
       10,
       [1]
     );
-    context.stroke();
+    config.context.stroke();
 
     //draw HP bar
-    context.lineTo(
+    config.context.lineTo(
       this.coordinate.x + this.radius,
       this.coordinate.y - this.radius - 10
     );
 
-    context.lineTo(
+    config.context.lineTo(
       this.coordinate.x + this.radius,
       this.coordinate.y - this.radius - 20
     );
 
-    context.lineTo(
+    config.context.lineTo(
       this.coordinate.x - this.radius,
       this.coordinate.y - this.radius - 20
     );
 
-    context.fillStyle = "#FFFFFF";
-    context.fillRect(
+    config.context.fillStyle = '#FFFFFF';
+    config.context.fillRect(
       this.coordinate.x - this.radius,
       this.coordinate.y - this.radius - 20,
       ((2 * this.radius) / 100) * this.HP,
@@ -228,7 +257,7 @@ export default class Player extends Character {
 
   HPBarUpdate() {
     //update HP
-    if (this.HP + this.healthRegen * secondsPassed > this.maxHealth) {
+    if (this.HP + this.healthRegen * config.secondsPassed > this.maxHealth) {
       this.HP = this.maxHealth;
     } else {
       this.HP += this.healthRegen * secondsPassed;
@@ -247,42 +276,42 @@ export default class Player extends Character {
   playerMove() {
     Enemies.forEach((enemy) => {
       if (this.moveUp) {
-        enemy.coordinate.y += this.moveSpeed * secondsPassed;
+        enemy.coordinate.y += this.moveSpeed * config.secondsPassed;
       }
       if (this.moveDown) {
-        enemy.coordinate.y -= this.moveSpeed * secondsPassed;
+        enemy.coordinate.y -= this.moveSpeed * config.secondsPassed;
       }
       if (this.moveLeft) {
-        enemy.coordinate.x += this.moveSpeed * secondsPassed;
+        enemy.coordinate.x += this.moveSpeed * config.secondsPassed;
       }
       if (this.moveRight) {
-        enemy.coordinate.x -= this.moveSpeed * secondsPassed;
+        enemy.coordinate.x -= this.moveSpeed * config.secondsPassed;
       }
     });
 
     EXPGems.forEach((EXPGem) => {
       if (this.moveUp) {
-        EXPGem.coordinate.y += this.moveSpeed * secondsPassed;
+        EXPGem.coordinate.y += this.moveSpeed * config.secondsPassed;
       }
       if (this.moveDown) {
-        EXPGem.coordinate.y -= this.moveSpeed * secondsPassed;
+        EXPGem.coordinate.y -= this.moveSpeed * config.secondsPassed;
       }
       if (this.moveLeft) {
-        EXPGem.coordinate.x += this.moveSpeed * secondsPassed;
+        EXPGem.coordinate.x += this.moveSpeed * config.secondsPassed;
       }
       if (this.moveRight) {
-        EXPGem.coordinate.x -= this.moveSpeed * secondsPassed;
+        EXPGem.coordinate.x -= this.moveSpeed * config.secondsPassed;
       }
     });
   }
 
   playerDraw() {
     //draw player
-    context.fillStyle = this.isColliding ? "#0099b0" : "#f7f5d7";
+    config.context.fillStyle = this.isColliding ? '#0099b0' : '#f7f5d7';
 
-    context.strokeStyle = "#FFFFFF";
-    context.beginPath();
-    context.arc(
+    config.context.strokeStyle = '#FFFFFF';
+    config.context.beginPath();
+    config.context.arc(
       this.coordinate.x,
       this.coordinate.y,
       this.radius,
@@ -290,8 +319,8 @@ export default class Player extends Character {
       2 * Math.PI,
       false
     );
-    context.stroke();
-    context.fill();
+    config.context.stroke();
+    config.context.fill();
 
     this.HPBarDraw();
     this.#weapons.forEach((weapon) => weapon.draw());

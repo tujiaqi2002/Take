@@ -1,21 +1,18 @@
+import { config } from '../take.js';
 import {
-  BOARD,
-  context,
+  BOARD_WIDTH,
+  BOARD_HEIGHT,
   player,
   Enemies,
-  FPS,
-  Bullets,
-  setEnemies,
   EXPGems,
   allCharacters,
-} from "./config.js";
-import { detectCollisions, circleIntersect } from "./Collision-system.js";
-import EXPGem from "./Level-system.js";
-import Enemy from "../entities/Enemy.js";
+} from './config.js';
+import { detectCollisions, circleIntersect } from './Collision-system.js';
+import Enemy from '../entities/Enemy.js';
 
 function boardDraw() {
-  context.fillStyle = "#080404";
-  context.fillRect(0, 0, BOARD.width, BOARD.height);
+  config.context.fillStyle = '#080404';
+  config.context.fillRect(0, 0, config.BOARD.width, config.BOARD.height);
 }
 
 function update() {
@@ -61,7 +58,6 @@ function update() {
 
 function draw() {
   boardDraw();
-  // FPSDraw();
 
   Enemies.forEach((enemy) => {
     enemy.enemyDraw();
@@ -72,13 +68,80 @@ function draw() {
   });
 
   player.playerDraw();
+  FPSDraw();
+}
+
+function rewardPhaseUpdate() {}
+
+export let indexOfHighlightBox = 0;
+export let arrowMoveUp = false;
+export let arrowMoveDown = false;
+
+export function indexOfHighlightBoxModify(_indexOfHighlightBox) {
+  indexOfHighlightBox = _indexOfHighlightBox;
+}
+
+export let numberOfReward = Math.floor(Math.random() + player.luck / 100) + 3;
+function rewardPhaseDraw() {
+  let rewardBoxLeftGap = 10;
+  let rewardBoxTopGap = 10;
+  let rewardBoxWidth = 1000;
+  let rewardBoxHeight = 300;
+  let rewardBoxGap = 15;
+
+  //draw boarder
+  config.context.strokeStyle = 'gold';
+  config.context.lineWidth = 8;
+  config.context.beginPath();
+  config.context.roundRect(
+    (BOARD_WIDTH - 2 * rewardBoxLeftGap - rewardBoxWidth) / 2,
+    (BOARD_HEIGHT -
+      numberOfReward * rewardBoxHeight -
+      (numberOfReward - 1) * rewardBoxGap -
+      2 * rewardBoxTopGap) /
+      2,
+    rewardBoxWidth + 2 * rewardBoxLeftGap,
+    numberOfReward * rewardBoxHeight +
+      (numberOfReward - 1) * rewardBoxGap +
+      2 * rewardBoxTopGap,
+    [20]
+  );
+  config.context.stroke();
+  config.context.fillStyle = 'Gray';
+  config.context.fill();
+
+  //draw boxes
+  for (let i = 0; i < numberOfReward; i++) {
+    if (i == indexOfHighlightBox) {
+      config.context.strokeStyle = 'red';
+    } else {
+      config.context.strokeStyle = 'gold';
+    }
+    config.context.lineWidth = 6;
+    config.context.beginPath();
+    config.context.roundRect(
+      (BOARD_WIDTH - rewardBoxWidth) / 2,
+      (BOARD_HEIGHT -
+        numberOfReward * rewardBoxHeight -
+        (numberOfReward - 1) * rewardBoxGap) /
+        2 +
+        i * rewardBoxHeight +
+        i * rewardBoxGap,
+      rewardBoxWidth,
+      rewardBoxHeight,
+      [10]
+    );
+    config.context.stroke();
+  }
+
+  config.context.lineWidth = 1;
 }
 
 function FPSDraw() {
   // Draw FPS to the screen
-  context.font = "25px Arial";
-  context.fillStyle = "white";
-  context.fillText("FPS: " + FPS, 10, 30);
+  config.context.font = '25px Arial';
+  config.context.fillStyle = 'white';
+  config.context.fillText('FPS: ' + config.FPS, 10, 30);
 }
 
-export { boardDraw, draw, update };
+export { boardDraw, draw, update, rewardPhaseUpdate, rewardPhaseDraw };
