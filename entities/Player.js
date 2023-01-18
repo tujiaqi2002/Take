@@ -135,9 +135,7 @@ export default class Player extends Character {
   }
 
   EXPBarDraw() {
-    //draw background
-
-    //draw  EXP bar
+    //draw EXP bar
     config.context.fillStyle = '#537a73';
     config.context.fillRect(
       9,
@@ -322,7 +320,7 @@ export default class Player extends Character {
     config.context.stroke();
     config.context.fill();
 
-    this.HPBarDraw();
+    this.HPBarDraw(); 
     this.#weapons.forEach((weapon) => weapon.draw());
     this.EXPBarDraw();
   }
