@@ -4,8 +4,11 @@ import Ezq from '../entities/EZq.js';
 import AOE from '../entities/AOE.js';
 
 let numberOfReward;
-
 let rewardArray;
+let indexOfHighlightBox = 0;
+let arrowMoveUp = false;
+let arrowMoveDown = false;
+
 export function rewardPhaseUpdate() {
   numberOfReward = Math.floor(Math.random() + player.luck / 100) + 3;
   rewardArray = [new AOE(), new AOE(), new Ezq()];
@@ -16,9 +19,6 @@ export function rewardPhaseUpdate() {
     config.rewardPhaseDone = false;
   }
 }
-let indexOfHighlightBox = 0;
-let arrowMoveUp = false;
-let arrowMoveDown = false;
 
 export function indexOfHighlightBoxModify(_indexOfHighlightBox) {
   indexOfHighlightBox = _indexOfHighlightBox;
