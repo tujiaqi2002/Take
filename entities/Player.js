@@ -139,9 +139,7 @@ export default class Player extends Character {
   }
 
   EXPBarDraw() {
-    //draw background
-
-    //draw  EXP bar
+    //draw EXP bar
     config.context.fillStyle = "#537a73";
     config.context.fillRect(
       9,
