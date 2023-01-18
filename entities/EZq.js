@@ -85,7 +85,7 @@ export default class Ezq extends Weapon {
       this.#intervalTime = (this.#attackSpeed * this.cooldown) / this.#bulletNum;
     }
     //let shootingTime = this.#attackSpeed * this.cooldown / this.#bulletNum * 0.3;
-    if (totalSecondsPassed >= 0){ 
+    if (totalSecondsPassed >= 0) {
       totalSecondsPassed += config.secondsPassed;
       if (totalSecondsPassed >= this.#attackSpeed * this.cooldown) {
         totalSecondsPassed = 0;

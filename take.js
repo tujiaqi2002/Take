@@ -25,7 +25,6 @@ function gameLoop(timeStamp) {
     config.inRewardPhase = true;
     config.inGamePhase = false;
   }
-  console.log(config.secondsPassed);
   draw();
   phaseSwap();
 }
