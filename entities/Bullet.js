@@ -1,5 +1,4 @@
-import { context } from '../utils/config.js';
-
+import { config } from "../take.js";
 export default class Bullet {
   #x;
   #y;
@@ -17,13 +16,13 @@ export default class Bullet {
     this.#radius = radius;
   }
 
-  get distance(){
+  get distance() {
     return this.#distance;
   }
 
   draw() {
-    context.fillStyle = 'lightgray';
-    context.strokeStyle = '#FFFFFF';
+    context.fillStyle = "lightgray";
+    context.strokeStyle = "#FFFFFF";
     context.beginPath();
     context.arc(this.#x, this.#y, this.#radius, 0, 2 * Math.PI, false);
     context.stroke();

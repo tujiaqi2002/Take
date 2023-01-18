@@ -135,7 +135,9 @@ export default class Player extends Character {
     this.HPBarUpdate();
     this.playerMove();
     this.EXPBarUpdate();
-    this.#weapons.forEach((weapon) => weapon.update());
+    if (this.weapon != []) {
+      this.#weapons.forEach((weapon) => weapon.update());
+    }
   }
 
   EXPBarDraw() {
@@ -262,12 +264,12 @@ export default class Player extends Character {
     if (this.HP + this.healthRegen * config.secondsPassed > this.maxHealth) {
       this.HP = this.maxHealth;
     } else {
-      this.HP += this.healthRegen * secondsPassed;
+      this.HP += this.healthRegen * config.secondsPassed;
     }
 
     Enemies.forEach((enemy) => {
       if (enemy.coordinate == this.coordinate) {
-        this.HP = this.HP - enemy.attackDamage * secondsPassed;
+        this.HP = this.HP - enemy.attackDamage * config.secondsPassed;
         if (this.HP < 0) {
           this.HP = 0;
         }
