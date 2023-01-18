@@ -4,21 +4,29 @@ import Ezq from '../entities/EZq.js';
 import AOE from '../entities/AOE.js';
 
 let numberOfReward;
-
 let rewardArray;
-export function rewardPhaseUpdate() {
-  numberOfReward = Math.floor(Math.random() + player.luck / 100) + 3;
-  rewardArray = [new AOE(), new AOE(), new Ezq()];
-  if (config.rewardPhaseDone) {
-    player.addWeapon(rewardArray[indexOfHighlightBox]);
-    config.inRewardPhase = false;
-    config.inGamePhase = true;
-    config.rewardPhaseDone = false;
-  }
-}
 let indexOfHighlightBox = 0;
 let arrowMoveUp = false;
 let arrowMoveDown = false;
+
+export function rewardPhaseUpdate() {
+  numberOfReward = Math.floor(Math.random() + player.luck / 100) + 3;
+  rewardArray = [new AOE(), new Ezq(), new AOE()];
+  if (config.rewardPhaseDone) {
+    //reset all the detectors so the game can switch back to game phase
+    player.addWeapon(rewardArray[indexOfHighlightBox]);
+    config.inGamePhase = true;
+
+    config.inRewardPhase = false;
+    config.rewardPhaseDone = false;
+    player.levelUp = false;
+    player.moveUp = false;
+    player.moveDown = false;
+    player.moveLeft = false;
+    player.moveRight = false;
+    indexOfHighlightBox = 0;
+  }
+}
 
 export function indexOfHighlightBoxModify(_indexOfHighlightBox) {
   indexOfHighlightBox = _indexOfHighlightBox;

@@ -46,26 +46,15 @@ export default class EXPGem {
     config.context.fillStyle = '#eeff00';
     config.context.strokeStyle = '#FFFFFF';
     config.context.beginPath();
-    config.context.arc(
-      this.#coordinate.x,
-      this.#coordinate.y,
-      this.#radius,
-      0,
-      2 * Math.PI,
-      false
-    );
+    config.context.arc(this.#coordinate.x, this.#coordinate.y, this.#radius, 0, 2 * Math.PI, false);
     config.context.stroke();
     config.context.fill();
   }
 
   EXPGemUpdate() {
     this.#coordinate.x +=
-      this.#velocity.getUnitVector().deltaX *
-      config.secondsPassed *
-      this.#flySpeed;
+      this.#velocity.getUnitVector().deltaX * config.secondsPassed * this.#flySpeed;
     this.#coordinate.y +=
-      this.#velocity.getUnitVector().deltaY *
-      config.secondsPassed *
-      this.#flySpeed;
+      this.#velocity.getUnitVector().deltaY * config.secondsPassed * this.#flySpeed;
   }
 }

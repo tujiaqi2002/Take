@@ -1,17 +1,10 @@
-import { config } from "../take.js";
-import {
-  BOARD_WIDTH,
-  BOARD_HEIGHT,
-  player,
-  Enemies,
-  EXPGems,
-  allCharacters,
-} from "./config.js";
-import { detectCollisions, circleIntersect } from "./Collision-system.js";
-import Enemy from "../entities/Enemy.js";
+import { config } from '../take.js';
+import { BOARD_WIDTH, BOARD_HEIGHT, player, Enemies, EXPGems, allCharacters } from './config.js';
+import { detectCollisions, circleIntersect } from './Collision-system.js';
+import Enemy from '../entities/Enemy.js';
 
 function boardDraw() {
-  config.context.fillStyle = "#080404";
+  config.context.fillStyle = '#080404';
   config.context.fillRect(0, 0, config.BOARD.width, config.BOARD.height);
 }
 
@@ -68,14 +61,14 @@ function draw() {
   });
 
   player.playerDraw();
-  FPSDraw();
+  // FPSDraw();
 }
 
 function FPSDraw() {
   // Draw FPS to the screen
-  config.context.font = "25px Arial";
-  config.context.fillStyle = "white";
-  config.context.fillText("FPS: " + config.FPS, 10, 30);
+  config.context.font = '25px Arial';
+  config.context.fillStyle = 'white';
+  config.context.fillText('FPS: ' + config.FPS, 10, 30);
 }
 
 export { boardDraw, draw, update };

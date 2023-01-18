@@ -30,9 +30,6 @@ export default class Config {
 // Entity Initialization
 const player = new Player();
 
-player.addWeapon(new AOE());
-player.addWeapon(new Ezq());
-
 let EXPGems = [];
 let allCharacters = [];
 let Enemies = [];

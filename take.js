@@ -1,17 +1,17 @@
-import Config, { player } from "./utils/config.js";
-import { draw, update } from "./utils/utility.js";
+import Config, { player } from './utils/config.js';
+import { draw, update } from './utils/utility.js';
 import {
   playerKeydownHandler,
   playerKeyupHandler,
-} from "./utils/eventHandler.js";
-import { rewardPhaseDraw, rewardPhaseUpdate } from "./utils/Reward-phase.js";
+  setEventListeners,
+} from './utils/eventHandler.js';
+import { rewardPhaseDraw, rewardPhaseUpdate } from './utils/Reward-phase.js';
 
-window.addEventListener("DOMContentLoaded", gameStart);
+window.addEventListener('DOMContentLoaded', gameStart);
 const config = new Config();
 
 function gameStart() {
-  window.addEventListener("keydown", playerKeydownHandler, false);
-  window.addEventListener("keyup", playerKeyupHandler, false);
+  setEventListeners();
   window.requestAnimationFrame(gameLoop);
 }
 
@@ -29,12 +29,16 @@ function gameLoop(timeStamp) {
   phaseSwap();
 }
 
-function rewardPhaseLoop() {
+function rewardPhaseLoop(timeStamp) {
+  config.secondsPassed = (timeStamp - config.oldTimeStamp) / 1000;
+  config.oldTimeStamp = timeStamp;
+  config.FPS = Math.round(1 / config.secondsPassed);
   rewardPhaseUpdate();
   rewardPhaseDraw();
   if (config.rewardPhaseDone) {
     window.requestAnimationFrame(gameLoop);
   }
+
   phaseSwap();
 }
 
