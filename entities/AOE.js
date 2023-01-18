@@ -25,7 +25,7 @@ export default class AOE extends Weapon {
 
   update() {
     this.coordinate = player.coordinate;
-    Enemies.forEach((enemy, index) => {
+    Enemies.forEach((enemy) => {
       if (
         //if enemy is inside the area
         circleIntersect(
