@@ -1,6 +1,6 @@
-import Player from "../entities/Player.js";
-import AOE from "../entities/AOE.js";
-import Ezq from "../entities/EZq.js";
+import Player from '../entities/Player.js';
+import AOE from '../entities/AOE.js';
+import Ezq from '../entities/EZq.js';
 
 const BOARD_HEIGHT = 2000;
 const BOARD_WIDTH = 2000;
@@ -29,6 +29,9 @@ export default class Config {
 
 // Entity Initialization
 const player = new Player();
+
+player.addWeapon(new AOE());
+player.addWeapon(new Ezq());
 
 let EXPGems = [];
 let allCharacters = [];

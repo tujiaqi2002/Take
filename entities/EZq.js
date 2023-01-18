@@ -1,4 +1,6 @@
 import { player } from '../utils/config.js';
+import { config } from '../take.js';
+
 import Coordinate from '../utils/Coordinate.js';
 import Bullet from './Bullet.js';
 import Weapon from './Weapon.js';
@@ -83,8 +85,8 @@ export default class Ezq extends Weapon {
       this.#intervalTime = (this.#attackSpeed * this.cooldown) / this.#bulletNum;
     }
     //let shootingTime = this.#attackSpeed * this.cooldown / this.#bulletNum * 0.3;
-    if (totalSecondsPassed >= 0) {
-      totalSecondsPassed += secondsPassed;
+    if (totalSecondsPassed >= 0){ 
+      totalSecondsPassed += config.secondsPassed;
       if (totalSecondsPassed >= this.#attackSpeed * this.cooldown) {
         totalSecondsPassed = 0;
         this.#boundTime = 0;
