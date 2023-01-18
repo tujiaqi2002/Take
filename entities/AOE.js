@@ -4,8 +4,15 @@ import { Enemies, player } from "../utils/config.js";
 import Weapon from "./Weapon.js";
 
 export default class AOE extends Weapon {
+  #radius;
+
   constructor() {
     super(10, 1, player.coordinate);
+    this.#radius = 100;
+  }
+
+  get radius() {
+    return this.#radius;
   }
 
   draw() {

@@ -1,16 +1,16 @@
-import Config, { player } from './utils/config.js';
+import Config, { player } from "./utils/config.js";
 import {
   draw,
   update,
   rewardPhaseUpdate,
   rewardPhaseDraw,
-} from './utils/utility.js';
+} from "./utils/utility.js";
 import {
   playerKeydownHandler,
   playerKeyupHandler,
 } from "./utils/eventHandler.js";
 
-window.addEventListener('DOMContentLoaded', gameStart);
+window.addEventListener("DOMContentLoaded", gameStart);
 const config = new Config();
 
 function gameStart() {
@@ -31,6 +31,7 @@ function gameLoop(timeStamp) {
   }
   draw();
   phaseSwap();
+  console.log(player.weapon);
 }
 
 function rewardPhaseLoop() {

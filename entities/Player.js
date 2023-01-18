@@ -1,12 +1,12 @@
-import { config } from '../take.js';
+import { config } from "../take.js";
 import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
   Enemies,
   EXPGems,
-} from '../utils/config.js';
-import Character from './Character.js';
-import Coordinate from '../utils/Coordinate.js';
+} from "../utils/config.js";
+import Character from "./Character.js";
+import Coordinate from "../utils/Coordinate.js";
 
 export default class Player extends Character {
   #moveUp;
@@ -115,6 +115,10 @@ export default class Player extends Character {
     return this.#luck;
   }
 
+  get weapon() {
+    return this.#weapons;
+  }
+
   set levelUp(levelUp) {
     this.#levelUp = levelUp;
   }
@@ -138,7 +142,7 @@ export default class Player extends Character {
     //draw background
 
     //draw  EXP bar
-    config.context.fillStyle = '#537a73';
+    config.context.fillStyle = "#537a73";
     config.context.fillRect(
       9,
       9,
@@ -147,17 +151,17 @@ export default class Player extends Character {
     );
 
     //draw EXP barboarder
-    config.context.strokeStyle = '#f7f5d7';
+    config.context.strokeStyle = "#f7f5d7";
     config.context.lineWidth = 8;
     config.context.beginPath();
     config.context.roundRect(7, 7, BOARD_WIDTH - 14, 50, [5]);
     config.context.stroke();
 
     //draw Level
-    config.context.fillStyle = 'white';
-    config.context.font = 'bolder 30px Courier';
+    config.context.fillStyle = "white";
+    config.context.font = "bolder 30px Courier";
     config.context.fillText(
-      'Level:' + this.#level,
+      "Level:" + this.#level,
       BOARD_WIDTH -
         120 -
         20 * Math.ceil(Math.log(this.#level + 0.5) / Math.log(10)),
@@ -192,7 +196,7 @@ export default class Player extends Character {
     //draw background
 
     //draw  EXP bar
-    config.context.fillStyle = '#537a73';
+    config.context.fillStyle = "#537a73";
     config.context.fillRect(
       9,
       9,
@@ -201,24 +205,24 @@ export default class Player extends Character {
     );
 
     //draw EXP barboarder
-    config.context.strokeStyle = '#f7f5d7';
+    config.context.strokeStyle = "#f7f5d7";
     config.context.lineWidth = 8;
     config.context.beginPath();
     config.context.roundRect(7, 7, BOARD_WIDTH - 14, 50, [5]);
     config.context.stroke();
 
     //draw Level
-    config.context.fillStyle = 'white';
-    config.context.font = 'bolder 30px Courier';
+    config.context.fillStyle = "white";
+    config.context.font = "bolder 30px Courier";
 
-    config.context.fillText('Level:' + this.#level, BOARD_WIDTH - 150, 40);
+    config.context.fillText("Level:" + this.#level, BOARD_WIDTH - 150, 40);
 
     config.context.lineWidth = 1;
   }
 
   HPBarDraw() {
     //draw HP bar boarder
-    config.context.strokeStyle = '#FFFFFF';
+    config.context.strokeStyle = "#FFFFFF";
 
     config.context.beginPath();
     config.context.roundRect(
@@ -246,7 +250,7 @@ export default class Player extends Character {
       this.coordinate.y - this.radius - 20
     );
 
-    config.context.fillStyle = '#FFFFFF';
+    config.context.fillStyle = "#FFFFFF";
     config.context.fillRect(
       this.coordinate.x - this.radius,
       this.coordinate.y - this.radius - 20,
@@ -307,9 +311,9 @@ export default class Player extends Character {
 
   playerDraw() {
     //draw player
-    config.context.fillStyle = this.isColliding ? '#0099b0' : '#f7f5d7';
+    config.context.fillStyle = this.isColliding ? "#0099b0" : "#f7f5d7";
 
-    config.context.strokeStyle = '#FFFFFF';
+    config.context.strokeStyle = "#FFFFFF";
     config.context.beginPath();
     config.context.arc(
       this.coordinate.x,
