@@ -9,7 +9,6 @@ function boardDraw() {
 }
 
 function update() {
-  console.log('1 ');
   detectCollisions();
 
   //update EXP gems
