@@ -2,6 +2,11 @@ import { config } from '../take.js';
 import { player } from '../utils/config.js';
 import { indexOfHighlightBox, indexOfHighlightBoxModify, numberOfReward } from './Reward-phase.js';
 
+function setEventListeners() {
+  window.addEventListener('keydown', playerKeydownHandler, false);
+  window.addEventListener('keyup', playerKeyupHandler, false);
+}
+
 function playerKeydownHandler(e) {
   if (config.inGamePhase) {
     switch (e.key) {
@@ -29,8 +34,7 @@ function playerKeydownHandler(e) {
       default:
         return;
     }
-  }
-  if (config.inRewardPhase) {
+  } else if (config.inRewardPhase) {
     switch (e.key) {
       case 'w':
       case 'ArrowUp': {
@@ -43,12 +47,13 @@ function playerKeydownHandler(e) {
       case 'ArrowDown': {
         if (indexOfHighlightBox < numberOfReward - 1) {
           indexOfHighlightBoxModify(indexOfHighlightBox + 1);
-          break;
         }
+        break;
       }
       case 'Enter':
       case ' ': {
         config.rewardPhaseDone = true;
+        break;
       }
       default:
         return;
@@ -86,4 +91,4 @@ function playerKeyupHandler(e) {
   }
 }
 
-export { playerKeydownHandler, playerKeyupHandler };
+export { playerKeydownHandler, playerKeyupHandler, setEventListeners };

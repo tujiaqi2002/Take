@@ -11,12 +11,20 @@ let arrowMoveDown = false;
 
 export function rewardPhaseUpdate() {
   numberOfReward = Math.floor(Math.random() + player.luck / 100) + 3;
-  rewardArray = [new AOE(), new AOE(), new Ezq()];
+  rewardArray = [new AOE(), new Ezq(), new AOE()];
   if (config.rewardPhaseDone) {
+    //reset all the detectors so the game can switch back to game phase
     player.addWeapon(rewardArray[indexOfHighlightBox]);
-    config.inRewardPhase = false;
     config.inGamePhase = true;
+
+    config.inRewardPhase = false;
     config.rewardPhaseDone = false;
+    player.levelUp = false;
+    player.moveUp = false;
+    player.moveDown = false;
+    player.moveLeft = false;
+    player.moveRight = false;
+    indexOfHighlightBox = 0;
   }
 }
 
