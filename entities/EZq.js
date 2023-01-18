@@ -1,7 +1,7 @@
-import { player } from "../utils/config.js";
-import Coordinate from "../utils/Coordinate.js";
-import Bullet from "./Bullet.js";
-import Weapon from "./Weapon.js";
+import { player } from '../utils/config.js';
+import Coordinate from '../utils/Coordinate.js';
+import Bullet from './Bullet.js';
+import Weapon from './Weapon.js';
 
 let LEFT = false;
 let RIGHT = true;
@@ -27,11 +27,8 @@ export default class Ezq extends Weapon {
   #radius;
 
   constructor() {
-    super("Fire Ball", 10, 1, player.coordinate);
-    this.#fireDirection = new Coordinate(
-      player.coordinate.x,
-      player.coordinate.y
-    );
+    super('Fire Ball', 10, 1, player.coordinate);
+    this.#fireDirection = new Coordinate(player.coordinate.x, player.coordinate.y);
     this.#radius = 7;
 
     this.#bulletType = 0;
@@ -83,12 +80,8 @@ export default class Ezq extends Weapon {
       this.#angle = Math.atan2(newCoord.y, newCoord.x);
       console.log(this.#angle);
     }
-    if (
-      (this.#intervalTime * this.#bulletNum) / this.cooldown >
-      this.#attackSpeed
-    ) {
-      this.#intervalTime =
-        (this.#attackSpeed * this.cooldown) / this.#bulletNum;
+    if ((this.#intervalTime * this.#bulletNum) / this.cooldown > this.#attackSpeed) {
+      this.#intervalTime = (this.#attackSpeed * this.cooldown) / this.#bulletNum;
     }
     //let shootingTime = this.#attackSpeed * this.cooldown / this.#bulletNum * 0.3;
     if (totalSecondsPassed >= 0) {
