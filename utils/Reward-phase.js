@@ -1,7 +1,7 @@
-import { BOARD_HEIGHT, BOARD_WIDTH, player } from "./config.js";
-import { config } from "../take.js";
-import Ezq from "../entities/EZq.js";
-import AOE from "../entities/AOE.js";
+import { BOARD_HEIGHT, BOARD_WIDTH, player } from './config.js';
+import { config } from '../take.js';
+import Ezq from '../entities/EZq.js';
+import AOE from '../entities/AOE.js';
 
 let numberOfReward;
 
@@ -14,7 +14,6 @@ export function rewardPhaseUpdate() {
     config.inRewardPhase = false;
     config.inGamePhase = true;
     config.rewardPhaseDone = false;
-    console.log(1);
   }
 }
 let indexOfHighlightBox = 0;
@@ -33,7 +32,7 @@ export function rewardPhaseDraw() {
   let rewardBoxGap = 15;
 
   //draw boarder
-  config.context.strokeStyle = "gold";
+  config.context.strokeStyle = 'gold';
   config.context.lineWidth = 8;
   config.context.beginPath();
   config.context.roundRect(
@@ -44,30 +43,25 @@ export function rewardPhaseDraw() {
       2 * rewardBoxTopGap) /
       2,
     rewardBoxWidth + 2 * rewardBoxLeftGap,
-    numberOfReward * rewardBoxHeight +
-      (numberOfReward - 1) * rewardBoxGap +
-      2 * rewardBoxTopGap,
+    numberOfReward * rewardBoxHeight + (numberOfReward - 1) * rewardBoxGap + 2 * rewardBoxTopGap,
     [20]
   );
   config.context.stroke();
-  config.context.fillStyle = "Gray";
+  config.context.fillStyle = 'Gray';
   config.context.fill();
 
   //draw boxes
   for (let i = 0; i < numberOfReward; i++) {
     if (i == indexOfHighlightBox) {
-      config.context.strokeStyle = "red";
+      config.context.strokeStyle = 'red';
     } else {
-      config.context.strokeStyle = "gold";
+      config.context.strokeStyle = 'gold';
     }
     config.context.lineWidth = 6;
     config.context.beginPath();
     config.context.roundRect(
       (BOARD_WIDTH - rewardBoxWidth) / 2,
-      (BOARD_HEIGHT -
-        numberOfReward * rewardBoxHeight -
-        (numberOfReward - 1) * rewardBoxGap) /
-        2 +
+      (BOARD_HEIGHT - numberOfReward * rewardBoxHeight - (numberOfReward - 1) * rewardBoxGap) / 2 +
         i * rewardBoxHeight +
         i * rewardBoxGap,
       rewardBoxWidth,
@@ -76,15 +70,12 @@ export function rewardPhaseDraw() {
     );
     config.context.stroke();
     //draw rewards
-    config.context.fillStyle = "white";
-    config.context.font = "bolder 50px Courier";
+    config.context.fillStyle = 'white';
+    config.context.font = 'bolder 50px Courier';
     config.context.fillText(
       rewardArray[i].name,
       (BOARD_WIDTH - rewardBoxWidth) / 2 + 0.7 * rewardBoxWidth,
-      (BOARD_HEIGHT -
-        numberOfReward * rewardBoxHeight -
-        (numberOfReward - 1) * rewardBoxGap) /
-        2 +
+      (BOARD_HEIGHT - numberOfReward * rewardBoxHeight - (numberOfReward - 1) * rewardBoxGap) / 2 +
         i * rewardBoxHeight +
         i * rewardBoxGap +
         0.55 * rewardBoxHeight

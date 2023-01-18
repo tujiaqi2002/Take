@@ -78,7 +78,6 @@ export default class Ezq extends Weapon {
     if ((newCoord.x == 0) & (newCoord.y == 0)) {
     } else {
       this.#angle = Math.atan2(newCoord.y, newCoord.x);
-      console.log(this.#angle);
     }
     if ((this.#intervalTime * this.#bulletNum) / this.cooldown > this.#attackSpeed) {
       this.#intervalTime = (this.#attackSpeed * this.cooldown) / this.#bulletNum;
