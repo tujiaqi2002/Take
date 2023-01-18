@@ -13,6 +13,7 @@ function gameStart() {
   window.addEventListener("keydown", playerKeydownHandler, false);
   window.addEventListener("keyup", playerKeyupHandler, false);
   window.requestAnimationFrame(gameLoop);
+  console.log(player.weapon);
 }
 
 function gameLoop(timeStamp) {
@@ -27,6 +28,7 @@ function gameLoop(timeStamp) {
   }
   draw();
   phaseSwap();
+  console.log(player.weapon);
 }
 
 function rewardPhaseLoop() {
@@ -35,7 +37,7 @@ function rewardPhaseLoop() {
   if (config.rewardPhaseDone) {
     window.requestAnimationFrame(gameLoop);
   }
-  window.requestAnimationFrame(rewardPhaseLoop);
+  phaseSwap();
 }
 
 function phaseSwap() {

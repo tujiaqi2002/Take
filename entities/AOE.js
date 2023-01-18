@@ -7,7 +7,7 @@ export default class AOE extends Weapon {
   #radius;
 
   constructor() {
-    super(10000, 1, player.coordinate);
+    super('Fire AOE',10000, 1, player.coordinate);
     this.#radius = 100;
   }
 

@@ -50,6 +50,10 @@ function playerKeydownHandler(e) {
           break;
         }
       }
+      case "Enter":
+      case "Space": {
+        config.rewardPhaseDone = true;
+      }
       default:
         return;
     }

@@ -1,12 +1,21 @@
 import { BOARD_HEIGHT, BOARD_WIDTH, player } from "./config.js";
 import { config } from "../take.js";
 import Ezq from "../entities/EZq.js";
+import AOE from "../entities/AOE.js";
 
 let numberOfReward;
 
-let rewardArray = [new Ezq()];
+let rewardArray;
 export function rewardPhaseUpdate() {
   numberOfReward = Math.floor(Math.random() + player.luck / 100) + 3;
+  rewardArray = [new AOE(), new AOE(), new Ezq()];
+  if (config.rewardPhaseDone) {
+    player.addWeapon(rewardArray[indexOfHighlightBox]);
+    config.inRewardPhase = false;
+    config.inGamePhase = true;
+    config.rewardPhaseDone = false;
+    console.log(1);
+  }
 }
 let indexOfHighlightBox = 0;
 let arrowMoveUp = false;
@@ -66,7 +75,20 @@ export function rewardPhaseDraw() {
       [10]
     );
     config.context.stroke();
-    console;
+    //draw rewards
+    config.context.fillStyle = "white";
+    config.context.font = "bolder 50px Courier";
+    config.context.fillText(
+      rewardArray[i].name,
+      (BOARD_WIDTH - rewardBoxWidth) / 2 + 0.7 * rewardBoxWidth,
+      (BOARD_HEIGHT -
+        numberOfReward * rewardBoxHeight -
+        (numberOfReward - 1) * rewardBoxGap) /
+        2 +
+        i * rewardBoxHeight +
+        i * rewardBoxGap +
+        0.55 * rewardBoxHeight
+    );
   }
 
   config.context.lineWidth = 1;

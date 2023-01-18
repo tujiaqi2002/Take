@@ -2,11 +2,13 @@ export default class Weapon {
   #damage;
   #cooldown;
   #coordinate;
+  #name;
 
-  constructor(damage, cooldown, coordinate) {
+  constructor(name, damage, cooldown, coordinate) {
     this.#damage = damage;
     this.#cooldown = cooldown;
     this.#coordinate = coordinate;
+    this.#name = name;
   }
 
   get coordinate() {
@@ -15,6 +17,10 @@ export default class Weapon {
 
   get damage() {
     return this.#damage;
+  }
+
+  get name() {
+    return this.#name;
   }
 
   set coordinate(coordinate) {
