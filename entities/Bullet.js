@@ -1,4 +1,4 @@
-import { context } from '../utils/config.js';
+import { config } from '../take.js';
 
 export default class Bullet {
   #x;
@@ -22,12 +22,12 @@ export default class Bullet {
   }
 
   draw() {
-    context.fillStyle = 'lightgray';
-    context.strokeStyle = '#FFFFFF';
-    context.beginPath();
-    context.arc(this.#x, this.#y, this.#radius, 0, 2 * Math.PI, false);
-    context.stroke();
-    context.fill();
+    config.context.fillStyle = 'lightgray';
+    config.context.strokeStyle = '#FFFFFF';
+    config.context.beginPath();
+    config.context.arc(this.#x, this.#y, this.#radius, 0, 2 * Math.PI, false);
+    config.context.stroke();
+    config.context.fill();
   }
 
   update() {
