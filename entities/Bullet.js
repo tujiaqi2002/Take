@@ -17,7 +17,7 @@ export default class Bullet {
     this.#radius = radius;
   }
 
-  get distance(){
+  get distance() {
     return this.#distance;
   }
 

@@ -1,13 +1,13 @@
-import { config } from '../take.js';
-import { circleIntersect } from '../utils/Collision-system.js';
-import { Enemies, player } from '../utils/config.js';
-import Weapon from './Weapon.js';
+import { config } from "../take.js";
+import { circleIntersect } from "../utils/Collision-system.js";
+import { Enemies, player } from "../utils/config.js";
+import Weapon from "./Weapon.js";
 
 export default class AOE extends Weapon {
   #radius;
 
   constructor() {
-    super(10, 1, player.coordinate);
+    super('Fire AOE',10000, 1, player.coordinate);
     this.#radius = 100;
   }
 
@@ -16,9 +16,8 @@ export default class AOE extends Weapon {
   }
 
   draw() {
-    console.log('a');
-    config.context.fillStyle = 'rgba(255, 255, 255, 0.5)';
-    config.context.strokeStyle = '#FFFFFF';
+    config.context.fillStyle = "rgba(255, 255, 255, 0.5)";
+    config.context.strokeStyle = "#FFFFFF";
     config.context.beginPath();
     config.context.arc(
       this.coordinate.x,

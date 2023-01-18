@@ -8,12 +8,12 @@ const BOARD_WIDTH = 2000;
 export default class Config {
   constructor() {
     // Canva (Board) Configuration
-    this.BOARD = document.getElementById('game-board');
+    this.BOARD = document.getElementById("game-board");
     this.BOARD.height = BOARD_HEIGHT;
     this.BOARD.width = BOARD_WIDTH;
 
     // Board Context
-    this.context = this.BOARD.getContext('2d');
+    this.context = this.BOARD.getContext("2d");
 
     // FPS
     this.FPS = 0;
@@ -21,14 +21,15 @@ export default class Config {
 
     // Phases
     this.rewardPhaseDone = false;
-    this.inRewardPhase = false;
-    this.inGamePhase = true;
+    this.inRewardPhase = true;
+    this.inGamePhase = false;
     this.oldTimeStamp = 0;
   }
 }
 
 // Entity Initialization
 const player = new Player();
+
 player.addWeapon(new AOE());
 player.addWeapon(new Ezq());
 
