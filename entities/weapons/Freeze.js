@@ -1,8 +1,8 @@
-import { config } from '../take.js';
+import { config } from '../../take.js';
 import Weapon from './Weapon.js';
-import { closestEnemy } from '../utils/utility.js';
-import { Enemies, player } from '../utils/config.js';
-import { circleIntersect } from '../utils/Collision-system.js';
+import { closestEnemy } from '../../utils/utility.js';
+import { Enemies, player } from '../../utils/config.js';
+import { circleIntersect } from '../../utils/Collision-system.js';
 
 export default class Freeze extends Weapon {
   constructor() {

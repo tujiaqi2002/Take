@@ -1,7 +1,7 @@
-import { player } from '../utils/config.js';
-import { config } from '../take.js';
+import { player } from '../../utils/config.js';
+import { config } from '../../take.js';
 
-import Coordinate from '../utils/Coordinate.js';
+import Coordinate from '../../utils/Coordinate.js';
 import Bullet from './Bullet.js';
 import Weapon from './Weapon.js';
 
