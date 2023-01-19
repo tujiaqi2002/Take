@@ -2,6 +2,7 @@ import { BOARD_HEIGHT, BOARD_WIDTH, player } from './config.js';
 import { config } from '../take.js';
 import Ezq from '../entities/EZq.js';
 import AOE from '../entities/AOE.js';
+import Freeze from '../entities/Freeze.js';
 
 let numberOfReward;
 let rewardArray;
@@ -11,7 +12,7 @@ let arrowMoveDown = false;
 
 export function rewardPhaseUpdate() {
   numberOfReward = Math.floor(Math.random() + player.luck / 100) + 3;
-  rewardArray = [new AOE(), new Ezq(), new AOE()];
+  rewardArray = [new AOE(), new Ezq(), new Freeze()];
   if (config.rewardPhaseDone) {
     //reset all the detectors so the game can switch back to game phase
     player.addWeapon(rewardArray[indexOfHighlightBox]);
@@ -51,7 +52,9 @@ export function rewardPhaseDraw() {
       2 * rewardBoxTopGap) /
       2,
     rewardBoxWidth + 2 * rewardBoxLeftGap,
-    numberOfReward * rewardBoxHeight + (numberOfReward - 1) * rewardBoxGap + 2 * rewardBoxTopGap,
+    numberOfReward * rewardBoxHeight +
+      (numberOfReward - 1) * rewardBoxGap +
+      2 * rewardBoxTopGap,
     [20]
   );
   config.context.stroke();
@@ -69,7 +72,10 @@ export function rewardPhaseDraw() {
     config.context.beginPath();
     config.context.roundRect(
       (BOARD_WIDTH - rewardBoxWidth) / 2,
-      (BOARD_HEIGHT - numberOfReward * rewardBoxHeight - (numberOfReward - 1) * rewardBoxGap) / 2 +
+      (BOARD_HEIGHT -
+        numberOfReward * rewardBoxHeight -
+        (numberOfReward - 1) * rewardBoxGap) /
+        2 +
         i * rewardBoxHeight +
         i * rewardBoxGap,
       rewardBoxWidth,
@@ -83,7 +89,10 @@ export function rewardPhaseDraw() {
     config.context.fillText(
       rewardArray[i].name,
       (BOARD_WIDTH - rewardBoxWidth) / 2 + 0.7 * rewardBoxWidth,
-      (BOARD_HEIGHT - numberOfReward * rewardBoxHeight - (numberOfReward - 1) * rewardBoxGap) / 2 +
+      (BOARD_HEIGHT -
+        numberOfReward * rewardBoxHeight -
+        (numberOfReward - 1) * rewardBoxGap) /
+        2 +
         i * rewardBoxHeight +
         i * rewardBoxGap +
         0.55 * rewardBoxHeight

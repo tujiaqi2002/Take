@@ -1,10 +1,6 @@
 import Config, { player } from './utils/config.js';
 import { draw, update } from './utils/utility.js';
-import {
-  playerKeydownHandler,
-  playerKeyupHandler,
-  setEventListeners,
-} from './utils/eventHandler.js';
+import { setEventListeners } from './utils/eventHandler.js';
 import { rewardPhaseDraw, rewardPhaseUpdate } from './utils/Reward-phase.js';
 
 window.addEventListener('DOMContentLoaded', gameStart);
