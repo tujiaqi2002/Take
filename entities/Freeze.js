@@ -7,7 +7,7 @@ import { circleIntersect } from '../utils/Collision-system.js';
 export default class Freeze extends Weapon {
   constructor() {
     super('Ice Freeze', 0, 5, player.coordinate);
-    this.radius = 30;
+    this.radius = 50;
     this.duration = 3;
     this.interval = 0;
   }
@@ -55,6 +55,21 @@ export default class Freeze extends Weapon {
       this.interval += config.secondsPassed;
     } else {
       this.interval += config.secondsPassed;
+
+      Enemies.forEach((enemy) => {
+        if (
+          circleIntersect(
+            this.coordinate.x,
+            this.coordinate.y,
+            this.radius,
+            enemy.coordinate.x,
+            enemy.coordinate.y,
+            enemy.radius
+          )
+        ) {
+          enemy.moveSpeed = enemy.moveSpeed / 2;
+        }
+      });
     }
   }
 }
