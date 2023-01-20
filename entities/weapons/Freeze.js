@@ -16,14 +16,7 @@ export default class Freeze extends Weapon {
     if (this.interval >= 0 && this.interval <= 3) {
       config.context.fillStyle = 'rgba(116, 194, 225, 0.8)';
       config.context.beginPath();
-      config.context.arc(
-        this.coordinate.x,
-        this.coordinate.y,
-        this.radius,
-        0,
-        2 * Math.PI,
-        false
-      );
+      config.context.arc(this.coordinate.x, this.coordinate.y, this.radius, 0, 2 * Math.PI, false);
       config.context.fill();
     }
   }
@@ -64,7 +57,7 @@ export default class Freeze extends Weapon {
             this.radius,
             enemy.coordinate.x,
             enemy.coordinate.y,
-            enemy.radius
+            0
           )
         ) {
           enemy.moveSpeed = enemy.moveSpeed / 2;

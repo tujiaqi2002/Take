@@ -21,6 +21,7 @@ export default class Config {
     this.rewardPhaseDone = false;
     this.inRewardPhase = true;
     this.inGamePhase = false;
+    this.inHomePagePhase = false;
     this.oldTimeStamp = 0;
   }
 }

@@ -52,9 +52,7 @@ export function rewardPhaseDraw() {
       2 * rewardBoxTopGap) /
       2,
     rewardBoxWidth + 2 * rewardBoxLeftGap,
-    numberOfReward * rewardBoxHeight +
-      (numberOfReward - 1) * rewardBoxGap +
-      2 * rewardBoxTopGap,
+    numberOfReward * rewardBoxHeight + (numberOfReward - 1) * rewardBoxGap + 2 * rewardBoxTopGap,
     [20]
   );
   config.context.stroke();
@@ -72,10 +70,7 @@ export function rewardPhaseDraw() {
     config.context.beginPath();
     config.context.roundRect(
       (BOARD_WIDTH - rewardBoxWidth) / 2,
-      (BOARD_HEIGHT -
-        numberOfReward * rewardBoxHeight -
-        (numberOfReward - 1) * rewardBoxGap) /
-        2 +
+      (BOARD_HEIGHT - numberOfReward * rewardBoxHeight - (numberOfReward - 1) * rewardBoxGap) / 2 +
         i * rewardBoxHeight +
         i * rewardBoxGap,
       rewardBoxWidth,
@@ -88,11 +83,8 @@ export function rewardPhaseDraw() {
     config.context.font = 'bolder 50px Courier';
     config.context.fillText(
       rewardArray[i].name,
-      (BOARD_WIDTH - rewardBoxWidth) / 2 + 0.7 * rewardBoxWidth,
-      (BOARD_HEIGHT -
-        numberOfReward * rewardBoxHeight -
-        (numberOfReward - 1) * rewardBoxGap) /
-        2 +
+      (BOARD_WIDTH - rewardBoxWidth) / 2 + 0.65 * rewardBoxWidth,
+      (BOARD_HEIGHT - numberOfReward * rewardBoxHeight - (numberOfReward - 1) * rewardBoxGap) / 2 +
         i * rewardBoxHeight +
         i * rewardBoxGap +
         0.55 * rewardBoxHeight
