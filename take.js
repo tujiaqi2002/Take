@@ -1,11 +1,11 @@
-import Config, { player } from './utils/config.js';
+import Config, { player,config } from './utils/config.js';
 import { draw, update } from './utils/utility.js';
 import { setEventListeners } from './utils/eventHandler.js';
 import { rewardPhaseDraw, rewardPhaseUpdate } from './utils/Reward-phase.js';
 import { homePageDraw, homePageUpdate } from './utils/Home-page.js';
 
+
 window.addEventListener('DOMContentLoaded', gameStart);
-const config = new Config();
 
 function gameStart() {
   setEventListeners();

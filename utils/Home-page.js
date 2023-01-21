@@ -1,5 +1,4 @@
-import { config } from '../take.js';
-import { BOARD_HEIGHT, BOARD_WIDTH } from './config.js';
+import { BOARD_HEIGHT, BOARD_WIDTH, config } from './config.js';
 
 let buttonArray;
 let indexOfButtonSelected = 0;
@@ -7,6 +6,11 @@ let numberOfButton;
 function indexOfButtonSelectedModify(_indexOfButtonSelected) {
   indexOfButtonSelected = _indexOfButtonSelected;
 }
+
+let particlesArray = [];
+const numberOfParticles = 5000;
+const detail = 1;
+
 function homePageUpdate() {
   buttonArray = ['Start', 'Setting', 'Power Up'];
   numberOfButton = buttonArray.length;
@@ -20,7 +24,7 @@ function homePageUpdate() {
       case 0:
         config.inGamePhase = true;
       case 1:
-        
+
       case 2:
     }
   }
@@ -30,7 +34,7 @@ function homePageDraw() {
   //draw the homepage image
   let homePageImage = new Image();
   homePageImage.src = '../assets/home-page.png';
-  config.context.drawImage(homePageImage, 0, 0, 2000, 2000);
+  config.context.drawImage(homePageImage, 0, 0, BOARD_WIDTH, BOARD_HEIGHT);
 
   let buttonGap = 125;
 

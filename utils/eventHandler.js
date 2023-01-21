@@ -1,5 +1,4 @@
-import { config } from '../take.js';
-import { player } from '../utils/config.js';
+import { player, config } from '../utils/config.js';
 import { indexOfButtonSelected, indexOfButtonSelectedModify, numberOfButton } from './Home-page.js';
 import { indexOfHighlightBox, indexOfHighlightBoxModify, numberOfReward } from './Reward-phase.js';
 

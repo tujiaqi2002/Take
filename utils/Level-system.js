@@ -1,5 +1,4 @@
-import { config } from '../take.js';
-import { player } from './config.js';
+import { player, config } from './config.js';
 import { circleIntersect } from './Collision-system.js';
 import Vector from './Vector.js';
 export default class EXPGem {

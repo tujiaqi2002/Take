@@ -1,5 +1,4 @@
-import { config } from '../take.js';
-import { player, Enemies, EXPGems, allCharacters } from './config.js';
+import { player, Enemies, EXPGems, allCharacters, config } from './config.js';
 import { detectCollisions, circleIntersect } from './Collision-system.js';
 import Enemy from '../entities/Enemy.js';
 

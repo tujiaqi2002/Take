@@ -1,6 +1,5 @@
-import { config } from '../../take.js';
 import { circleIntersect } from '../../utils/Collision-system.js';
-import { Enemies, player } from '../../utils/config.js';
+import { Enemies, player, config } from '../../utils/config.js';
 import Weapon from './Weapon.js';
 
 export default class AOE extends Weapon {
@@ -18,14 +17,7 @@ export default class AOE extends Weapon {
   draw() {
     config.context.fillStyle = 'rgba(255, 255, 255, 0.5)';
     config.context.beginPath();
-    config.context.arc(
-      this.coordinate.x,
-      this.coordinate.y,
-      this.radius,
-      0,
-      2 * Math.PI,
-      false
-    );
+    config.context.arc(this.coordinate.x, this.coordinate.y, this.radius, 0, 2 * Math.PI, false);
     config.context.fill();
   }
 

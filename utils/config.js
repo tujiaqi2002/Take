@@ -43,7 +43,8 @@ export default class Config {
     player.moveRight = false;
   }
 }
-
+//Initial config
+const config = new Config();
 // Entity Initialization
 const player = new Player();
 
@@ -53,4 +54,4 @@ let Enemies = [];
 
 allCharacters.push(player);
 
-export { BOARD_HEIGHT, BOARD_WIDTH, player, Enemies, allCharacters, EXPGems };
+export { BOARD_HEIGHT, BOARD_WIDTH, player, Enemies, allCharacters, EXPGems, config };

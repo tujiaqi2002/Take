@@ -1,5 +1,4 @@
-import { BOARD_HEIGHT, BOARD_WIDTH, player } from './config.js';
-import { config } from '../take.js';
+import { BOARD_HEIGHT, BOARD_WIDTH, player, config } from './config.js';
 import Ezq from '../entities/weapons/EZq.js';
 import AOE from '../entities/weapons/AOE.js';
 import Freeze from '../entities/weapons/Freeze.js';
