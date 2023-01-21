@@ -1,4 +1,5 @@
 import { BOARD_HEIGHT, BOARD_WIDTH, config } from './config.js';
+import { FPSDraw } from './utility.js';
 
 let buttonArray;
 let indexOfButtonSelected = 0;
@@ -44,8 +45,8 @@ class Particle {
     this.y = Math.random() * BOARD_HEIGHT;
     //this.prevX = this.x;
     this.speed = 0;
-    this.velocity = Math.random() * 1 ;
-    this.size = -Math.random() * 7 + 10;
+    this.velocity = Math.random() * 1;
+    this.size = 25 / (2.5 - this.speed + this.velocity);
     this.position1 = Math.floor(this.y / detail);
     this.position2 = Math.floor(this.x / detail);
     this.angle = 0;
@@ -59,7 +60,7 @@ class Particle {
       }
     }
     this.angle += this.speed / 20;
-    let movement = 2.5 - this.speed + this.velocity;
+    let movement = (2.5 - this.speed + this.velocity) * 0.01;
     this.y -=
       Math.random > 0.5 ? movement + Math.cos(this.angle) : -movement + Math.cos(this.angle);
     this.x += Math.random > 0.5 ? Math.cos(this.angle) : -Math.cos(this.angle);
@@ -76,7 +77,6 @@ class Particle {
       this.x = 0;
       this.y = Math.random() * BOARD_HEIGHT;
     }
-    //console.log(this.x += movement)
   }
   draw() {
     config.context.beginPath();
@@ -89,7 +89,8 @@ class Particle {
     } else {
       config.context.fillStyle = 'white';
     }
-    config.context.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+    // config.context.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+    config.context.fillRect(this.x, this.y, this.size, this.size);
     config.context.fill();
   }
 }
@@ -135,7 +136,6 @@ function homePageDraw() {
     config.context.globalAlpha = 1;
     particlesArray[i].draw();
   }
-  console.log(1);
   let buttonGap = 125;
 
   config.context.globalAlpha = 0.5;
@@ -152,6 +152,7 @@ function homePageDraw() {
     );
   });
 
+  FPSDraw();
   //drawt the title
   config.context.fillStyle = 'White';
   config.context.font = 'bolder 200px Courier';

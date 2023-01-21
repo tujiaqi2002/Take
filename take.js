@@ -12,6 +12,7 @@ function gameStart() {
 }
 
 function gameLoop(timeStamp) {
+  config.context.globalAlpha = 1;
   config.secondsPassed = (timeStamp - config.oldTimeStamp) / 1000;
   config.oldTimeStamp = timeStamp;
   config.FPS = Math.round(1 / config.secondsPassed);

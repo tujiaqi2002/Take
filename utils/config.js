@@ -41,6 +41,7 @@ export default class Config {
     player.moveDown = false;
     player.moveLeft = false;
     player.moveRight = false;
+    
   }
 }
 //Initial config

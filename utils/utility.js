@@ -92,4 +92,4 @@ function distanceTwoPoints(coordinateA, coordinateB) {
   return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
 }
 
-export { boardDraw, draw, update };
+export { boardDraw, draw, update, FPSDraw };
