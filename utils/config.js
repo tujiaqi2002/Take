@@ -19,10 +19,28 @@ export default class Config {
 
     // Phases
     this.rewardPhaseDone = false;
-    this.inRewardPhase = true;
+    this.inRewardPhase = false;
+
     this.inGamePhase = false;
-    this.inHomePagePhase = false;
+
+    this.inHomePagePhase = true;
+    this.homePagePhaseDone = false;
+
+    //timeStamp used to calculate FPS
     this.oldTimeStamp = 0;
+  }
+
+  configReset() {
+    this.inGamePhase = false;
+    this.inRewardPhase = false;
+    this.rewardPhaseDone = false;
+    this.inHomePagePhase = false;
+    this.homePagePhaseDone = false;
+    player.levelUp = false;
+    player.moveUp = false;
+    player.moveDown = false;
+    player.moveLeft = false;
+    player.moveRight = false;
   }
 }
 

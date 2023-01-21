@@ -1,5 +1,6 @@
 import { config } from '../take.js';
 import { player } from '../utils/config.js';
+import { indexOfButtonSelected, indexOfButtonSelectedModify, numberOfButton } from './Home-page.js';
 import { indexOfHighlightBox, indexOfHighlightBoxModify, numberOfReward } from './Reward-phase.js';
 
 function setEventListeners() {
@@ -53,6 +54,30 @@ function playerKeydownHandler(e) {
       case 'Enter':
       case ' ': {
         config.rewardPhaseDone = true;
+        break;
+      }
+      default:
+        return;
+    }
+  } else if (config.inHomePagePhase) {
+    switch (e.key) {
+      case 'w':
+      case 'ArrowUp': {
+        if (indexOfButtonSelected > 0) {
+          indexOfButtonSelectedModify(indexOfButtonSelected - 1);
+        }
+        break;
+      }
+      case 's':
+      case 'ArrowDown': {
+        if (indexOfButtonSelected < numberOfButton - 1) {
+          indexOfButtonSelectedModify(indexOfButtonSelected + 1);
+        }
+        break;
+      }
+      case 'Enter':
+      case ' ': {
+        config.homePagePhaseDone = true;
         break;
       }
       default:
