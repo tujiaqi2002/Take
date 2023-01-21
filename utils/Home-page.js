@@ -29,7 +29,6 @@ homePageImage.addEventListener('load', () => {
       const green = pixels.data[y * 4 * pixels.width + (x * 4 + 1)];
       const blue = pixels.data[y * 4 * pixels.width + (x * 4 + 2)];
       const color = 'rgb(' + red + ',' + green + ',' + blue + ')';
-
       const brightness = calculateBrightness(red, green, blue) / 100;
       const cell = [color, brightness];
       row.push(cell);
@@ -89,7 +88,6 @@ class Particle {
     } else {
       config.context.fillStyle = 'white';
     }
-    // config.context.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
     config.context.fillRect(this.x, this.y, this.size, this.size);
     config.context.fill();
   }
