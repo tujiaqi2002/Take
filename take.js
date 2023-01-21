@@ -4,7 +4,6 @@ import { setEventListeners } from './utils/eventHandler.js';
 import { rewardPhaseDraw, rewardPhaseUpdate } from './utils/Reward-phase.js';
 import { homePageDraw, homePageUpdate } from './utils/Home-page.js';
 
-
 window.addEventListener('DOMContentLoaded', gameStart);
 
 function gameStart() {
