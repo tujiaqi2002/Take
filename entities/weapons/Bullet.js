@@ -1,6 +1,5 @@
-import { config } from '../../take.js';
 import { circleIntersect } from '../../utils/Collision-system.js';
-import { Enemies } from '../../utils/config.js';
+import { Enemies, config } from '../../utils/config.js';
 
 export default class Bullet {
   #coordinate;

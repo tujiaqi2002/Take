@@ -1,5 +1,4 @@
-import { config } from '../take.js';
-import { player, Enemies, EXPGems, allCharacters } from './config.js';
+import { player, Enemies, EXPGems, allCharacters, config } from './config.js';
 import { detectCollisions, circleIntersect } from './Collision-system.js';
 import Enemy from '../entities/Enemy.js';
 
@@ -93,4 +92,4 @@ function distanceTwoPoints(coordinateA, coordinateB) {
   return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
 }
 
-export { boardDraw, draw, update };
+export { boardDraw, draw, update, FPSDraw };

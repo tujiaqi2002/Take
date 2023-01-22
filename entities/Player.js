@@ -1,12 +1,6 @@
-import { config } from "../take.js";
-import {
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
-  Enemies,
-  EXPGems,
-} from "../utils/config.js";
-import Character from "./Character.js";
-import Coordinate from "../utils/Coordinate.js";
+import { BOARD_HEIGHT, BOARD_WIDTH, Enemies, EXPGems, config } from '../utils/config.js';
+import Character from './Character.js';
+import Coordinate from '../utils/Coordinate.js';
 
 export default class Player extends Character {
   #moveUp;
@@ -142,29 +136,22 @@ export default class Player extends Character {
 
   EXPBarDraw() {
     //draw EXP bar
-    config.context.fillStyle = "#537a73";
-    config.context.fillRect(
-      9,
-      9,
-      ((BOARD_WIDTH - 14) * this.#EXP) / this.#maxEXP,
-      50
-    );
+    config.context.fillStyle = '#537a73';
+    config.context.fillRect(9, 9, ((BOARD_WIDTH - 14) * this.#EXP) / this.#maxEXP, 50);
 
     //draw EXP barboarder
-    config.context.strokeStyle = "#f7f5d7";
+    config.context.strokeStyle = '#f7f5d7';
     config.context.lineWidth = 8;
     config.context.beginPath();
     config.context.roundRect(7, 7, BOARD_WIDTH - 14, 50, [5]);
     config.context.stroke();
 
     //draw Level
-    config.context.fillStyle = "white";
-    config.context.font = "bolder 30px Courier";
+    config.context.fillStyle = 'white';
+    config.context.font = 'bolder 30px Courier';
     config.context.fillText(
-      "Level:" + this.#level,
-      BOARD_WIDTH -
-        120 -
-        20 * Math.ceil(Math.log(this.#level + 0.5) / Math.log(10)),
+      'Level:' + this.#level,
+      BOARD_WIDTH - 120 - 20 * Math.ceil(Math.log(this.#level + 0.5) / Math.log(10)),
       40
     );
 
@@ -196,33 +183,28 @@ export default class Player extends Character {
     //draw background
 
     //draw  EXP bar
-    config.context.fillStyle = "#537a73";
-    config.context.fillRect(
-      9,
-      9,
-      ((BOARD_WIDTH - 14) * this.#EXP) / this.#maxEXP,
-      50
-    );
+    config.context.fillStyle = '#537a73';
+    config.context.fillRect(9, 9, ((BOARD_WIDTH - 14) * this.#EXP) / this.#maxEXP, 50);
 
     //draw EXP barboarder
-    config.context.strokeStyle = "#f7f5d7";
+    config.context.strokeStyle = '#f7f5d7';
     config.context.lineWidth = 8;
     config.context.beginPath();
     config.context.roundRect(7, 7, BOARD_WIDTH - 14, 50, [5]);
     config.context.stroke();
 
     //draw Level
-    config.context.fillStyle = "white";
-    config.context.font = "bolder 30px Courier";
+    config.context.fillStyle = 'white';
+    config.context.font = 'bolder 30px Courier';
 
-    config.context.fillText("Level:" + this.#level, BOARD_WIDTH - 150, 40);
+    config.context.fillText('Level:' + this.#level, BOARD_WIDTH - 150, 40);
 
     config.context.lineWidth = 1;
   }
 
   HPBarDraw() {
     //draw HP bar boarder
-    config.context.strokeStyle = "#FFFFFF";
+    config.context.strokeStyle = '#FFFFFF';
 
     config.context.beginPath();
     config.context.roundRect(
@@ -235,22 +217,13 @@ export default class Player extends Character {
     config.context.stroke();
 
     //draw HP bar
-    config.context.lineTo(
-      this.coordinate.x + this.radius,
-      this.coordinate.y - this.radius - 10
-    );
+    config.context.lineTo(this.coordinate.x + this.radius, this.coordinate.y - this.radius - 10);
 
-    config.context.lineTo(
-      this.coordinate.x + this.radius,
-      this.coordinate.y - this.radius - 20
-    );
+    config.context.lineTo(this.coordinate.x + this.radius, this.coordinate.y - this.radius - 20);
 
-    config.context.lineTo(
-      this.coordinate.x - this.radius,
-      this.coordinate.y - this.radius - 20
-    );
+    config.context.lineTo(this.coordinate.x - this.radius, this.coordinate.y - this.radius - 20);
 
-    config.context.fillStyle = "#FFFFFF";
+    config.context.fillStyle = '#FFFFFF';
     config.context.fillRect(
       this.coordinate.x - this.radius,
       this.coordinate.y - this.radius - 20,
@@ -311,18 +284,11 @@ export default class Player extends Character {
 
   playerDraw() {
     //draw player
-    config.context.fillStyle = this.isColliding ? "#0099b0" : "#f7f5d7";
+    config.context.fillStyle = this.isColliding ? '#0099b0' : '#f7f5d7';
 
-    config.context.strokeStyle = "#FFFFFF";
+    config.context.strokeStyle = '#FFFFFF';
     config.context.beginPath();
-    config.context.arc(
-      this.coordinate.x,
-      this.coordinate.y,
-      this.radius,
-      0,
-      2 * Math.PI,
-      false
-    );
+    config.context.arc(this.coordinate.x, this.coordinate.y, this.radius, 0, 2 * Math.PI, false);
     config.context.stroke();
     config.context.fill();
 
